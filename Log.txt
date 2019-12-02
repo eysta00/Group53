@@ -33,7 +33,7 @@ Guðmundur: Creating the state diagram and starting the design report
 Klevis:
 Óskar: Continue working on Class Diagrams
 
-End of day report - 27/11/19
+End of day report - 28/11/19
 Eysteinn: I set up the design report, finished to-do-list, made a state diagram for the “Update information” use case and got some interview info (We can test UX with the wireframe)
 Garret:
 Guðmundur:

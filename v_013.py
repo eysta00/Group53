@@ -234,7 +234,7 @@ class Voyage:
 
     pass
 
-class Data:
+class Data: # class for test without datastructure
     def __init__(self):
         self.employees = {}
         self.aircrafts = {}
