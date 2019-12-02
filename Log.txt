@@ -1,0 +1,41 @@
+Morning meeting - 26/11/19
+Eysteinn: Setting up the log on github, finish up on use cases, work on the state diagram/s
+Guðmundur: Writing up the state diagram and finishing up the requirements list. Then trying to finish the user group analysis
+Garrett: Cleaning up requirement lists, adding UX goals, helping with diagrams (class, state, etc.).
+Klevis: class, state diagram
+Óskar: Finishing up Use cases, upon completion look into class diagrams
+
+End of day report - 26/11/19
+Eysteinn: finished up on the sources in the use cases, initial commits on github.
+Guðmundur: Finished the state diagram sketch, finished requirement list and the user group analysis. I also finished the wireframe for the application.
+Garrett: Completed functional and non-functional requirements, added functional requirements to sources in use cases, helped with wireframe design.
+Klevis: Class diagrams. 
+Óskar: Finished up Use Cases.
+ 
+Morning Meeting - 27/11/19
+Eysteinn: Create a to-do-list and make a template of design report
+Guðmundur: Polishing up the wire-frame. Going over non-functional requirements, efficiency and UX goals
+Garrett: Working on framework for scrolling based TUI, tied in to wireframe design.
+Klevis: Continuation of class diagram.
+Óskar: Checking that Use cases match with functional requirements
+
+End of day report - 27/11/19
+Eysteinn: created to do list 50% done and made a template of design report.
+Guðmundur: Finished the wire-frame
+Garrett: Finished framework for TUI.
+Klevis: Finished class diagram
+Óskar: Matched Use cases to functional requirements then looked into class diagrams.
+ 
+Morning Meeting 28/11/19
+Eysteinn: Set up the design report, finish to-do-list and write intro for the design report and inquire more information from teachers regarding state diagrams and interviews.
+Garrett: Redesigning state diagram, creating shell example for classes in the TUI.   
+Guðmundur: Creating the state diagram and starting the design report
+Klevis:
+Óskar: Continue working on Class Diagrams
+
+End of day report - 27/11/19
+Eysteinn: I set up the design report, finished to-do-list, made a state diagram for the “Update information” use case and got some interview info (We can test UX with the wireframe)
+Garret:
+Guðmundur:
+Klevis: working on more state diagrams
+Óskar: Class diagram then talked about datastructures
