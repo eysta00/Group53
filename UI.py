@@ -15,6 +15,18 @@ class UI:
         return self.flag
 
 class Menu(UI):
+    def menu(self):
+        return ("1.Register\n"
+                "2.View\n"
+                "3.Change\n")
+    def register(self):
+        return ("1.Pilot\n"
+                "2.Flight Attendant\n"
+                "3.Aircraft\n"
+                "4.Voyage\n"
+                "5.Flight Location\n"
+                "6.Passanger Seat\n")
+
     pass
 
 class Operation(UI):

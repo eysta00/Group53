@@ -67,6 +67,11 @@ class Operation(UI):
         b_arcrft = input('Aircraft Id: ')
         API.add_flight(a_num, a_dest, a_dest_cont, a_date, a_end_date, a_depar, a_arcrft, b_num, b_dest, b_dest_cont, b_date, b_end_date, b_depar, b_arcrft)
 
+    def add_destination():
+        dest_name = input('Destination name:')
+        dest_id = input('Destination ID:')
+        API.add_destination(dest_name, dest_id)
+
 class API:
     def add_pilot(full_name, ssn, addr, phone, email, lcnse):
         LL.add_pilot(full_name, ssn, addr, phone, email, lcnse)
@@ -79,6 +84,9 @@ class API:
 
     def add_flight(a_num, a_dest, a_dest_cont, a_date, a_end_date, a_depar, a_arcrft, b_num, b_dest, b_dest_cont, b_date, b_end_date, b_depar, b_arcrft):
         LL.add_flight(a_num, a_dest, a_dest_cont, a_date, a_end_date, a_depar, a_arcrft, b_num, b_dest, b_dest_cont, b_date, b_end_date, b_depar, b_arcrft)
+    
+    def add_destination(dest_name, dest_id):
+        LL.add_destination(dest_name, dest_id)
 
 class LL:
     def add_pilot(full_name, ssn, addr, phone, email, lcnse):
@@ -109,6 +117,12 @@ class LL:
         ALL_DATA.add_flights(a_flght)
         ALL_DATA.add_flights(b_flght)
         ALL_DATA.add_voyages(voy)
+    
+    def add_destination(dest_name, dest_id):
+        dest = Destination(dest_name, dest_id)
+        dest.update_data()
+        # add to data layer
+        ALL_DATA.add_destination(dest)
 
 class Employee:
     def __init__(self, name, ssn, address, phone, email, pilot_bool = 0, attend_bool = 0, licenses = []):
@@ -233,6 +247,16 @@ class Voyage:
 
 
     pass
+class Destination:
+    def __init__(self, dest_name, dest_id):
+        self.dest_name = dest_name
+        self.dest_id = dest_id
+        self.d_data ={}
+
+    def update_data(self, new_dname, new_did):
+        self.d_data['dest_name'] = self.dest_name
+        self.d_data['dest_id'] = self.dest_id
+
 
 class Data: # class for test without datastructure
     def __init__(self):
@@ -240,7 +264,8 @@ class Data: # class for test without datastructure
         self.aircrafts = {}
         self.flights = {}
         self.voyages = {}
-        self.alldata = {**self.employees, **self.aircrafts, **self.flights, **self.voyages}
+        self.destinations = {}
+        self.alldata = {**self.employees, **self.aircrafts, **self.flights, **self.voyages, **self.destinations}
     
     def add_employees(self, emp_obj):
         self.employees[emp_obj.e_name] = emp_obj.e_data
@@ -257,6 +282,9 @@ class Data: # class for test without datastructure
     def add_aircrafts(self, aircraft_obj):
         self.aircrafts[aircraft_obj.ai_id] = aircraft_obj.ai_data
         self.update_alldata()
+    
+    def add_destination(self, dest_obj):
+        self.destinations[dest_obj.dest_id] = dest_obj.d_data
 
     def update_alldata(self):
         self.alldata = {**self.employees, **self.aircrafts, **self.flights}
@@ -328,7 +356,10 @@ def testmain():
     ms2o2 = Operation('Add Flight', 1)
     ms2o1 = Operation('Add Aircraft', 1, [], Operation.add_aircraft)
     ms2 = Menu('Flights and Aircraft', 0, [ms2o1, ms2o2, ms2o3, ms2o4])
-    main_menu = Menu('Main Menu', 0, [ms1, ms2])
+    ms301 = Operation('Add Destination', 1, [], Operation.add_destination)
+    ms302 = Operation('List Destinations', 1)
+    ms3 = Menu('Destinations', 0, [ms301, ms302])
+    main_menu = Menu('Main Menu', 0, [ms1, ms2, ms3])
     pmenu(main_menu)
 
 testmain()  
