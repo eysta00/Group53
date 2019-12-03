@@ -1,17 +1,20 @@
 import csv
 import os
 from Employee import Employee
+from Exceptions import EntryInDatabase
+from Exceptions import EntryNotInDatabase
 
-class EntryInDatabase(Exception):
-    pass
-class EntryNotInDatabase(Exception):
-    pass
+
+# class EntryInDatabase(Exception):
+#     pass
+# class EntryNotInDatabase(Exception):
+#     pass
 
 class EmployeesIO():
     def __init__(self, filePath):
         self.filePath = filePath
         self.tempFilePath = 'Data/EmployeeTemp.csv'
-        self.__fielldNames_lst = ["ssn", "name", "address", "phone", "email", "pilot_bool", "planeType"]
+        self.__fieldNames_lst = ["ssn", "name", "address", "phone", "email", "pilot_bool", "planeType"]
 
     def addEmployee(self, employee):
         
@@ -19,7 +22,7 @@ class EmployeesIO():
             raise EntryInDatabase("You might want to try updateEmployee with duplicate data")
 
         with open(self.filePath, 'a+') as csv_file:
-            csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fielldNames_lst)
+            csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
             # to be updated when employee class is complete
             csvWriter.writerow({"ssn" : employee.ssn, "name" : employee.name, "address" : employee.address, "pilot_bool" : employee.pilot_bool,\
                 "planeType" : employee.planeType, "phone" : employee.phone, "email" : employee.email})
@@ -28,7 +31,7 @@ class EmployeesIO():
     
     def updateEmployee(self, employee):
         with open(self.filePath, 'r') as csv_file:
-            csvReader = csv.DictReader(csv_file, fieldnames = self.__fielldNames_lst)
+            csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             rows = list(csvReader)
             for emp in rows:
                 if str(emp["ssn"]) == str(employee.ssn):
@@ -42,7 +45,7 @@ class EmployeesIO():
 # method to rewrite entire data file from list from update Employee
     def __reWriteFileFromList(self, dictList): # writing to new file then rename-ing files and deleting old 
         with open(self.tempFilePath, 'w') as csv_file:
-            csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fielldNames_lst)
+            csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
             for entry in dictList:
                 csvWriter.writerow(entry)
             os.remove(self.filePath)
@@ -54,7 +57,7 @@ class EmployeesIO():
     def getEmployeeBySSN(self, employeeSSN_int):
 
         with open(self.filePath, 'r') as csv_file:
-            csvReader = csv.DictReader(csv_file, fieldnames = self.__fielldNames_lst)
+            csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
                 if str(row["ssn"]) == str(employeeSSN_int):
                     return Employee(row["name"], row["ssn"], row["address"], row["phone"], row["email"], row["planeType"], row["pilot_bool"])
@@ -62,7 +65,7 @@ class EmployeesIO():
     def EmplyeeInDataBase_bool(self, employeeSSN_int):
 
         with open(self.filePath, 'r') as csv_file:
-            csvReader = csv.DictReader(csv_file, fieldnames = self.__fielldNames_lst)
+            csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
                 if str(row["ssn"]) == str(employeeSSN_int):
                     return True
