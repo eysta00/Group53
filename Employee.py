@@ -1,29 +1,38 @@
 class Employee:
-    def __init__(self, name, ssn, address, phone, email, pilot_bool = False, planeType):
-        self.e_name = name #split for first, and surname
-        self.e_ssn = ssn
-        self.e_address = address
-        self.e_phone = phone
-        self.e_email = email
-        self.e_assigned = 0
-        self.e_date = ''
-        self.e_dest = ''
-        self.e_pilot = pilot_bool
-        self.e_attendant = attend_bool
-        self.e_permissions = []
-        self.e_licenses = licenses.split()
-        self.e_data = {}
+    def __init__(self, name, ssn, address, phone, email, planeType, pilot_bool = False):
+        self.name = name #split for first, and surname
+        self.ssn = ssn
+        self.address = address
+        self.phone = phone
+        self.email = email
+        self.assigned = 0
+        self.date = ''
+        self.dest = ''
+        self.pilot_bool = pilot_bool
+        # self.attendant = attend_bool
+        self.permissions = []
+        # self.licenses = licenses.split()
+        self.data = {}
+        self.planeType = planeType
 
-    def update_data(self):
-        self.e_data['name'] = self.e_name
-        self.e_data['ssn'] = self.e_ssn
-        self.e_data['address'] =self.e_address
-        self.e_data['phone'] = self.e_phone
-        self.e_data['email'] = self.e_email
-        self.e_data['assigned'] = self.e_assigned
-        self.e_data['date'] = self.e_date
-        self.e_data['dest'] = self.e_dest
-        self.e_data['is pilot'] = self.e_pilot
-        self.e_data['is attendant'] = self.e_attendant
-        self.e_data['permissions'] = self.e_permissions
-        self.e_data['licenses'] = self.e_licenses
+    def updatdata(self):
+        self.data['name'] = self.name
+        self.data['ssn'] = self.ssn
+        self.data['address'] =self.address
+        self.data['phone'] = self.phone
+        self.data['email'] = self.email
+        self.data['assigned'] = self.assigned
+        self.data['date'] = self.date
+        self.data['dest'] = self.dest
+        self.data['is pilot'] = self.pilot_bool
+        self.data['is attendant'] = self.attendant
+        self.data['permissions'] = self.permissions
+        self.data['licenses'] = self.licenses
+
+    def __str__(self):
+        return_str = 'name: ' + self.name + ', ssn: ' + self.ssn + ', address: ' + self.address + ', phone: ' + self.phone + ', email: ' + self.email + ', plane type: ' + self.planeType
+        if self.pilot_bool:
+            return_str += ", Position: Pilot"
+        else:
+            return_str += ', Position: Flight Attendant'
+        return return_str
