@@ -1,7 +1,8 @@
 class Destination:
-    def __init__(self,dest_name, dest_id):
+    def __init__(self,dest_name, dest_id, flight_duration):
         self.dest_name = dest_name
         self.dest_id = dest_id
+        self.flight_duration = flight_duration
         self.d_data ={}
 
     def update_data(self, new_dname, new_did):
