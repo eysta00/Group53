@@ -5,6 +5,9 @@ class Destination:
         self.flight_duration = flight_duration
         self.d_data ={}
 
-    def update_data(self, new_dname, new_did):
-        self.d_data['dest_name'] = self.dest_name
-        self.d_data['dest_id'] = self.dest_id
+    # def update_data(self, new_dname, new_did):
+    #     self.d_data['dest_name'] = self.dest_name
+    #     self.d_data['dest_id'] = self.dest_id
+
+    def __str__(self):
+        return self.dest_name + ' : ' + self.flight_duration
