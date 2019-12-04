@@ -11,7 +11,7 @@ Guðmundur: Finished the state diagram sketch, finished requirement list and the
 Garrett: Completed functional and non-functional requirements, added functional requirements to sources in use cases, helped with wireframe design.
 Klevis: Class diagrams. 
 Óskar: Finished up Use Cases.
- 
+
 Morning Meeting - 27/11/19
 Eysteinn: Create a to-do-list and make a template of design report
 Guðmundur: Polishing up the wire-frame. Going over non-functional requirements, efficiency and UX goals
@@ -19,13 +19,14 @@ Garrett: Working on framework for scrolling based TUI, tied in to wireframe desi
 Klevis: Continuation of class diagram.
 Óskar: Checking that Use cases match with functional requirements
 
+
 End of day report - 27/11/19
 Eysteinn: created to do list 50% done and made a template of design report.
 Guðmundur: Finished the wire-frame
 Garrett: Finished framework for TUI.
 Klevis: Finished class diagram
 Óskar: Matched Use cases to functional requirements then looked into class diagrams.
- 
+
 Morning Meeting 28/11/19
 Eysteinn: Set up the design report, finish to-do-list and write intro for the design report and inquire more information from teachers regarding state diagrams and interviews.
 Garrett: Redesigning state diagram, creating shell example for classes in the TUI.   
@@ -35,7 +36,55 @@ Klevis:
 
 End of day report - 28/11/19
 Eysteinn: I set up the design report, finished to-do-list, made a state diagram for the “Update information” use case and got some interview info (We can test UX with the wireframe)
-Garret:
-Guðmundur:
+Garrett: Worked on the logic layer for classes. Misc functionality detailed in versions v_004 -> v_009. Added Changelog.
+Guðmundur: Made a digital state diagram and worked on the design report
 Klevis: working on more state diagrams
-Óskar: Class diagram then talked about datastructures
+Óskar: Class diagram then talked about data-structures
+Morning meeting - 29/11/19
+Eysteinn: Create more state diagrams, finish the design report and turn it in.
+Garrett: Reformatting data classes, adding initial framework for logic layer.
+Guðmundur: Having his tonsils removed
+Klevis: Create 2 more state diagrams(update user and create a voyage)
+Óskar:
+
+End of day report - 29/11/19
+Eysteinn: Turned in the design report, made a state diagram.
+Garret:: Separated UI and Logic layers (mostly).
+Guðmundur:
+Klevis:
+Óskar:
+
+Morning meeting - 2/12/19
+Eysteinn: Start working on user testing and keep the design report updated.
+Garrett: Separating all layers so after I leave things can be worked on modularly.
+Guðmundur: 
+Klevis:
+Óskar: Started working on datastructures
+
+
+End of day report - 2/12/19
+Eysteinn: Created some design files and made some revisions the Functional Requirements and use cases.
+Garret: 
+Guðmundur: 
+Klevis: 
+Óskar: Setup the data Classes, and looked into working with csv files in python
+
+Morning meeting - 3/12/19
+Eysteinn: Make some more revisions to the interviews and make a template on how the interviews are performed.
+Garrett:
+Guðmundur: Updating wire-frame
+Klevis:
+Óskar: Writing data classes for all stored attributes
+
+End of day report - 3/12/19
+Eysteinn: Made some more revisions to the interviews and made a template on how the interviews are performed.
+Garrett:
+Guðmundur: Updated the wire-frame
+Klevis:
+Óskar: Finished all data classes
+Morning Meeting - 04/12/19
+Eysteinn: 
+Garrett:
+Guðmundur: 
+Klevis:
+Óskar: Setting up the IO API then starting to work on logic level functionality
