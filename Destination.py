@@ -11,3 +11,5 @@ class Destination:
 
     def __str__(self):
         return self.dest_name + ' : ' + self.flight_duration
+
+    def __str__(self):
