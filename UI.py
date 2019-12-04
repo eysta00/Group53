@@ -65,3 +65,4 @@ class Operation(UI):
         b_depar = input('Departure Time: ')
         b_arcrft = input('Aircraft Id: ')
         API.add_flight(a_num, a_dest, a_dest_cont, a_date, a_end_date, a_depar, a_arcrft, b_num, b_dest, b_dest_cont, b_date, b_end_date, b_depar, b_arcrft)
+
