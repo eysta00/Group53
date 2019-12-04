@@ -38,6 +38,10 @@ class EmployeeLL:
         flightAttendats = self.ListFlightAttendats()
         return pilots + flightAttendats
 
+
+    def AddEmployee(self, name_str, ssn_str, address_str, phone_str, email_str, pilot_bool = False, planeType = None):
+        employee = Employee(name_str, ssn_str, address_str, phone_str, email_str, pilot_bool, planeType)
+
 if __name__ == "__main__":
     logic = EmployeeLL()
     print(logic.ListPilots())
