@@ -60,7 +60,7 @@ class EmployeesIO():
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
                 if str(row["ssn"]) == str(employeeSSN_int):
-                    return Employee(row["name"], row["ssn"], row["address"], row["phone"], row["email"], row["planeType"], row["pilot_bool"])
+                    return Employee(row["name"], row["ssn"], row["address"], row["phone"], row["email"], row["pilot_bool"], row["planeType"])
 
     def EmplyeeInDataBase_bool(self, employeeSSN_int):
 
@@ -74,7 +74,7 @@ class EmployeesIO():
 
 if __name__ == "__main__":
     data = EmployeesIO("Data/EmployeeData.csv")
-    employee = Employee("Oskar", 1611982429, "Einarsnes", 6619798, "oskarp17@ru.is", None, False)
+    employee = Employee("Oskar", 1611982429, "Einarsnes", 6619798, "oskarp17@ru.is")
     
     try:
         data.addEmployee(employee)
