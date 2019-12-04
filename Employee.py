@@ -1,5 +1,5 @@
 class Employee:
-    def __init__(self, name, ssn, address, phone, email, planeType, pilot_bool = False):
+    def __init__(self, name, ssn, address, phone, email, pilot_bool = False, planeType = None):
         self.name = name #split for first, and surname
         self.ssn = ssn
         self.address = address
