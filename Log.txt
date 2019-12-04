@@ -84,8 +84,15 @@ Klevis:finished adding destination class and attributes
 Óskar: Finished all data classes
 
     Morning Meeting - 04/12/19
-Eysteinn: 
+Eysteinn: Start fylling inn some part of the final design report
 Garrett:
-Guðmundur: 
+Guðmundur: Working on listing functionality in v_013
 Klevis: adding more options on UI menu
 Óskar: Setting up the IO API then starting to work on logic level functionality
+
+    End of day report - 4/12/19
+Eysteinn: 
+Garrett: 
+Guðmundur: 
+Klevis: 
+Óskar: 
