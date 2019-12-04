@@ -257,6 +257,9 @@ class Destination:
         self.d_data['dest_name'] = self.dest_name
         self.d_data['dest_id'] = self.dest_id
 
+    def get_all_destinations(self):
+        Destination
+
 
 class Data: # class for test without datastructure
     def __init__(self):
