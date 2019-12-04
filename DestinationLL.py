@@ -17,10 +17,10 @@ class DestinationLL:
 
     def ListAllDestinations(self):
         destinations = self.data.getAllDestinatons()
-        dst = []
-        for d in destinations:
-            dst.append(d)
-        dst.sort(key=lambda x: x.name)
-        return dst
+        # dst = []
+        # for d in destinations:
+        #     dst.append(d)
+        destinations.sort(key=lambda x: x.name)
+        return destinations
 
     
