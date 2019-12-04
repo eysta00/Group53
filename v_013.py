@@ -356,9 +356,9 @@ def testmain():
     ms2o2 = Operation('Add Flight', 1)
     ms2o1 = Operation('Add Aircraft', 1, [], Operation.add_aircraft)
     ms2 = Menu('Flights and Aircraft', 0, [ms2o1, ms2o2, ms2o3, ms2o4])
-    ms301 = Operation('Add Destination', 1, [], Operation.add_destination)
-    ms302 = Operation('List Destinations', 1)
-    ms3 = Menu('Destinations', 0, [ms301, ms302])
+    ms3o1 = Operation('Add Destination', 1, [], Operation.add_destination)
+    ms3o2 = Operation('List Destinations', 1)
+    ms3 = Menu('Destinations', 0, [ms3o1, ms3o2])
     main_menu = Menu('Main Menu', 0, [ms1, ms2, ms3])
     pmenu(main_menu)
 
