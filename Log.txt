@@ -58,7 +58,7 @@ Klevis:
 Eysteinn: Start working on user testing and keep the design report updated.
 Garrett: Separating all layers so after I leave things can be worked on modularly.
 Guðmundur: 
-Klevis:
+Klevis:working on classes
 Óskar: Started working on datastructures
 
 
@@ -66,26 +66,26 @@ Klevis:
 Eysteinn: Created some design files and made some revisions the Functional Requirements and use cases.
 Garret: 
 Guðmundur: 
-Klevis: 
+Klevis: helped filling up io files 
 Óskar: Setup the data Classes, and looked into working with csv files in python
 
     Morning meeting - 3/12/19
 Eysteinn: Make some more revisions to the interviews and make a template on how the interviews are performed.
 Garrett:
 Guðmundur: Updating wire-frame
-Klevis:
+Klevis: working on destination class
 Óskar: Writing data classes for all stored attributes
 
     End of day report - 3/12/19
 Eysteinn: Made some more revisions to the interviews and made a template on how the interviews are performed.
 Garrett:
 Guðmundur: Updated the wire-frame
-Klevis:
+Klevis:finished adding destination class and attributes
 Óskar: Finished all data classes
 
     Morning Meeting - 04/12/19
 Eysteinn: 
 Garrett:
 Guðmundur: 
-Klevis:
+Klevis: adding more options on UI menu
 Óskar: Setting up the IO API then starting to work on logic level functionality
