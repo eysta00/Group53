@@ -1,16 +1,17 @@
 class Aircraft:
     id_count = 0 #this would need to be loaded in from data for later
 
-    def __init__(self, aircraftID, model, total_seats):
+    def __init__(self, aircraftID, model, total_seats_int):
         self.aircraftID = aircraftID
         self.model = model
-        self.total_seats = total_seats
+        self.total_seats_int = total_seats_int
 
-
+    def __str__(self):
+        return self.model + ' : ' + self.total_seats_int
     #     self.ai_id = Aircraft.gen_id(self)
     #     self.ai_model = model
     #     self.ai_manufacturer = manufacturer
-    #     self.ai_total_seats = total_seats
+    #     self.ai_total_seats_int = total_seats_int
     #     self.ai_used_seats = 0
     #     self.ai_pilots = []
     #     self.ai_permissions = [] #pilots
@@ -29,7 +30,7 @@ class Aircraft:
     #     self.ai_data['aircraft id'] = self.ai_id
     #     self.ai_data['model'] = self.ai_model
     #     self.ai_data['manufacturer'] = self.ai_manufacturer
-    #     self.ai_data['total seats'] = self.ai_total_seats
+    #     self.ai_data['total seats'] = self.ai_total_seats_int
     #     self.ai_data['used seats'] = self.ai_used_seats
     #     self.ai_data['pilots'] = self.ai_pilots
     #     self.ai_data['permissions'] = self.ai_permissions

@@ -9,8 +9,8 @@ class AircraftIO():
     def __init__(self, filePath):
         self.filePath = filePath
         self.tempFilePath = 'Data/AircraftTemp.csv'
-        # aircraftID, model, total_seats
-        self.__fieldNames_lst = ['aircraftID', 'model', 'total_seats']
+        # aircraftID, model, total_seats_int
+        self.__fieldNames_lst = ['aircraftID', 'model', 'total_seats_int']
 
     def addAircraft(self, aircraft):
         
@@ -20,7 +20,7 @@ class AircraftIO():
         with open(self.filePath, 'a+') as csv_file:
             csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
             
-            csvWriter.writerow({'aircraftID' : aircraft.aircraftID, 'model' : aircraft.model, 'total_seats' : aircraft.total_seats})
+            csvWriter.writerow({'aircraftID' : aircraft.aircraftID, 'model' : aircraft.model, 'total_seats_int' : aircraft.total_seats_int})
 
     
     
@@ -30,8 +30,8 @@ class AircraftIO():
             rows = list(csvReader)
             for entry in rows:
                 if str(entry["aircraftID"]) == str(aircraft.aircraftID):
-                    entry["aircraftID"], entry["model"], entry["total_seats"] = \
-                        aircraft.aircraftID, aircraft.model, aircraft.total_seats
+                    entry["aircraftID"], entry["model"], entry["total_seats_int"] = \
+                        aircraft.aircraftID, aircraft.model, aircraft.total_seats_int
                     self.__reWriteFileFromList(rows)
                     return
             raise EntryNotInDatabase('try using addAircraft')
@@ -55,7 +55,7 @@ class AircraftIO():
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
                 if str(row["aircraftID"]) == str(aircraftID):
-                    return Aircraft(row['aircraftID'], row['model'], row['total_seats'])
+                    return Aircraft(row['aircraftID'], row['model'], row['total_seats_int'])
 
     def AircraftInDatabase_bool(self, AircraftID):
 
