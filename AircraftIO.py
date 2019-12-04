@@ -67,6 +67,15 @@ class AircraftIO():
             return False
 
 
+    def getAllAircrafts(self):
+        return_list = []
+
+        with open(self.filePath, 'r') as csv_file:
+            csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
+            for row in csvReader:
+                    return_list.append(Aircraft(row['aircraftID'], row['model'], row['total_seats_int']))
+        return return_list
+
 if __name__ == "__main__":
     data = AircraftIO('Data/AircraftData.csv')
     aircraft = Aircraft(2, 'Boeng_747', 300)
@@ -81,3 +90,5 @@ if __name__ == "__main__":
         data.updateAircraft(aircraft)
     except EntryNotInDatabase:
         print('Aircraft not in database')
+
+    print(data.getAllAircrafts())

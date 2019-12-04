@@ -71,6 +71,15 @@ class EmployeesIO():
                     return True
             return False
 
+    def getAllEmployees(self): # Returns all Employees stored in a list
+        return_list = []
+        
+        with open(self.filePath, 'r') as csv_file:
+            csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
+            for row in csvReader:
+                return_list.append(Employee(row["name"], row["ssn"], row["address"], row["phone"], row["email"], row["pilot_bool"], row["planeType"]))
+        return return_list
+
 
 if __name__ == "__main__":
     data = EmployeesIO("Data/EmployeeData.csv")
@@ -83,6 +92,8 @@ if __name__ == "__main__":
     
     print(data.EmplyeeInDataBase_bool(1234567890))
 
-    data.updateEmployee(employee)    
+    data.updateEmployee(employee)
+
+    print(data.getAllEmployees())    
 
 

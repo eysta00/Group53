@@ -30,6 +30,9 @@ class IOAPI():
     def updateEmployee(self, employee):
         return self.EmployeeData.updateEmployee(employee)
 
+    def getAllEmployees(self):
+        return self.EmployeeData.getAllEmployees()
+
 
     ##### DESTINATION API #####
     def getDestinationByDestinationID(self, destination_id):
@@ -40,6 +43,9 @@ class IOAPI():
 
     def updateDestination(self, destination):
         return self.DestinationData.updateDestination(destination)
+
+    def getAllDestinatons(self):
+        return self.DestinationData.getAllDestinations()
 
     
     ##### VOYAGE API #####
@@ -52,6 +58,8 @@ class IOAPI():
     def updateVoyage(self, voyage):
         return self.VoyageData.updateVoyage(voyage)
 
+    def getAllVoyages(self):
+        return self.VoyageData.getAllVoyages()
 
     ##### AIRCRAFT API #####
     def getAircraftByAircraftID(self, aircraftID):
@@ -63,6 +71,8 @@ class IOAPI():
     def updateAircraft(self, aircraft):
         return self.AircraftData.updateAircraft(aircraft)
 
+    def getAllAircrafts(self):
+        return self.AircraftData.getAllAircrafts()
 
 
 if __name__ == "__main__":
@@ -102,3 +112,11 @@ if __name__ == "__main__":
     data.updateEmployee(employee)
     data.updateAircraft(aircraft)
     data.updateVoyage(voyage)
+
+
+    print(data.getAllDestinatons())
+    print(data.getAllEmployees())
+    print(data.getAllAircrafts())
+    print(data.getAllVoyages())
+    
+    

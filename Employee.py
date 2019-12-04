@@ -36,3 +36,6 @@ class Employee:
         else:
             return_str += ', Position: Flight Attendant'
         return return_str
+
+    def __repr__(self):
+        return self.name + ' : ' + self.ssn

@@ -8,6 +8,9 @@ class Aircraft:
 
     def __str__(self):
         return self.model + ' : ' + self.total_seats_int
+
+    def __repr__(self):
+        return self.aircraftID + ' : ' + self.model
     #     self.ai_id = Aircraft.gen_id(self)
     #     self.ai_model = model
     #     self.ai_manufacturer = manufacturer

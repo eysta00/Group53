@@ -66,6 +66,15 @@ class DestinationIO():
                     return True
             return False
 
+    def getAllDestinations(self):
+        return_list = []
+        with open(self.filePath, 'r') as csv_file:
+            csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
+            for row in csvReader:
+                return_list.append(Destination(row['dest_name'], row['dest_id'], row['flight_duration']))
+        return return_list
+        
+
 if __name__ == "__main__":
     data = DestinationIO('Data/DestinationData.csv')
     dest = Destination('San Francisco', 3, 6)
@@ -79,3 +88,5 @@ if __name__ == "__main__":
         data.updateDestination(dest)
     except EntryNotInDatabase:
         print('destination not in database')
+
+    print(data.getAllDestinations())

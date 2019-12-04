@@ -67,6 +67,16 @@ class VoyageIO():
                     return True
             return False
 
+    def getAllVoyages(self):
+        return_list = []
+
+        with open(self.filePath, 'r') as csv_file:
+            csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
+            for row in csvReader:
+                    return_list.append(Voyage(row['voyageID'], row['destination'], row['departureTime'], row['aircraftID'], row['pilots_lst'], row['flightAttendants_lst'], row['captain']))
+        return return_list
+
+
 if __name__ == "__main__":
     data = VoyageIO('Data/VoyageData.csv')
     time_str = datetime(year = 2020, month = 2, day = 1, hour = 0, minute = 0, second = 0)
@@ -83,3 +93,5 @@ if __name__ == "__main__":
         print('Entry Not in database')
 
     print(data.getVoyageByVoyageID(2))
+
+    print(data.getAllVoyages())
