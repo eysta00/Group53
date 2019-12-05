@@ -4,6 +4,8 @@ from IOAPI import IOAPI
 from datetime import datetime
 from Exceptions import EntryInDatabase
 from Exceptions import EntryNotInDatabase
+import dateutil.parser
+
 class DestinationLL():
     def __init__(self):
         self.data = IOAPI()

@@ -2,6 +2,7 @@ from Voyage import Voyage
 from Exceptions import EntryInDatabase
 from Exceptions import EntryNotInDatabase
 from IOAPI import IOAPI
+import dateutil.parser
 
 
 class VoyageLL:
@@ -29,6 +30,8 @@ class VoyageLL:
 
     def addVoyage(self, destination_id, flightTime_str):
         
+        # implement logic checking if there's enough staff available at the given time here
+
         try:
             voyage = Voyage(self.__GenerateNewVoyageID(), destination_id, flightTime_str)
             self.data.addVoyage(voyage)
