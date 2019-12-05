@@ -23,3 +23,20 @@ class AircraftLL:
             arcft.append(a)
         arcft.sort(key=lambda x: x.name)
         return arcft
+
+    def _GenerateNewAircraftID(self):
+        aircrafts = self.data.getAllAircrafts()
+        iteration = 1
+        for air in aircrafts:
+            if iteration <= 1:
+                highest_id = int(air.aircraftID)
+            else:
+                if int(air.aircraftID) > highest_id:
+                    highest_id = int(air.aircraftID)
+            
+            iteration += 1
+        return highest_id + 1 # returns an integer that is 1 higher than the highest id any voyage has in the database
+
+if __name__ == "__main__":
+    logic = AircraftLL()
+    print(logic._GenerateNewAircraftID())

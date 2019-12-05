@@ -36,16 +36,20 @@ class VoyageLL:
         except:
             return -1
 
-            
-    def __GenerateNewVoyageID(self):
-        voyages = data.getAllVoyages()
+
+    def _GenerateNewVoyageID(self):
+        voyages = self.data.getAllVoyages()
         iteration = 1
         for voy in voyages:
             if iteration <= 1:
-                highest_id = voy.voyageID
+                highest_id = int(voy.voyageID)
             else:
-                if voy.voyageID > highest_id:
-                    highest_id = voy.voyageID
+                if int(voy.voyageID) > highest_id:
+                    highest_id = int(voy.voyageID)
             
             iteration += 1
         return highest_id + 1 # returns an integer that is 1 higher than the highest id any voyage has in the database
+
+if __name__ == "__main__":
+    logic = VoyageLL()
+    print(logic._GenerateNewVoyageID())
