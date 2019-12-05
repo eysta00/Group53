@@ -1,6 +1,5 @@
 from EmployeeLL import EmployeeLL
 
-
 class EmployeeUI:
     def __init__(self):
         self.EmployeeLL = EmployeeLL()

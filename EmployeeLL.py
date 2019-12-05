@@ -67,7 +67,7 @@ class EmployeeLL:
         pilots = self.ListPilots()
         model_pilots = []
         for pil in pilots:
-            if pil.planeType = aircraft_model:
+            if pil.planeType == aircraft_model:
                 model_pilots.append(pil)
         model_pilots.sort(key=lambda x: x.name)
         return model_pilots
