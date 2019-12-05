@@ -360,7 +360,10 @@ def testmain():
     ms1o3 = Operation('List Employees', 1, [], Operation.listAllEmployees)
     ms1o2 = Operation('Add Attendent', 1, [], Operation.add_attendant)
     ms1o1 = Operation('Add Pilot', 1, [], Operation.add_pilot)
-    ms1 = Menu('Employees', 0, [ms1o1, ms1o2, ms1o3, ms1o4, ms1o5, ms1o6, ms1o7])
+    ms1 = Menu('Employees', 0, [ms1o1, ms1o2, ms1o3, ms1o4, ms1o5, ms1o6, ms1o7, ms1o8, ms1o9, ms1o10])
+    ms2o10 = Operation("List Voyages For Given Week", 1)
+    ms2o9 = Operation("Assign Staff to Voyage", 1)
+    ms2o8 = Operation("List Voyages For Given Day", 1)
     ms2o7 = Operation('List Available Aircrafts', 1)
     ms2o6 = Operation('List All Aircrafts', 1) # Show by status
     ms2o5 = Operation('Change Destination Contact Info', 1)
@@ -368,7 +371,7 @@ def testmain():
     ms2o3 = Operation('List Flights for Date', 1) # Daily, weekly..
     ms2o2 = Operation('Add Flight', 1) # Assign Staff to Flight and register flight location
     ms2o1 = Operation('Add Aircraft', 1, [], Operation.add_aircraft) # Register seating
-    ms2 = Menu('Flights and Aircrafts', 0, [ms2o1, ms2o2, ms2o3, ms2o4, ms2o5, ms2o6])
+    ms2 = Menu('Flights and Aircrafts', 0, [ms2o1, ms2o2, ms2o3, ms2o4, ms2o5, ms2o6, ms2o7, ms2o8, ms2o9, ms2o10])
     ms3o1 = Operation('Add Destination', 1, [], Operation.add_destination)
     ms3o2 = Operation('List Destinations', 1)
     ms3 = Menu('Destinations', 0, [ms3o1, ms3o2])
