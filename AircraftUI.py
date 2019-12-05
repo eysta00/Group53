@@ -14,6 +14,3 @@ class AircraftUI:
             print("Error, input not valid!")
         
         return
-
-test1 = AircraftUI()
-test1.register_aircraft()
