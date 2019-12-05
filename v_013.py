@@ -1,4 +1,5 @@
 from EmployeesIO import EmployeesIO
+from DestinationIO import DestinationIO
 QUIT_FLAG = 0
 
 def default_operation():
@@ -74,6 +75,8 @@ class Operation(UI):
         API.add_destination(dest_name, dest_id)
     def listAllEmployees():
         EmployeesIO("Data/EmployeeData.csv").ListALLStaff()
+    def listAllDestinations():
+        DestinationIO("Data/DestinationData.csv").listAllDestinations()
 
 class API:
     def add_pilot(full_name, ssn, addr, phone, email, lcnse):
@@ -373,7 +376,7 @@ def testmain():
     ms2o1 = Operation('Add Aircraft', 1, [], Operation.add_aircraft) # Register seating
     ms2 = Menu('Flights and Aircrafts', 0, [ms2o1, ms2o2, ms2o3, ms2o4, ms2o5, ms2o6, ms2o7, ms2o8, ms2o9, ms2o10])
     ms3o1 = Operation('Add Destination', 1, [], Operation.add_destination)
-    ms3o2 = Operation('List Destinations', 1)
+    ms3o2 = Operation('List Destinations', 1, [], Operation.listAllDestinations)
     ms3 = Menu('Destinations', 0, [ms3o1, ms3o2])
     main_menu = Menu('Main Menu', 0, [ms1, ms2, ms3])
     pmenu(main_menu)
