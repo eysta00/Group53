@@ -29,6 +29,10 @@ class LLAPI:
     def ListAllAircrafts(self):
         Aircrafts = self.aircraft_logic.ListAllAircrafts()
         Aircrafts.sort(key = lambda x: x.model)
+        return Aircrafts
+
+    def AddStaffToVoyage(self, voyage_ID, employee_SSN):
+        return self.voyage_logic.AddStaffToVoyage(voyage_ID, employee_SSN)
 
     ##### DESTINATION API #####
 
@@ -45,3 +49,7 @@ class LLAPI:
 
     def ListAllAircrafts(self):
         return self.aircraft_logic.ListAllAircrafts()
+
+
+if __name__ == "__main__":
+    api = LLAPI()
