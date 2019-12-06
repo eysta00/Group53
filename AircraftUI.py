@@ -14,3 +14,10 @@ class AircraftUI:
             print("Error, input not valid!")
         
         return
+
+    def print_aircrafts(self):
+        print("List all aircrafts")
+        aircrafts = self.AircraftLL.ListAllAircrafts()
+        for aircraft in aircrafts:
+            print(aircraft)
+        print("\n")
