@@ -7,7 +7,8 @@ class DestinationUI:
     def register_destination(self):
         destination_name = input('Destination name: ')
         destination_id = input('Destination ID: ')
-        error = self.DestinationLL(destination_name, destination_id)
+        flight_duration = input('Flight duration: ')
+        error = self.DestinationLL(destination_name, destination_id, flight_duration)
         if error != 1:
             print("Error, input not valid!")
         
