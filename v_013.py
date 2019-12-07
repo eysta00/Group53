@@ -353,28 +353,36 @@ def pmenu(instance):
 def testmain():
     global ALL_DATA
 
+    ms1o12 = Operation('List Pilots by Aircraft Permission', 1)
+    ms1o11 = Operation('List All Pilots', 1) 
     ms1o10 = Operation('Work Summary', 1) # printable 
     ms1o9 = Operation('Change Employee Info', 1)
     ms1o8 = Operation('List Employee Info', 1)
     ms1o7 = Operation('List Unassigned Employees', 1)
     ms1o6 = Operation('List Assigned Employees', 1)
     ms1o5 = Operation('List Flight Attendants', 1)
-    ms1o4 = Operation('List Pilots', 1) # List All Pilots, List Pilots for Aircraft, List Pilots by Aircraft Permission
+    ms1o4 = Operation('List Pilots', 1, [ms1o11, ms1o12]) # List All Pilots,  List Pilots by Aircraft Permission
     ms1o3 = Operation('List Employees', 1, [], Operation.listAllEmployees)
     ms1o2 = Operation('Add Attendent', 1, [], Operation.add_attendant)
     ms1o1 = Operation('Add Pilot', 1, [], Operation.add_pilot)
     ms1 = Menu('Employees', 0, [ms1o1, ms1o2, ms1o3, ms1o4, ms1o5, ms1o6, ms1o7, ms1o8, ms1o9, ms1o10])
+   
+    ms2o14 = Operation("Arrival Time", 1)
+    ms2o13 = Operation("Departure Time", 1)
+    ms2o12 = Operation("Register Flight Location", 1, [], Operation.add_flight)
+    ms2o11 = Operation("Assign Staff to Flight", 1)
     ms2o10 = Operation("List Voyages For Given Week", 1)
-    ms2o9 = Operation("Assign Staff to Voyage", 1)
-    ms2o8 = Operation("List Voyages For Given Day", 1)
-    ms2o7 = Operation('List Available Aircrafts', 1)
+    ms2o9 = Operation("List Voyages For Given Day", 1)
+    ms2o8 = Operation("Assign Staff to Voyage", 1)
+    ms2o7 = Operation('List Available Aircrafts', 1) # List Pilots for Aircraft
     ms2o6 = Operation('List All Aircrafts', 1) # Show by status
     ms2o5 = Operation('Change Destination Contact Info', 1)
     ms2o4 = Operation('List Flights By Location', 1)
-    ms2o3 = Operation('List Flights for Date', 1) # Daily, weekly..
-    ms2o2 = Operation('Add Flight', 1) # Assign Staff to Flight and register flight location
+    ms2o3 = Operation('List Voyages', 1, [ms2o9,ms2o10]) # Daily, weekly..
+    ms2o2 = Operation('Add Flight', 1, [ms2o11, ms2o12, ms2o13]) # Assign Staff to Flight and register flight location
     ms2o1 = Operation('Add Aircraft', 1, [], Operation.add_aircraft) # Register seating
-    ms2 = Menu('Flights and Aircrafts', 0, [ms2o1, ms2o2, ms2o3, ms2o4, ms2o5, ms2o6, ms2o7, ms2o8, ms2o9, ms2o10])
+    ms2 = Menu('Flights and Aircrafts', 0, [ms2o1, ms2o2, ms2o3, ms2o4, ms2o5, ms2o6, ms2o7, ms2o8])
+    
     ms3o1 = Operation('Add Destination', 1, [], Operation.add_destination)
     ms3o2 = Operation('List Destinations', 1, [], Operation.listAllDestinations)
     ms3 = Menu('Destinations', 0, [ms3o1, ms3o2])
