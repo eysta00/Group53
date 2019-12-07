@@ -1,9 +1,9 @@
 from Employee import Employee
 from IOAPI import IOAPI
-from datetime import datetime
+import datetime
 from Exceptions import EntryInDatabase
 from Exceptions import EntryNotInDatabase
-import dateutil.parser
+from dateutil.parser import *
 
 class EmployeeLL:
     def __init__(self):
@@ -57,10 +57,14 @@ class EmployeeLL:
             return -1
 
     def ListUnassignedEmployees(self, date_iso): # not implemeted, to be implemented once datetime slides appear
-        dateParced = dateutil.parser.parse(date)
+        dateParced = parse(date_iso)
         voyages = self.data.getAllVoyages()
         employees = self.data.getAllEmployees()
-        #Not Complete
+        unassign_employees = []
+        for emp in employees:
+            for voy in voyages:
+                parsedStartTime = parse(voy.departureTime)
+                parsedEndTime = 3 # creating private method to solve this
 
 
     def ListPilotsWithAircraftPrivilege(self, aircraft_model):
@@ -72,10 +76,17 @@ class EmployeeLL:
         model_pilots.sort(key=lambda x: x.name)
         return model_pilots
 
+    def _getEndTimeOfVoyage(voyage):
+        destination = self.data.getDestinationByDestinationID(voyage.destination)
+        parsedStartTime = parse(voyage.departureTime)
+        flightTime = destination.flightTime
+        
+        #not finished implementing
 
 if __name__ == "__main__":
     logic = EmployeeLL()
     # print(logic.ListPilots())
     # print(logic.ListFlightAttendats())
     # print(logic.ListAllEmployees())
-    print(logic.ListUnassignedEmployees())
+    time = datetime.datetime(2020, 12, 24, 18, 0, 0).isoformat()
+    print(logic.ListUnassignedEmployees(time))

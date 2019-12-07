@@ -30,10 +30,13 @@ class Employee:
         self.data['licenses'] = self.licenses
 
     def __str__(self):
-        return_str = 'name: ' + self.name + ', ssn: ' + self.ssn + ', address: ' + self.address + ', phone: ' + self.phone + ', email: ' + self.email + ', plane type: ' + self.planeType
+        return_str = 'Name: ' + self.name + ', ssn: ' + self.ssn + ', address: ' + self.address + ', phone: ' + self.phone + ', email: ' + self.email + ', plane type: ' + self.planeType
+        seperator = len(return_str) * "-"
         if self.pilot_bool:
+            print(seperator + "-" * 17)
             return_str += ", Position: Pilot"
         else:
+            print(seperator + "-" * 28)
             return_str += ', Position: Flight Attendant'
         return return_str
 
