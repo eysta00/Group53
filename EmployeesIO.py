@@ -79,7 +79,15 @@ class EmployeesIO():
             for row in csvReader:
                 return_list.append(Employee(row["name"], row["ssn"], row["address"], row["phone"], row["email"], row["pilot_bool"], row["planeType"]))
         return return_list
-
+    
+    def ListALLStaff(self):
+        print("{:<25}{:<25}{:<25}{:<25}{:<25}{:<25}{:<25}".format("SSN", "NAME", "ADDRESS", "PHONE", "EMAIL", "PILOT_BOOL", "PLANETYPE"))
+        with open(self.filePath, 'r') as csv_file:
+            # csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
+            for row in csv_file:
+                name,ssn,address,phone,email,pilot_bool,planeType = row.strip().split(",")
+                print("{:<25}{:<25}{:<25}{:<25}{:<25}{:<25}{:<25}".format(name,ssn,address,phone,email,pilot_bool,planeType))
+               
 
 if __name__ == "__main__":
     data = EmployeesIO("Data/EmployeeData.csv")

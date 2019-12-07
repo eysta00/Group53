@@ -74,6 +74,13 @@ class DestinationIO():
                 return_list.append(Destination(row['dest_name'], row['dest_id'], row['flight_duration']))
         return return_list
         
+    def listAllDestinations(self):
+        with open(self.filePath, 'r') as csv_file:
+            # csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
+            print("{:<20}{:<20}{:<10}".format("Dest Name", "ID", "Duration"))
+            for row in csv_file:
+                dest_name, dest_id, flight_duration = row.strip().split(",")
+                print("{:<20}{:<20}{:<10}".format(dest_name, dest_id, flight_duration))
 
 if __name__ == "__main__":
     data = DestinationIO('Data/DestinationData.csv')
