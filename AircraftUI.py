@@ -1,15 +1,15 @@
-from AircraftLL import AircraftLL
+from LLAPI import LLAPI
 
 class AircraftUI:
     def __init__(self):
-        self.AircraftLL = AircraftLL()
+        self.LLAPI = LLAPI()
 
     def register_aircraft(self):
         model = input('Aircraft Model: ')
         manufacturer = input('Aircraft Manufacturer: ')
         total_seats = input('Number of Seats: ')
         req_licenses = input('Required Piloting Licenses: ')
-        error = self.AircraftLL(model, manufacturer, total_seats, req_licenses)
+        error = self.LLAPI(model, manufacturer, total_seats, req_licenses)
         if error != 1:
             print("Error, input not valid!")
         
@@ -17,7 +17,12 @@ class AircraftUI:
 
     def print_aircrafts(self):
         print("List all aircrafts")
-        aircrafts = self.AircraftLL.ListAllAircrafts()
+        aircrafts = self.LLAPI.ListAllAircrafts()
         for aircraft in aircrafts:
             print(aircraft)
         print("\n")
+
+
+test1 = AircraftUI()
+test1.print_aircrafts()
+test1.register_aircraft()
