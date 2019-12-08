@@ -3,7 +3,7 @@ from Exceptions import EntryInDatabase
 from Exceptions import EntryNotInDatabase
 from IOAPI import IOAPI
 import dateutil.parser
-
+from datetime import datetime
 
 class VoyageLL:
     def __init__(self):
@@ -17,15 +17,16 @@ class VoyageLL:
     def AddStaffToVoyage(self, voyageID, employeeSSN): 
         
         try:
-            voyage = self.data.getVoyageByVoyageID(voyage.voyageID)
+            voyage = self.data.getVoyageByVoyageID(voyageID)
             employee = self.data.getEmployeeBySSN(employeeSSN)
             if employee.pilot_bool:
+                print(voyage.pilots_lst)
                 voyage.pilots_lst.append(employeeSSN)
             else:
                 voyage.flightAttendats_lst.append(employeeSSN)
             self.data.updateVoyage(voyage)
             return 1
-        except: # error code to see if voyage is successfully updated
+        except EntryNotInDatabase: # error code to see if voyage is successfully updated
             return -1
 
     def addVoyage(self, destination_id, flightTime_str):
@@ -33,16 +34,17 @@ class VoyageLL:
         # implement logic checking if there's enough staff available at the given time here
 
         try:
-            voyage = Voyage(self.__GenerateNewVoyageID(), destination_id, flightTime_str)
+            voyage = Voyage(self._GenerateNewVoyageID(), destination_id, flightTime_str)
             self.data.addVoyage(voyage)
             return 1
-        except:
+        except EntryInDatabase:
             return -1
 
 
     def _GenerateNewVoyageID(self):
         voyages = self.data.getAllVoyages()
         iteration = 1
+        highest_id = 0
         for voy in voyages:
             if iteration <= 1:
                 highest_id = int(voy.voyageID)
@@ -55,4 +57,9 @@ class VoyageLL:
 
 if __name__ == "__main__":
     logic = VoyageLL()
-    print(logic._GenerateNewVoyageID())
+    # print(logic._GenerateNewVoyageID())
+
+    time = datetime.now().isoformat()
+    voyage = Voyage(logic._GenerateNewVoyageID(), 1, time)
+    logic.addVoyage(2, time)
+    print(logic.AddStaffToVoyage(1, '1611982429'))

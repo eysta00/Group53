@@ -1,9 +1,10 @@
 from Employee import Employee
 from IOAPI import IOAPI
-import datetime
+from datetime import datetime
 from Exceptions import EntryInDatabase
 from Exceptions import EntryNotInDatabase
 from dateutil.parser import *
+from dateutil.relativedelta import *
 
 class EmployeeLL:
     def __init__(self):
@@ -60,11 +61,20 @@ class EmployeeLL:
         dateParced = parse(date_iso)
         voyages = self.data.getAllVoyages()
         employees = self.data.getAllEmployees()
-        unassign_employees = []
+        unassigned_employees = []
         for emp in employees:
+            assigned = False
             for voy in voyages:
                 parsedStartTime = parse(voy.departureTime)
-                parsedEndTime = 3 # creating private method to solve this
+                parsedEndTime = self._getEndTimeOfVoyage(voy)
+
+                # testing if the departure or the return date are on the tested date
+                assigned or (not ((dateParced.year == parsedStartTime.year and dateParced.month == parsedStartTime.month and dateParced.day == parsedStartTime.day)\
+                    and (dateParced.year == parsedEndTime.year and dateParced.month == parsedEndTime.month and dateParced.day == parsedEndTime.day)))
+            if not assigned:
+                unassigned_employees.append(emp)
+        return unassigned_employees
+
 
 
     def ListPilotsWithAircraftPrivilege(self, aircraft_model):
@@ -76,10 +86,12 @@ class EmployeeLL:
         model_pilots.sort(key=lambda x: x.name)
         return model_pilots
 
-    def _getEndTimeOfVoyage(voyage):
+    def _getEndTimeOfVoyage(self, voyage):
         destination = self.data.getDestinationByDestinationID(voyage.destination)
-        parsedStartTime = parse(voyage.departureTime)
-        flightTime = destination.flightTime
+        StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S.%f')
+        flightTime = int(destination.flight_duration) # consider changing this to int so as to not miss the disimal places!
+        # print(flightTime)
+        return parse((StartTime_dateTime + relativedelta(hour=+(flightTime*2+1))).isoformat()) # Assuming the rest at destination is 1 hour
         
         #not finished implementing
 
@@ -88,5 +100,5 @@ if __name__ == "__main__":
     # print(logic.ListPilots())
     # print(logic.ListFlightAttendats())
     # print(logic.ListAllEmployees())
-    time = datetime.datetime(2020, 12, 24, 18, 0, 0).isoformat()
+    time = datetime(2020, 12, 24, 18, 0, 0).isoformat()
     print(logic.ListUnassignedEmployees(time))

@@ -56,7 +56,19 @@ class VoyageIO():
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
                 if str(row["voyageID"]) == str(voyageID):
-                    return Voyage(row['voyageID'], row['destination'], row['departureTime'], row['aircraftID'], row['pilots_lst'], row['flightAttendants_lst'], row['captain'])
+                    voyageID = row['voyageID']
+                    destination = row['destination']
+                    departureTime = row['departureTime']
+                    aircraftID = row['aircraftID']
+                    pilots_lst = row['pilots_lst']
+                    flightAttendants_lst = row['flightAttendants_lst']
+                    captain = row['captain']
+                    if pilots_lst == '':
+                        pilots_lst = []
+                    if flightAttendants_lst == '':
+                        flightAttendants_lst = []
+
+                    return Voyage(voyageID, destination, departureTime, aircraftID, pilots_lst, flightAttendants_lst, captain)
 
     def VoyageInDatabase_bool(self, voyageID):
 
