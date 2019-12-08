@@ -2,7 +2,7 @@ from Voyage import Voyage
 from Exceptions import EntryInDatabase
 from Exceptions import EntryNotInDatabase
 from IOAPI import IOAPI
-import dateutil.parser
+# import dateutil.parser
 
 
 class VoyageLL:

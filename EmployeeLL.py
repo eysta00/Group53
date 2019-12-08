@@ -3,7 +3,7 @@ from IOAPI import IOAPI
 import datetime
 from Exceptions import EntryInDatabase
 from Exceptions import EntryNotInDatabase
-from dateutil.parser import *
+# from dateutil.parser import *
 
 class EmployeeLL:
     def __init__(self):
