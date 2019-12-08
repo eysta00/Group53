@@ -22,7 +22,7 @@ class DestinationLL():
         # dst = []
         # for d in destinations:
         #     dst.append(d)
-        destinations.sort(key=lambda x: x.name)
+        # destinations.sort(key=lambda x: x.name)
         return destinations
 
     def _GenerateNewDestinationID(self):

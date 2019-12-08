@@ -1,5 +1,7 @@
 from EmployeeUI import EmployeeUI
 from VoyageUI import VoyageUI
+from DestinationUI import DestinationUI
+
 def default_operation():
     print('This operation is still WIP.\nThank you for your patience. :)')
     return MenuUI().showMainMenu()
@@ -115,13 +117,9 @@ class MenuUI:
     def getDInput(self):
         choice = input("\nEnter a command:")
         if choice == "1":
-            return 
+            return DestinationUI().register_destination()
         elif choice == "2":
-            return
-        elif choice == "3":
-            return 
-        elif choice == "4":
-            return
+            return DestinationUI().print_destinations()
         elif choice == "q":
             return
         else:
