@@ -22,7 +22,7 @@ class AircraftLL:
         arcft = []
         for a in aircrafts:
             arcft.append(a)
-        arcft.sort(key=lambda x: x.name)
+        arcft.sort(key=lambda x: x.model)
         return arcft
 
     def _GenerateNewAircraftID(self):
