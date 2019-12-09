@@ -1,8 +1,8 @@
 import csv
 import os
-from Employee import Employee
-from Exceptions import EntryInDatabase
-from Exceptions import EntryNotInDatabase
+from InstanceClasses.Employee import Employee
+from Exceptions.Exceptions import EntryInDatabase
+from Exceptions.Exceptions import EntryNotInDatabase
 
 
 # class EntryInDatabase(Exception):

@@ -1,9 +1,9 @@
-from DestinationIO import DestinationIO
-from Destination import Destination
-from IOAPI import IOAPI
+# from DestinationIO import DestinationIO
+from InstanceClasses.Destination import Destination
+from IO.IOAPI import IOAPI
 from datetime import datetime
-from Exceptions import EntryInDatabase
-from Exceptions import EntryNotInDatabase
+from Exceptions.Exceptions import EntryInDatabase
+from Exceptions.Exceptions import EntryNotInDatabase
 # import dateutil.parser
 
 class DestinationLL():

@@ -1,8 +1,8 @@
 import csv
 import os
-from Voyage import Voyage
-from Exceptions import EntryInDatabase
-from Exceptions import EntryNotInDatabase
+from InstanceClasses.Voyage import Voyage
+from Exceptions.Exceptions import EntryInDatabase
+from Exceptions.Exceptions import EntryNotInDatabase
 from datetime import datetime
 
 class VoyageIO():

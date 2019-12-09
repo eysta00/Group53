@@ -1,16 +1,16 @@
-from DestinationIO import DestinationIO
-from VoyageIO import VoyageIO
-from AircraftIO import AircraftIO
-from EmployeesIO import EmployeesIO
+from IO.DestinationIO import DestinationIO
+from IO.VoyageIO import VoyageIO
+from IO.AircraftIO import AircraftIO
+from IO.EmployeesIO import EmployeesIO
 
-from Destination import Destination
-from Employee import Employee
-from Voyage import Voyage
-from Aircraft import Aircraft
+from InstanceClasses.Destination import Destination
+from InstanceClasses.Employee import Employee
+from InstanceClasses.Voyage import Voyage
+from InstanceClasses.Aircraft import Aircraft
 
 from datetime import datetime
-from Exceptions import EntryInDatabase
-from Exceptions import EntryNotInDatabase
+from Exceptions.Exceptions import EntryInDatabase
+from Exceptions.Exceptions import EntryNotInDatabase
 
 class IOAPI():
     def __init__(self):

@@ -1,4 +1,4 @@
-from VoyageLL import VoyageLL
+from LogicLayer.VoyageLL import VoyageLL
 
 class VoyageUI:
     def __init__(self):

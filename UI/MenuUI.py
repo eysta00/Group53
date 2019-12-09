@@ -1,6 +1,6 @@
-from EmployeeUI import EmployeeUI
-from VoyageUI import VoyageUI
-from DestinationUI import DestinationUI
+from UI.EmployeeUI import EmployeeUI
+from UI.VoyageUI import VoyageUI
+from UI.DestinationUI import DestinationUI
 
 def default_operation():
     print('This operation is still WIP.\nThank you for your patience. :)')

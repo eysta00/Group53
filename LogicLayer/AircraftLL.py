@@ -1,9 +1,9 @@
-from Aircraft import Aircraft
-from AircraftIO import AircraftIO
-from IOAPI import IOAPI
+from InstanceClasses.Aircraft import Aircraft
+# from InstanceClasses.AircraftIO import AircraftIO
+from IO.IOAPI import IOAPI
 from datetime import datetime
-from Exceptions import EntryInDatabase
-from Exceptions import EntryNotInDatabase
+from Exceptions.Exceptions import EntryInDatabase
+from Exceptions.Exceptions import EntryNotInDatabase
 import dateutil.parser
 
 class AircraftLL:

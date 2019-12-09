@@ -1,4 +1,4 @@
-from EmployeeLL import EmployeeLL
+from LogicLayer.EmployeeLL import EmployeeLL
 
 class EmployeeUI:
     def __init__(self):

@@ -1,8 +1,8 @@
 import csv
 import os
-from Destination import Destination
-from Exceptions import EntryInDatabase
-from Exceptions import EntryNotInDatabase
+from InstanceClasses.Destination import Destination
+from Exceptions.Exceptions import EntryInDatabase
+from Exceptions.Exceptions import EntryNotInDatabase
 from datetime import datetime
 
 class DestinationIO():

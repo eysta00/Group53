@@ -1,8 +1,8 @@
-from Employee import Employee
-from IOAPI import IOAPI
+from InstanceClasses.Employee import Employee
+from IO.IOAPI import IOAPI
 from datetime import datetime
-from Exceptions import EntryInDatabase
-from Exceptions import EntryNotInDatabase
+from Exceptions.Exceptions import EntryInDatabase
+from Exceptions.Exceptions import EntryNotInDatabase
 from dateutil.parser import *
 from dateutil.relativedelta import *
 # from dateutil.parser import *

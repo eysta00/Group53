@@ -1,8 +1,8 @@
 import csv
 import os
-from Aircraft import Aircraft
-from Exceptions import EntryInDatabase
-from Exceptions import EntryNotInDatabase
+from InstanceClasses.Aircraft import Aircraft
+from Exceptions.Exceptions import EntryInDatabase
+from Exceptions.Exceptions import EntryNotInDatabase
 from datetime import datetime
 
 class AircraftIO():

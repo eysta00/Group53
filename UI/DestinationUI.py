@@ -1,4 +1,4 @@
-from DestinationLL import DestinationLL
+from LogicLayer.DestinationLL import DestinationLL
 
 class DestinationUI:
     def __init__(self):

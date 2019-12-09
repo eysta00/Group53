@@ -1,8 +1,8 @@
-from EmployeeLL import EmployeeLL
-from AircraftLL import AircraftLL
-from DestinationLL import DestinationLL
-from AircraftLL import AircraftLL
-from VoyageLL import VoyageLL
+from LogicLayer.EmployeeLL import EmployeeLL
+from LogicLayer.AircraftLL import AircraftLL
+from LogicLayer.DestinationLL import DestinationLL
+from LogicLayer.AircraftLL import AircraftLL
+from LogicLayer.VoyageLL import VoyageLL
 
 
 class LLAPI:

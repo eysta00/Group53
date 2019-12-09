@@ -1,7 +1,7 @@
-from Voyage import Voyage
-from Exceptions import EntryInDatabase
-from Exceptions import EntryNotInDatabase
-from IOAPI import IOAPI
+from InstanceClasses.Voyage import Voyage
+from Exceptions.Exceptions import EntryInDatabase
+from Exceptions.Exceptions import EntryNotInDatabase
+from IO.IOAPI import IOAPI
 import dateutil.parser
 from datetime import datetime
 from dateutil.parser import *
