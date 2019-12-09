@@ -4,7 +4,7 @@ class EmployeeUI:
     def __init__(self):
         self.EmployeeLL = EmployeeLL()
 
-    def print_register_employee(self):
+    def register_employee(self):
         print("Register a new employee")
         e_name = input("Full employee name: ")
         e_ssn = input("Employee social securtiy number: ")
@@ -55,9 +55,9 @@ class EmployeeUI:
             print(pilot_license)
         print("\n")
         
-# test1 = EmployeeUI()
-# test1.print_all_employees()
-# test1.register_employee()
+test1 = EmployeeUI()
+test1.print_all_employees()
+#test1.register_employee()
 # test1.print_flight_attendants()
 # test1.print_pilots()
 # test1.print_pilots_with_aircraft_privilage()
