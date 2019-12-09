@@ -65,16 +65,41 @@ class EmployeeLL:
         for emp in employees:
             assigned = False
             for voy in voyages:
-                parsedStartTime = parse(voy.departureTime)
-                parsedEndTime = self._getEndTimeOfVoyage(voy)
+                if emp.ssn in voy.pilots_lst or emp.ssn in voy.flightAttendants_lst:
+                    parsedStartTime = parse(voy.departureTime)
+                    parsedEndTime = self._getEndTimeOfVoyage(voy)
 
-                # testing if the departure or the return date are on the tested date
-                assigned or (not ((dateParced.year == parsedStartTime.year and dateParced.month == parsedStartTime.month and dateParced.day == parsedStartTime.day)\
-                    and (dateParced.year == parsedEndTime.year and dateParced.month == parsedEndTime.month and dateParced.day == parsedEndTime.day)))
+                    # testing if the departure or the return date are on the tested date
+                
+                    assigned = assigned or (((dateParced.year == parsedStartTime.year and dateParced.month == parsedStartTime.month and dateParced.day == parsedStartTime.day)\
+                        and (dateParced.year == parsedEndTime.year and dateParced.month == parsedEndTime.month and dateParced.day == parsedEndTime.day)))
+                
+
             if not assigned:
                 unassigned_employees.append(emp)
         return unassigned_employees
 
+    def ListAssignedEmployees(self, date_iso): 
+        dateParced = parse(date_iso)
+        voyages = self.data.getAllVoyages()
+        employees = self.data.getAllEmployees()
+        assigned_employees = []
+        for emp in employees:
+            assigned = False
+            for voy in voyages:
+                if emp.ssn in voy.pilots_lst or emp.ssn in voy.flightAttendants_lst:
+                    parsedStartTime = parse(voy.departureTime)
+                    parsedEndTime = self._getEndTimeOfVoyage(voy)
+
+                    # testing if the departure or the return date are on the tested date
+                
+                    assigned = assigned or ((dateParced.year == parsedStartTime.year and dateParced.month == parsedStartTime.month and dateParced.day == parsedStartTime.day)\
+                        and (dateParced.year == parsedEndTime.year and dateParced.month == parsedEndTime.month and dateParced.day == parsedEndTime.day))
+                
+
+            if assigned:
+                assigned_employees.append(emp)
+        return assigned_employees
 
 
     def ListPilotsWithAircraftPrivilege(self, aircraft_model):
@@ -100,5 +125,5 @@ if __name__ == "__main__":
     # print(logic.ListPilots())
     # print(logic.ListFlightAttendats())
     # print(logic.ListAllEmployees())
-    time = datetime(2020, 12, 24, 18, 0, 0).isoformat()
-    print(logic.ListUnassignedEmployees(time))
+    time = datetime(2019, 12, 8, 18, 0, 0).isoformat()
+    print(logic.ListAssignedEmployees(time))

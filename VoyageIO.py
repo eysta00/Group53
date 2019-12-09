@@ -44,8 +44,12 @@ class VoyageIO():
             csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
             for entry in dictList:
                 csvWriter.writerow(entry)
-            os.remove(self.filePath)
-            os.rename(self.tempFilePath, self.filePath)
+            
+        os.remove(self.filePath)
+        os.rename(self.tempFilePath, self.filePath)
+            # os.rename(self.filePath, 'Data/temp.csv')
+            # os.rename(self.tempFilePath, self.filePath)
+            # os.rename('Data/temp.csv', self.tempFilePath)
 
 
 
@@ -60,8 +64,8 @@ class VoyageIO():
                     destination = row['destination']
                     departureTime = row['departureTime']
                     aircraftID = row['aircraftID']
-                    pilots_lst = row['pilots_lst']
-                    flightAttendants_lst = row['flightAttendants_lst']
+                    pilots_lst = list(row['pilots_lst'])
+                    flightAttendants_lst = list(row['flightAttendants_lst'])
                     captain = row['captain']
                     if pilots_lst == '':
                         pilots_lst = []
