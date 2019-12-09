@@ -14,7 +14,9 @@ class VoyageLL:
         self.data = IOAPI()
 
     def ListAllVoyages(self):
-        return self.data.getAllVoyages()
+        voyages = self.data.getAllVoyages()
+        #sort by something here not sure what
+        return voyages
 
 
     # We should possibly edit the code so that it doesn't access the stored instances in the classes directly but through methods

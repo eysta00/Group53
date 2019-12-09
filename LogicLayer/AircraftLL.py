@@ -19,11 +19,8 @@ class AircraftLL:
 
     def ListAllAircrafts(self):
         aircrafts = self.data.getAllAircrafts()
-        arcft = []
-        for a in aircrafts:
-            arcft.append(a)
-        arcft.sort(key=lambda x: x.model)
-        return arcft
+        aircrafts.sort(key=lambda x: x.model)
+        return aircrafts
 
     def _GenerateNewAircraftID(self):
         aircrafts = self.data.getAllAircrafts()

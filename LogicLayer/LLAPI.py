@@ -24,12 +24,19 @@ class LLAPI:
     def ListAllEmployees(self):
         return self.employee_logic.ListAllEmployees()
 
+    def ListUnassignedEmployees(self, date_iso):
+        return self.employee_logic.ListUnassignedEmployees(date_iso)
+    
+    def ListAssignedEmployees(self, date_iso):
+        return self.employee_logic.ListAssignedEmployees(date_iso)
+
+    
+
     ##### VOYAGE API #####
 
-    def ListAllAircrafts(self):
-        Aircrafts = self.aircraft_logic.ListAllAircrafts()
-        Aircrafts.sort(key = lambda x: x.model)
-        return Aircrafts
+    def AddVoyage(self, destination_id, flightTime_str):
+        return self.voyage_logic.addVoyage(destination_id, flightTime_str)
+
 
     def AddStaffToVoyage(self, voyage_ID, employee_SSN):
         return self.voyage_logic.AddStaffToVoyage(voyage_ID, employee_SSN)
@@ -50,6 +57,9 @@ class LLAPI:
     def ListAllAircrafts(self):
         return self.aircraft_logic.ListAllAircrafts()
 
+    def ListAllAircrafts(self):
+        return self.aircraft_logic.ListAllAircrafts()
+        
 
 if __name__ == "__main__":
     api = LLAPI()
