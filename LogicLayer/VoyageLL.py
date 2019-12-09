@@ -25,12 +25,16 @@ class VoyageLL:
         try:
             voyage = self.data.getVoyageByVoyageID(voyageID)
             employee = self.data.getEmployeeBySSN(employeeSSN)
+            print(employee.pilot_bool)
+            print(type(employee.pilot_bool))
             if employee.pilot_bool:
+                # print(voyage.pilots_lst)
+                # print(type(voyage.pilots_lst))
                 print(voyage.pilots_lst)
-                print(type(voyage.pilots_lst))
                 voyage.pilots_lst.append(employeeSSN)
             else:
-                voyage.flightAttendats_lst.append(employeeSSN)
+                
+                voyage.flightAttendants_lst.append(employeeSSN)
             self.data.updateVoyage(voyage)
             return 1
         except EntryNotInDatabase: # error code to see if voyage is successfully updated

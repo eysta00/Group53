@@ -37,19 +37,30 @@ class VoyageIO():
                     return
             raise EntryNotInDatabase('try using addVoyage')
 
-
+# ------ This Method Creates A New File And Transfers The Data To Negate Likelyhood Of Data Loss ------
 # method to rewrite entire data file from list from update Employee
+    # def __reWriteFileFromList(self, dictList): # writing to new file then rename-ing files and deleting old 
+    #     with open(self.tempFilePath, 'w') as csv_file:
+    #         csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
+    #         for entry in dictList:
+    #             csvWriter.writerow(entry)
+            
+    #     os.remove(self.filePath)
+    #     os.rename(self.tempFilePath, self.filePath)
+    #         # os.rename(self.filePath, 'Data/temp.csv')
+    #         # os.rename(self.tempFilePath, self.filePath)
+    #         # os.rename('Data/temp.csv', self.tempFilePath)
+
+# ------ Same Purpose As Commented Function Above But Less Redundancy But Does Not Require Delete Priveledges ------
     def __reWriteFileFromList(self, dictList): # writing to new file then rename-ing files and deleting old 
-        with open(self.tempFilePath, 'w') as csv_file:
+        with open(self.filePath, 'w') as csv_file:
             csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
             for entry in dictList:
                 csvWriter.writerow(entry)
             
-        os.remove(self.filePath)
-        os.rename(self.tempFilePath, self.filePath)
-            # os.rename(self.filePath, 'Data/temp.csv')
-            # os.rename(self.tempFilePath, self.filePath)
-            # os.rename('Data/temp.csv', self.tempFilePath)
+        # os.remove(self.filePath)
+        # os.rename(self.tempFilePath, self.filePath)
+            
 
 
 
@@ -64,8 +75,19 @@ class VoyageIO():
                     destination = row['destination']
                     departureTime = row['departureTime']
                     aircraftID = row['aircraftID']
-                    pilots_lst = list(row['pilots_lst'])
-                    flightAttendants_lst = list(row['flightAttendants_lst'])
+                    print(row['pilots_lst'])
+                    print(type(row['pilots_lst']))
+
+                    pilots_lst = row['pilots_lst'].strip('][').split(', ') # this code is to convert pilots list to 
+                    pilots_lst = [s.replace("'", "") for s in pilots_lst]
+                    
+                    flightAttendants_lst = row['flightAttendants_lst'].strip('][').split(', ')
+                    flightAttendants_lst = [s.replace("'", "") for s in flightAttendants_lst]
+                    if pilots_lst[0] == '' and len(pilots_lst) == 1: # avoiding the list returning with one empty string
+                        pilots_lst = []
+                    if flightAttendants_lst[0] == '' and len(flightAttendants_lst) == 1:
+                        flightAttendants_lst = []
+
                     captain = row['captain']
                     if pilots_lst == '':
                         pilots_lst = []
@@ -73,6 +95,8 @@ class VoyageIO():
                         flightAttendants_lst = []
 
                     return Voyage(voyageID, destination, departureTime, aircraftID, pilots_lst, flightAttendants_lst, captain)
+            raise EntryNotInDatabase
+
 
     def VoyageInDatabase_bool(self, voyageID):
 

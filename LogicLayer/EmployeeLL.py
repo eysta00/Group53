@@ -114,7 +114,10 @@ class EmployeeLL:
 
     def _getEndTimeOfVoyage(self, voyage):
         destination = self.data.getDestinationByDestinationID(voyage.destination)
-        StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S.%f')
+        try:
+            StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S.%f')
+        except ValueError:
+            StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S')
         flightTime = int(destination.flight_duration) # consider changing this to int so as to not miss the disimal places!
         # print(flightTime)
         return parse((StartTime_dateTime + relativedelta(hour=+(flightTime*2+1))).isoformat()) # Assuming the rest at destination is 1 hour

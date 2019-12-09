@@ -60,7 +60,16 @@ class EmployeesIO():
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
                 if str(row["ssn"]) == str(employeeSSN_int):
-                    return Employee(row["name"], row["ssn"], row["address"], row["phone"], row["email"], row["pilot_bool"], row["planeType"])
+                    name = row["name"]
+                    ssn = row["ssn"]
+                    address = row["address"]
+                    phone = row["phone"]
+                    email = row["email"]
+                    pilot_bool = row["pilot_bool"] == "True" #this is because it is stored as a string in the file
+                    planeType = row["planeType"]
+
+                    
+                    return Employee(name, ssn, address, phone, email, pilot_bool, planeType)
 
     def EmplyeeInDataBase_bool(self, employeeSSN_int):
 
