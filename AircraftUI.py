@@ -9,7 +9,7 @@ class AircraftUI:
         manufacturer = input('Aircraft Manufacturer: ')
         total_seats = input('Number of Seats: ')
         req_licenses = input('Required Piloting Licenses: ')
-        error = self.AircraftLL(model, manufacturer, total_seats, req_licenses)
+        error = AircraftLL().RegisterAircraft(model, manufacturer, total_seats, req_licenses)
         if error != 1:
             print("Error, input not valid!")
         
@@ -21,3 +21,8 @@ class AircraftUI:
         for aircraft in aircrafts:
             print(aircraft)
         print("\n")
+
+
+test1 = AircraftUI()
+test1.print_aircrafts()
+test1.register_aircraft()

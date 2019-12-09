@@ -4,7 +4,7 @@ from IOAPI import IOAPI
 from datetime import datetime
 from Exceptions import EntryInDatabase
 from Exceptions import EntryNotInDatabase
-import dateutil.parser
+# import dateutil.parser
 
 class DestinationLL():
     def __init__(self):
@@ -22,7 +22,7 @@ class DestinationLL():
         # dst = []
         # for d in destinations:
         #     dst.append(d)
-        destinations.sort(key=lambda x: x.name)
+        # destinations.sort(key=lambda x: x.name)
         return destinations
 
     def _GenerateNewDestinationID(self):
