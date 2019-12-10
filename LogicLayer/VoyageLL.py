@@ -18,6 +18,9 @@ class VoyageLL:
         #sort by something here not sure what
         return voyages
 
+    def getVoyageByVoyageID(self, voyageID):
+        return self.data.getVoyageByVoyageID(voyageID)
+
 
     # We should possibly edit the code so that it doesn't access the stored instances in the classes directly but through methods
     def AddStaffToVoyage(self, voyageID, employeeSSN): 
@@ -25,12 +28,12 @@ class VoyageLL:
         try:
             voyage = self.data.getVoyageByVoyageID(voyageID)
             employee = self.data.getEmployeeBySSN(employeeSSN)
-            print(employee.pilot_bool)
-            print(type(employee.pilot_bool))
+            # print(employee.pilot_bool)
+            # print(type(employee.pilot_bool))
             if employee.pilot_bool:
                 # print(voyage.pilots_lst)
                 # print(type(voyage.pilots_lst))
-                print(voyage.pilots_lst)
+                # print(voyage.pilots_lst)
                 voyage.pilots_lst.append(employeeSSN)
             else:
                 
@@ -39,6 +42,16 @@ class VoyageLL:
             return 1
         except EntryNotInDatabase: # error code to see if voyage is successfully updated
             return -1
+
+    def assignAircraftToVoyage(self, voyageID, aircraftID):
+        try:
+            voyage = self.data.getVoyageByVoyageID(voyageID)
+            voyage.aircraftID = aircraftID
+            self.data.updateVoyage(voyage)
+            return 1
+        except EntryNotInDatabase:
+            return -1
+
 
     def addVoyage(self, destination_id, flightTime_str):
         
@@ -79,7 +92,27 @@ class VoyageLL:
                 voyagesInWeek_lst.append(voy)
         return voyagesInWeek_lst
 
+    def ListVoyagePilots(self, voyageID):
+        voyage = self.data.getVoyageByVoyageID(voyageID)
+        pilotsSSN_lst = voyage.pilots_lst
+        pilots_emp = []
+        for pilotSSN in pilotsSSN_lst:
+            pilots_emp.append(self.data.getEmployeeBySSN(pilotSSN))
+        return pilots_emp
 
+    def ListVoyageFlightAttendants(self, voyageID):
+        voyage = self.data.getVoyageByVoyageID(voyageID)
+        flightAttendantsSSN_lst = voyage.flightAttendants_lst
+        flightAttendats_emp = []
+        for flightAttendatSSN in flightAttendantsSSN_lst:
+            flightAttendats_emp.append(self.data.getEmployeeBySSN(flightAttendatSSN))
+        return flightAttendats_emp
+
+
+    def UpdateVoyageCaptain(self,voyageID, pilotSSN):
+        voyage = self.data.getVoyageByVoyageID(voyageID)
+        voyage.captain = pilotSSN
+        self.data.updateVoyage(voyage)
 
     def _getEndTimeOfVoyage(self, voyage):
         destination = self.data.getDestinationByDestinationID(voyage.destination)

@@ -37,9 +37,23 @@ class LLAPI:
     def AddVoyage(self, destination_id, flightTime_str):
         return self.voyage_logic.addVoyage(destination_id, flightTime_str)
 
+    def getVoyageByVoyageID(self, voyageID):
+        return self.voyage_logic.getVoyageByVoyageID(voyageID)
 
     def AddStaffToVoyage(self, voyage_ID, employee_SSN):
         return self.voyage_logic.AddStaffToVoyage(voyage_ID, employee_SSN)
+    
+    def AssignAircraftToVoyge(self, voyageID, aircraftID):
+        return self.voyage_logic.assignAircraftToVoyage(voyageID, aircraftID)
+
+    def ListVoyagePilots(self, voyageID):
+        return self.voyage_logic.ListVoyagePilots(voyageID)
+
+    def ListVoyageFlightAttendants(self, voyageID):
+        return self.voyage_logic.ListVoyageFlightAttendants(voyageID)
+
+    def UpdateVoyageCaptain(self,voyageID, pilotSSN):
+        return self.voyage_logic.UpdateVoyageCaptain(voyageID, pilotSSN)
 
     ##### DESTINATION API #####
 
@@ -48,6 +62,9 @@ class LLAPI:
 
     def RegisterDestination(self, dest_name_str, dest_id_int, flight_duration_double):
         return self.destination_logic.RegisterDestination(dest_name_str, dest_id_int, flight_duration_double)
+
+    def UpdateDestinationContactNumber(self, destinationID, contactNr):
+        return self.destination_logic.UpdateDestinationContactNumber(destinationID, contactNr)
 
     ##### AIRCRAFT API #####
 
@@ -59,6 +76,12 @@ class LLAPI:
 
     def ListAllAircrafts(self):
         return self.aircraft_logic.ListAllAircrafts()
+
+    def AircraftStatus(self, aircraftID):
+        return self.aircraft_logic.AircraftStatus(aircraftID)
+
+    def ShowStatusOfAircrafts(self):
+        return self.aircraft_logic.ShowStatusOfAircrafts()
         
 
 if __name__ == "__main__":

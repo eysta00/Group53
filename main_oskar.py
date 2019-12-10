@@ -1,14 +1,33 @@
 from Exceptions.Exceptions import *
 from LogicLayer.LLAPI import *
+from LogicLayer.AircraftLL import *
 
 from datetime import datetime
 from dateutil.parser import *
 from dateutil.relativedelta import *
 
 
-logic = LLAPI()
-time = datetime(2020, 1, 8, 18, 0, 0).isoformat()
-print(logic.ListAssignedEmployees(time))
-# logic.AddVoyage(2, datetime(2019, 12, 24, 18).isoformat())
+logicAPI = LLAPI()
+# time = datetime(2020, 1, 8, 18, 0, 0).isoformat()
+# print(logicAPI.ListAssignedEmployees(time))
+# logicAPI.AddVoyage(3, datetime(2019, 12, 10, 12).isoformat())
 
-print(logic.AddStaffToVoyage(3, '1234567890'))
+# print(logicAPI.AddStaffToVoyage(4, '1234567890'))
+
+# logicAPI.AssignAircraftToVoyge(4, 1)
+
+
+# print(logicAPI.AircraftStatus(1))
+
+# print(logicAPI.ShowStatusOfAircrafts())
+
+# logicAPI.UpdateDestinationContactNumber(1, '6619798')
+
+# print(logicAPI.ListVoyageFlightAttendants(1))
+
+logicAPI.UpdateVoyageCaptain(3, '1234567890')
+
+# logic = AircraftLL()
+# voyage = logicAPI.getVoyageByVoyageID(3)
+# print(voyage)
+# print(logic._getTimeOfVoyageActivities(voyage))

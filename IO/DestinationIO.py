@@ -10,7 +10,7 @@ class DestinationIO():
         self.filePath = filePath
         self.tempFilePath = 'Data/DestinationTemp.csv'
         # dest_name, dest_id, flightTime
-        self.__fieldNames_lst = ['dest_name', 'dest_id', 'flight_duration']
+        self.__fieldNames_lst = ['dest_name', 'dest_id', 'flight_duration', 'contact_nr']
 
     def addDestination(self, destination):
         
@@ -20,7 +20,7 @@ class DestinationIO():
         with open(self.filePath, 'a+') as csv_file:
             csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
             
-            csvWriter.writerow({'dest_name' : destination.dest_name, 'dest_id' : destination.dest_id, 'flight_duration' : destination.flight_duration})
+            csvWriter.writerow({'dest_name' : destination.dest_name, 'dest_id' : destination.dest_id, 'flight_duration' : destination.flight_duration, 'contact_nr' : destination.contactNr})
 
     
     
@@ -30,21 +30,31 @@ class DestinationIO():
             rows = list(csvReader)
             for entry in rows:
                 if str(entry["dest_id"]) == str(destination.dest_id):
-                    entry["dest_name"], entry["dest_id"], entry["flight_duration"] = \
-                        destination.dest_name, destination.dest_id, destination.flight_duration
+                    entry["dest_name"], entry["dest_id"], entry["flight_duration"], entry["contact_nr"] = \
+                        destination.dest_name, destination.dest_id, destination.flight_duration, destination.contactNr
                     self.__reWriteFileFromList(rows)
                     return
             raise EntryNotInDatabase('try using addDestination')
 
 
+
+# ------ This Method Creates A New File And Transfers The Data To Negate Likelyhood Of Data Loss ------
 # method to rewrite entire data file from list from update Employee
+    # def __reWriteFileFromList(self, dictList): # writing to new file then rename-ing files and deleting old 
+    #     with open(self.tempFilePath, 'w') as csv_file:
+    #         csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
+    #         for entry in dictList:
+    #             csvWriter.writerow(entry)
+    #         os.remove(self.filePath)
+    #         os.rename(self.tempFilePath, self.filePath)
+
+# ------ Same Purpose As Commented Function Above But Less Redundancy But Does Not Require Delete Priveledges ------
     def __reWriteFileFromList(self, dictList): # writing to new file then rename-ing files and deleting old 
-        with open(self.tempFilePath, 'w') as csv_file:
+        with open(self.filePath, 'w') as csv_file:
             csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
             for entry in dictList:
                 csvWriter.writerow(entry)
-            os.remove(self.filePath)
-            os.rename(self.tempFilePath, self.filePath)
+            
 
 
 
@@ -55,7 +65,7 @@ class DestinationIO():
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
                 if str(row["dest_id"]) == str(dest_id):
-                    return Destination(row['dest_name'], row['dest_id'], row['flight_duration'])
+                    return Destination(row['dest_name'], row['dest_id'], row['flight_duration'], row['contact_nr'])
 
     def DestinationInDatabase_bool(self, dest_id):
 
@@ -71,7 +81,7 @@ class DestinationIO():
         with open(self.filePath, 'r') as csv_file:
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
-                return_list.append(Destination(row['dest_name'], row['dest_id'], row['flight_duration']))
+                return_list.append(Destination(row['dest_name'], row['dest_id'], row['flight_duration'], row['contact_nr']))
         return return_list
         
     def listAllDestinations(self):

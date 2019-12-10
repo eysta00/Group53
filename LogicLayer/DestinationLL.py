@@ -25,6 +25,18 @@ class DestinationLL():
         # destinations.sort(key=lambda x: x.name)
         return destinations
 
+    def UpdateDestinationContactNumber(self, destinationID, contactNr):
+        destination = self.data.getDestinationByDestinationID(destinationID)
+        destination.contactNr = contactNr
+
+        try:
+            self.data.updateDestination(destination)
+            return 1
+        except EntryNotInDatabase:
+            return -1
+
+
+
     def _GenerateNewDestinationID(self):
         destinations = self.data.getAllDestinatons()
         iteration = 1
@@ -37,6 +49,8 @@ class DestinationLL():
             
             iteration += 1
         return int(highest_id) + 1 # returns an integer that is 1 higher than the highest id any voyage has in the database
+
+
     
 
 if __name__ == "__main__":

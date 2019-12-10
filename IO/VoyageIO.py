@@ -75,12 +75,12 @@ class VoyageIO():
                     destination = row['destination']
                     departureTime = row['departureTime']
                     aircraftID = row['aircraftID']
-                    print(row['pilots_lst'])
-                    print(type(row['pilots_lst']))
+                    # print(row['pilots_lst'])
+                    # print(type(row['pilots_lst']))
 
                     pilots_lst = row['pilots_lst'].strip('][').split(', ') # this code is to convert pilots list to 
                     pilots_lst = [s.replace("'", "") for s in pilots_lst]
-                    
+
                     flightAttendants_lst = row['flightAttendants_lst'].strip('][').split(', ')
                     flightAttendants_lst = [s.replace("'", "") for s in flightAttendants_lst]
                     if pilots_lst[0] == '' and len(pilots_lst) == 1: # avoiding the list returning with one empty string
