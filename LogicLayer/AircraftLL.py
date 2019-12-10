@@ -35,6 +35,16 @@ class AircraftLL:
             iteration += 1
         return highest_id + 1 # returns an integer that is 1 higher than the highest id any voyage has in the database
 
+    def ShowStatusOfAircrafts(self):
+        pass
+
+    def AircraftStatus(self, aircraftID):
+        # Aircraft = data.()
+        Voyages = data.getAllVoyages()
+        time = datetime.now().isoformat()
+        for voy in Voyages:
+            pass
+
 if __name__ == "__main__":
     logic = AircraftLL()
     print(logic._GenerateNewAircraftID())
