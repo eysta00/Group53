@@ -4,7 +4,7 @@ class EmployeeUI:
     def __init__(self):
         self.LLAPI = LLAPI()
 
-    def register_employee(self):
+    def print_register_employee(self):
         print("\tRegister a new employee")
         e_name = input("Full employee name: ")
         e_ssn = input("Employee social securtiy number: ")

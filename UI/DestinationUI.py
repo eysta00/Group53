@@ -21,6 +21,6 @@ class DestinationUI:
             print(destination)
         print("\n")
 
-test1 = DestinationUI()
-test1.print_destinations()
-test1.register_destination()
+#test1 = DestinationUI()
+#test1.print_destinations()
+#test1.register_destination()
