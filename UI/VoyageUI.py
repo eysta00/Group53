@@ -1,14 +1,14 @@
-from LogicLayer.VoyageLL import VoyageLL
+from LogicLayer.LLAPI import LLAPI
 
 class VoyageUI:
     def __init__(self):
-        self.VoyageLL = VoyageLL()
+        self.LLAPI = LLAPI()
     
     def addVoyage(self):
-        return VoyageLL().addVoyage()
+        return LLAPI().addVoyage()
     
     def ListVoyages(self):
-        return VoyageLL().ListAllVoyages()
+        return LLAPI().ListAllVoyages()
 
-#test1 = VoyageUI()
-#test1.addVoyage()
+# test1 = VoyageUI()
+# test1.addVoyage()
