@@ -92,15 +92,6 @@ class VoyageLL:
                 voyagesInWeek_lst.append(voy)
         return voyagesInWeek_lst
 
-    def GetWorkSummaryBySsn(self, employeeSSN, current_date):
-        voyages_in_week = self.ListVoyagesForGivenWeek(current_date)
-        emp_voyages = []
-
-        for voyage in voyages:
-            if employeeSSN in voyage.pilots_lst:
-                emp_voyages.append(voyage)
-
-        return emp_voyages
 
     def ListVoyagePilots(self, voyageID):
         voyage = self.data.getVoyageByVoyageID(voyageID)

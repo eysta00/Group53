@@ -1,8 +1,8 @@
-from LogicLayer.DestinationLL import DestinationLL
+from LogicLayer.LLAPI import LLAPI
 
 class DestinationUI:
     def __init__(self):
-        self.DestinationLL = DestinationLL()
+        self.LLAPI = LLAPI()
 
     def register_destination(self):
         destination_name = input('Destination name: ')
@@ -10,6 +10,7 @@ class DestinationUI:
         flight_duration = input('Flight duration: ')
         contactNr = input('Contact number: ')
         error = DestinationLL().RegisterDestination(destination_name, destination_id, flight_duration, contactNr)
+        error = LLAPI().RegisterDestination(destination_name, destination_id, flight_duration)
         if error != 1:
             print("Error, input not valid!")
         
@@ -17,7 +18,15 @@ class DestinationUI:
 
     def print_destinations(self):
         print("List all destinations")
-        destinations = self.DestinationLL.ListAllDestinations()
+        destinations = self.LLAPI.ListAllDestinations()
         for destination in destinations:
             print(destination)
+<<<<<<< HEAD
         print("\n")
+=======
+        print("\n")
+
+#test1 = DestinationUI()
+#test1.print_destinations()
+#test1.register_destination()
+>>>>>>> b436498cc826f81eba32e4002a1895d79d30d7c2

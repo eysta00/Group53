@@ -41,6 +41,14 @@ class EmployeeLL:
         flightAttendats = self.ListFlightAttendats()
         return pilots + flightAttendats
 
+    def ListAllEmployeesWithName(self, name):
+        employees = self.data.getAllEmployees()
+        ret_lst = []  
+        for emp in employees:
+            if emp.name == name:
+                ret_lst.append(emp)
+        return ret_lst
+
 
     def AddEmployee(self, name_str, ssn_str, address_str, phone_str, email_str, pilot_bool = False, planeType = None):
         employee = Employee(name_str, ssn_str, address_str, phone_str, email_str, pilot_bool, planeType)
@@ -118,10 +126,22 @@ class EmployeeLL:
             StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S.%f')
         except ValueError:
             StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S')
-        flightTime = int(destination.flight_duration) # consider changing this to int so as to not miss the disimal places!
+        flightTimeHours = int(destination.flight_duration) # consider changing this to int so as to not miss the disimal places!
+        # flightTimeMinutes = flightTimeHours%
         # print(flightTime)
-        return parse((StartTime_dateTime + relativedelta(hour=+(flightTime*2+1))).isoformat()) # Assuming the rest at destination is 1 hour
+        return parse((StartTime_dateTime + relativedelta(hour=+(flightTimeHours*2+1))).isoformat()) # Assuming the rest at destination is 1 hour
         
+
+    def GetWorkSummaryBySsn(self, employeeSSN, current_date):
+        voyages_in_week = VoyageLL().ListVoyagesForGivenWeek(current_date)
+        emp_voyages = []
+
+        for voyage in voyages_in_week:
+            if employeeSSN in voyage.pilots_lst:
+                emp_voyages.append(voyage)
+
+        return emp_voyages
+
         #not finished implementing
 
 if __name__ == "__main__":
