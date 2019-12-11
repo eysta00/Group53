@@ -38,14 +38,17 @@ class MenuUI:
               "\n3. Assign Staff to Voyage",
               "\n4. Assign Captain to Voyage",
               "\n5. Assign Aircraft to Voyage",
-              "\n6. Change Destination Contact Info",
-              "\n7. List Flights By Location")
+              "\n6. List voyage for given day",
+              "\n7. List voyages for given week",
+              "\n8. Change Destination Contact Info",
+              "\n9. List Flights By Location")
         return self.getVInput()
     
     def showDestinationsMenu(self):
         print("\n##### Destinations ######")
         print("\n1. Add Destination",
-              "\n2. List Destinations")
+              "\n2. List Destinations",
+              "\n3. Change Destination Info")
         return self.getDInput()
 
     def showAircraftsMenu(self):
@@ -113,9 +116,13 @@ class MenuUI:
         elif choice == "5":
             return VoyageUI().register_aircraft()
         elif choice == "6":
-            return
+            return default_operation()
         elif choice == "7":
-            return
+            return default_operation()
+        elif choice == "8":
+            return default_operation()
+        elif choice == "9":
+            return default_operation()
         elif choice == "q":
             return
         else:
@@ -129,6 +136,8 @@ class MenuUI:
             return DestinationUI().register_destination()
         elif choice == "2":
             return DestinationUI().print_destinations()
+        elif choice == "3":
+            return default_operation()
         elif choice == "q":
             return
         else:
