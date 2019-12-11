@@ -1,14 +1,14 @@
-from LogicLayer.VoyageLL import VoyageLL
+from LogicLayer.LLAPI import LLAPI
 
 class VoyageUI:
     def __init__(self):
-        self.VoyageLL = VoyageLL()
+        self.LLAPI = LLAPI()
 
     def register_Voyage(self):
         Voyage_destination = input('Voyage destination: ')
         Voyage_time = input('Voyage ID: ')
         Voyage_id = input('Voyage ID: ')
-        error = VoyageLL().RegisterVoyage(Voyage_destination, Voyage_time, Voyage_id)
+        error = LLAPI().RegisterVoyage(Voyage_destination, Voyage_time, Voyage_id)
         if error != 1:
             print("Error, input not valid!")
         
@@ -28,7 +28,7 @@ class VoyageUI:
 
     def print_Voyages(self):
         print("List all Voyages")
-        Voyages = self.VoyageLL.ListAllVoyages()
+        Voyages = self.LLAPI.ListAllVoyages()
         for Voyage in Voyages:
             print(Voyage)
         print("\n")
