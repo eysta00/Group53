@@ -21,12 +21,8 @@ class DestinationUI:
         destinations = self.LLAPI.ListAllDestinations()
         for destination in destinations:
             print(destination)
-<<<<<<< HEAD
-        print("\n")
-=======
         print("\n")
 
 #test1 = DestinationUI()
 #test1.print_destinations()
 #test1.register_destination()
->>>>>>> b436498cc826f81eba32e4002a1895d79d30d7c2

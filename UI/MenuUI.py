@@ -8,7 +8,7 @@ def default_operation():
 
 class MenuUI:
     def showMainMenu(self):
-        print("##### MAIN MENU #####")
+        print("\n##### MAIN MENU #####")
         print("1. Employees"
               "\n2. Voyages"
               "\n3. Destinations"
@@ -17,7 +17,7 @@ class MenuUI:
         return self.getMInput()
     
     def showEmployeeMenu(self):
-        print("##### Employees ######")
+        print("\n##### Employees ######")
         print("\n1. Register Employee",
               "\n2. List Employees",
               "\n3. List Pilots",
@@ -31,7 +31,7 @@ class MenuUI:
         return self.getEInput()
     
     def showVoyagesMenu(self):
-        print("##### Voyages ######")
+        print("\n##### Voyages ######")
         print("\n1. Add Voyage",
               "\n2. List Voyages",
               "\n3. List Flights By Location",
@@ -42,19 +42,19 @@ class MenuUI:
         return self.getVInput()
     
     def showDestinationsMenu(self):
-        print("##### Destinations ######")
+        print("\n##### Destinations ######")
         print("\n1. Add Destination",
               "\n2. List Destinations")
         return self.getDInput()
 
     def showAircraftsMenu(self):
-        print("##### Aircrafts ######")
+        print("\n##### Aircrafts ######")
         print("\n1. Add Aircarft",
               "\n2. List Aircrafts")
         return self.getAInput()
     
     def getMInput(self):
-        choice = input("\nEnter a command:")
+        choice = input("\nEnter a command: ")
         if choice == "1":
             return self.showEmployeeMenu()
         elif choice == "2":
@@ -71,7 +71,7 @@ class MenuUI:
         return self.showMainMenu()
 
     def getEInput(self):
-        choice = input("\nEnter a command:")
+        choice = input("\nEnter a command: ")
         if choice == "1":
             return EmployeeUI().print_register_employee()
         elif choice == "2":
@@ -83,7 +83,7 @@ class MenuUI:
         elif choice == "5":
             return default_operation()
         elif choice == "6":
-            return default_operation()
+            return EmployeeUI().print_unassigned_employees()
         elif choice == "7":
             return EmployeeUI().print_pilots_with_aircraft_privilage()
         elif choice == "8":
@@ -98,7 +98,7 @@ class MenuUI:
         return self.showMainMenu()
     
     def getVInput(self):
-        choice = input("\nEnter a command:")
+        choice = input("\nEnter a command: ")
         if choice == "1":
             return default_operation()
         elif choice == "2":
@@ -115,7 +115,7 @@ class MenuUI:
         return self.showMainMenu()
     
     def getDInput(self):
-        choice = input("\nEnter a command:")
+        choice = input("\nEnter a command: ")
         if choice == "1":
             return DestinationUI().register_destination()
         elif choice == "2":
@@ -128,7 +128,7 @@ class MenuUI:
         return self.showMainMenu()
     
     def getAInput(self):
-        choice = input("\nEnter a command:")
+        choice = input("\nEnter a command: ")
         if choice == "1":
             return 
         elif choice == "2":

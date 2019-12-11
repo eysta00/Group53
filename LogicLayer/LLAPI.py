@@ -15,6 +15,9 @@ class LLAPI:
 
     ##### EMPLOYEE API #####
 
+    def RegisterEmployee(self, name, ssn, address, phone, email, pilot, planelicense):
+        return self.employee_logic.RegisterEmployee(name, ssn, address, phone, email, pilot, planelicense)
+
     def ListPilots(self):
         return self.employee_logic.ListPilots()
 
