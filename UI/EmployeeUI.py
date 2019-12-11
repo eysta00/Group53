@@ -62,7 +62,10 @@ class EmployeeUI:
         print("\n")
 
     def print_work_summary(self):
-        employeeSSN = input('Enter Employee SSN: ')
+        employeeSSN = input('Enter Employee SSN: ') 
+        # Change this to employee name, even though this is easier,
+        # from a user prespective nobody would want to 
+        # remember a SSN of an employee.
         week_of = input('Enter Week of Work: ')
 
         work_procedures = self.LLAPI.GetWorkSummary(employeeSSN, week_of)
