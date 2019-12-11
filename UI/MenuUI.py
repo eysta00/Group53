@@ -35,11 +35,11 @@ class MenuUI:
         print("\n##### Voyages ######")
         print("\n1. Add Voyage",
               "\n2. List Voyages",
-              "\n3. List Flights By Location",
-              "\n4. Change Destination Contact Info",
-              "\n5. List All Aircrafts",
-              "\n6. List Available Aircrafts",
-              "\n7. Assign Staff to Voyage")
+              "\n3. Assign Staff to Voyage",
+              "\n4. Assign Captain to Voyage",
+              "\n5. Assign Aircraft to Voyage",
+              "\n6. Change Destination Contact Info",
+              "\n7. List Flights By Location")
         return self.getVInput()
     
     def showDestinationsMenu(self):
@@ -51,7 +51,8 @@ class MenuUI:
     def showAircraftsMenu(self):
         print("\n##### Aircrafts ######")
         print("\n1. Add Aircarft",
-              "\n2. List Aircrafts")
+              "\n2. List Aircrafts",
+              "\n3. List All Available Aircrafts")
         return self.getAInput()
     
     def getMInput(self):
@@ -88,7 +89,7 @@ class MenuUI:
         elif choice == "7":
             return EmployeeUI().print_pilots_with_aircraft_privilage()
         elif choice == "8":
-            return default_operation()
+            return EmployeeUI().print_update_employee_infomation()
         elif choice == "9":
             return EmployeeUI().print_work_summary()
         elif choice == "q":
@@ -101,13 +102,19 @@ class MenuUI:
     def getVInput(self):
         choice = input("\nEnter a command: ")
         if choice == "1":
-            return default_operation()
+            return VoyageUI().register_Voyage()
         elif choice == "2":
             return VoyageUI().ListVoyages()
         elif choice == "3":
-            return default_operation()
+            return VoyageUI().register_employees_to_voyage()
         elif choice == "4":
-            return default_operation()
+            return VoyageUI().register_captain_to_voyage()
+        elif choice == "5":
+            return VoyageUI().register_aircraft()
+        elif choice == "6":
+            return
+        elif choice == "7":
+            return
         elif choice == "q":
             return
         else:
@@ -134,6 +141,8 @@ class MenuUI:
             return AircraftUI().register_aircraft()
         elif choice == "2":
             return AircraftUI().print_aircrafts()
+        elif choice == "3":
+            return default_operation()
         elif choice == "q":
             return
         else:

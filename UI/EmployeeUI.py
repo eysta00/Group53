@@ -35,7 +35,7 @@ class EmployeeUI:
         print("\n")
         
     def print_flight_attendants(self):
-        print("\tList all flight attendats")
+        print("\tList all flight attendants")
         flight_attendants = self.LLAPI.ListFlightAttendants()
         for attendant in flight_attendants:
             print(attendant)
