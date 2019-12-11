@@ -126,8 +126,12 @@ class EmployeeLL:
             StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S.%f')
         except ValueError:
             StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S')
-        flightTimeHours = int(destination.flight_duration) # consider changing this to int so as to not miss the disimal places!
-        # flightTimeMinutes = flightTimeHours%
+        flightTimeHours = destination.flight_duration # consider changing this to int so as to not miss the disimal places!
+        flightTimeMinutes = (flightTimeHours % 1) * 60
+        flightTimeSeconds = (flightTimeMinutes % 1) * 60
+        flightTimeHours = int(flightTimeHours)
+        flightTimeMinutes = int(flightTimeMinutes)
+        flightTimeSeconds = int(flightTimeSeconds)
         # print(flightTime)
         return parse((StartTime_dateTime + relativedelta(hour=+(flightTimeHours*2+1))).isoformat()) # Assuming the rest at destination is 1 hour
         
