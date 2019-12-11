@@ -131,6 +131,17 @@ class EmployeeLL:
         # print(flightTime)
         return parse((StartTime_dateTime + relativedelta(hour=+(flightTimeHours*2+1))).isoformat()) # Assuming the rest at destination is 1 hour
         
+
+    def GetWorkSummaryBySsn(self, employeeSSN, current_date):
+        voyages_in_week = VoyageLL().ListVoyagesForGivenWeek(current_date)
+        emp_voyages = []
+
+        for voyage in voyages_in_week:
+            if employeeSSN in voyage.pilots_lst:
+                emp_voyages.append(voyage)
+
+        return emp_voyages
+
         #not finished implementing
 
 if __name__ == "__main__":
