@@ -89,9 +89,6 @@ class LLAPI:
     def ListAllAircrafts(self):
         return self.aircraft_logic.ListAllAircrafts()
 
-    def ListAllAircrafts(self):
-        return self.aircraft_logic.ListAllAircrafts()
-
     def AircraftStatus(self, aircraftID):
         return self.aircraft_logic.AircraftStatus(aircraftID)
 

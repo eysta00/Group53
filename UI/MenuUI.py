@@ -52,7 +52,8 @@ class MenuUI:
         print("\n##### Aircrafts ######")
         print("\n1. Add Aircarft",
               "\n2. List Aircrafts",
-              "\n3. List All Available Aircrafts")
+              "\n3. Show aircraft status",
+              "\n4. List All Available Aircrafts")
         return self.getAInput()
     
     def getMInput(self):
@@ -142,7 +143,9 @@ class MenuUI:
         elif choice == "2":
             return AircraftUI().print_aircrafts()
         elif choice == "3":
-            return default_operation()
+            return AircraftUI().showAircraftStatus()
+        elif choice == "4":
+            return #AircraftUI().
         elif choice == "q":
             return
         else:
