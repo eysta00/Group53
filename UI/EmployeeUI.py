@@ -2,8 +2,8 @@ from LogicLayer.LLAPI import LLAPI
 
 class EmployeeUI:
     def __init__(self):
-        self.EmployeeLL = EmployeeLL()
         self.LLAPI = LLAPI()
+        self.EmployeeLL = self.LLAPI.employee_logic
 
     def register_employee(self):
         print("Register a new employee")
@@ -59,6 +59,15 @@ class EmployeeUI:
         for pilot_license in pilot_licenses:
             print(pilot_license)
         print("\n")
+
+    def print_work_summary(self):
+        employeeSSN = input('Enter Employee SSN: ')
+        week_of = input('Enter Week of Work: ')
+
+        work_procedures = self.LLAPI.GetWorkSummary(employeeSSN, week_of)
+        for voy in work_procedures:
+            print(voy)
+        
         
 #test1 = EmployeeUI()
 #test1.print_all_employees()

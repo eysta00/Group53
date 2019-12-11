@@ -30,6 +30,9 @@ class LLAPI:
     def ListAssignedEmployees(self, date_iso):
         return self.employee_logic.ListAssignedEmployees(date_iso)
 
+    def GetWorkSummary(self, employeeSSN, current_date):
+        return self.employee_logic.GetWorkSummaryBySsn(employeeSSN, current_date)
+
     
 
     ##### VOYAGE API #####

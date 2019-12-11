@@ -10,5 +10,5 @@ class VoyageUI:
     def ListVoyages(self):
         return VoyageLL().ListAllVoyages()
 
-test1 = VoyageUI()
-test1.addVoyage()
+#test1 = VoyageUI()
+#test1.addVoyage()
