@@ -114,6 +114,20 @@ class VoyageLL:
         voyage.captain = pilotSSN
         self.data.updateVoyage(voyage)
 
+    def SellSeatsForVoyage(self, voyageID, soldSeats):
+        voyage = self.data.getVoyageByVoyageID(voyageID)
+        # Raise exception if no aircraft has been registered
+        aircraft = self.data.getAircraftByAircraftID(voyage.aircraftID)
+        print("1. " + str(voyage.seatingSold))
+        print("2. " + str(soldSeats))
+        print("3. " + str(aircraft.total_seats_int))
+        if (int(voyage.seatingSold) + int(soldSeats)) > int(aircraft.total_seats_int):
+            return -1
+        else:
+            voyage.seatingSold = int(voyage.seatingSold) + int(soldSeats)
+            self.data.updateVoyage(voyage)
+            return 1
+
     def _getEndTimeOfVoyage(self, voyage):
         destination = self.data.getDestinationByDestinationID(voyage.destination)
         StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S.%f')

@@ -25,7 +25,8 @@ logicAPI = LLAPI()
 
 # print(logicAPI.ListVoyageFlightAttendants(1))
 
-logicAPI.UpdateVoyageCaptain(3, '1234567890')
+# logicAPI.UpdateVoyageCaptain(3, '1234567890')
+logicAPI.SellSeatsForVoyage(3,25)
 
 # logic = AircraftLL()
 # voyage = logicAPI.getVoyageByVoyageID(3)

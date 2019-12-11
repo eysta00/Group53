@@ -55,6 +55,9 @@ class LLAPI:
     def UpdateVoyageCaptain(self,voyageID, pilotSSN):
         return self.voyage_logic.UpdateVoyageCaptain(voyageID, pilotSSN)
 
+    def SellSeatsForVoyage(self, voyageID, seatsSold):
+        return self.voyage_logic.SellSeatsForVoyage(voyageID, seatsSold)
+
     ##### DESTINATION API #####
 
     def ListAllDestinations(self):

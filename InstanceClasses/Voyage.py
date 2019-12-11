@@ -1,5 +1,5 @@
 class Voyage:
-    def __init__(self, voyageID, destination, departureTime, aircraftID = None, pilots_lst = None, flightAttendants_lst = None, captain = None):
+    def __init__(self, voyageID, destination, departureTime, aircraftID = None, pilots_lst = None, flightAttendants_lst = None, captain = None, seatingSold = 0):
         # self.flight_init = flight_init
         # self.flight_sec = flight_sec
         # self.v_title = flight_init.f_destination 
@@ -12,6 +12,7 @@ class Voyage:
         self.flightAttendants_lst = flightAttendants_lst
         self.pilots_lst = pilots_lst
         self.captain = captain
+        self.seatingSold = seatingSold
 
 
     # def update_data(self, new_init, new_sec):
