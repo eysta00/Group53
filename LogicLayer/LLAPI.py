@@ -30,7 +30,9 @@ class LLAPI:
     def ListAssignedEmployees(self, date_iso):
         return self.employee_logic.ListAssignedEmployees(date_iso)
 
-    
+    def ListAllEmployeesWithName(self, name):
+        return self.employee_logic.ListAllEmployeesWithName(name)
+
 
     ##### VOYAGE API #####
 
