@@ -48,13 +48,24 @@ class EmployeeUI:
             print(pilot)
         print("\n")
     
+    def print_assigned_employees(self):
+        print("\tList all assigned employees on a given day")
+        year = int(input("Input year: "))
+        month = int(input("Input month: "))
+        day = int(input("Input day: "))
+        date_iso = datetime(year, month, day).isoformat()
+        assinged_employees = self.LLAPI.ListAssignedEmployees(date_iso)
+        for employee in assinged_employees:
+            print(employee)
+        print("\n")
+
+    
     def print_unassigned_employees(self):
         print("\tList all unassigned employees on a given day")
         year = int(input("Input year: "))
         month = int(input("Input month: "))
         day = int(input("Input day: "))
         date_iso = datetime(year, month, day).isoformat()
-        print(date_iso)
         unassinged_employees = self.LLAPI.ListUnassignedEmployees(date_iso)
         for employee in unassinged_employees:
             print(employee)

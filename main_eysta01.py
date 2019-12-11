@@ -1,6 +1,8 @@
 from UI.MenuUI import MenuUI
 
 Main_Program = MenuUI()
-while True:
+Bool = True
+while Bool:
     Main_Program.showMainMenu()
-    print("--------While loop_looped------")
+    print("Quitting")
+    Bool = False

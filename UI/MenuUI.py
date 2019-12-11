@@ -81,7 +81,7 @@ class MenuUI:
         elif choice == "4":
             return EmployeeUI().print_flight_attendants()
         elif choice == "5":
-            return default_operation()
+            return EmployeeUI().print_assigned_employees()
         elif choice == "6":
             return EmployeeUI().print_unassigned_employees()
         elif choice == "7":
@@ -89,7 +89,7 @@ class MenuUI:
         elif choice == "8":
             return default_operation()
         elif choice == "9":
-            return default_operation()
+            return EmployeeUI().print_work_summary()
         elif choice == "q":
             return
         else:
