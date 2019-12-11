@@ -4,6 +4,7 @@ class Destination:
         self.dest_id = dest_id
         self.flight_duration = flight_duration
         self.d_data ={}
+        self.contactNr = contactNr
 
     # def update_data(self, new_dname, new_did):
     #     self.d_data['dest_name'] = self.dest_name

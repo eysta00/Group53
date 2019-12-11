@@ -63,6 +63,9 @@ class LLAPI:
 
     def SellSeatsForVoyage(self, voyageID, seatsSold):
         return self.voyage_logic.SellSeatsForVoyage(voyageID, seatsSold)
+    
+    def ListAllVoyages(self):
+        return self.voyage_logic.ListAllVoyages()
 
     ##### DESTINATION API #####
 

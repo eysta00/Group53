@@ -10,9 +10,9 @@ class DestinationLL():
     def __init__(self):
         self.data = IOAPI()
     
-    def RegisterDestination(self, dest_name, dest_id, flight_duration):
+    def RegisterDestination(self, dest_name, dest_id, flight_duration, contactNr):
         try:
-            self.data.addDestination(Destination(dest_name, dest_id, flight_duration))
+            self.data.addDestination(Destination(dest_name, dest_id, flight_duration, contactNr))
             return 1 
         except EntryInDatabase:
             return -1

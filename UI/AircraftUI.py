@@ -21,8 +21,3 @@ class AircraftUI:
         for aircraft in aircrafts:
             print(aircraft)
         print("\n")
-
-
-test1 = AircraftUI()
-test1.print_aircrafts()
-test1.register_aircraft()
