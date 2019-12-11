@@ -1,6 +1,7 @@
 from UI.EmployeeUI import EmployeeUI
 from UI.VoyageUI import VoyageUI
 from UI.DestinationUI import DestinationUI
+from UI.AircraftUI import AircraftUI
 
 def default_operation():
     print('This operation is still WIP.\nThank you for your patience. :)')
@@ -130,13 +131,9 @@ class MenuUI:
     def getAInput(self):
         choice = input("\nEnter a command: ")
         if choice == "1":
-            return 
+            return AircraftUI().register_aircraft()
         elif choice == "2":
-            return
-        elif choice == "3":
-            return 
-        elif choice == "4":
-            return
+            return AircraftUI().print_aircrafts()
         elif choice == "q":
             return
         else:
