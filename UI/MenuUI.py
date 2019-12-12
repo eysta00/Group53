@@ -151,7 +151,7 @@ class MenuUI:
         elif choice == "3":
             return AircraftUI().showAircraftStatus()
         elif choice == "4":
-            return #AircraftUI().
+            return AircraftUI().printAvailableAircrafts()
         elif choice == "q":
             return
         else:
