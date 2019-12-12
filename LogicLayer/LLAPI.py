@@ -26,6 +26,9 @@ class LLAPI:
 
     def ListAllEmployees(self):
         return self.employee_logic.ListAllEmployees()
+    
+    def ListPilotsWithAircraftPrivilege(self, aircraft_model):
+        return self.employee_logic.ListPilotsWithAircraftPrivilege(aircraft_model)
 
     def ListUnassignedEmployees(self, date_iso):
         return self.employee_logic.ListUnassignedEmployees(date_iso)
@@ -38,8 +41,6 @@ class LLAPI:
 
     def GetWorkSummary(self, employeeSSN, current_date):
         return self.employee_logic.GetWorkSummaryBySsn(employeeSSN, current_date)
-
-    
 
     ##### VOYAGE API #####
 

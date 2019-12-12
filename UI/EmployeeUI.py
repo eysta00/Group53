@@ -10,6 +10,7 @@ class EmployeeUI:
         rows_len, columns_len = os.get_terminal_size() # checks on length of terminal, this repeats.
 
         print("\tRegister a new employee")
+        print("-" * (rows_len - 1))
         e_name = input("Full employee name: ")
         e_ssn = input("Employee social securtiy number: ")
         e_address = input("Employee Adress: ")
@@ -30,14 +31,15 @@ class EmployeeUI:
             repeat_inquiry = input("Would you like to try again? yes/no: ").lower()
             if repeat_inquiry == "yes":
                 return print_register_employee()
+        print("-" * (rows_len - 1))
         print("\n")        
         return
     
     def print_all_employees(self):
         rows_len, columns_len = os.get_terminal_size()
 
-
         print("\tList all employess")
+        print("-" * (rows_len - 1))
         print(self.header)
         all_employees = self.LLAPI.ListAllEmployees()
         for employee in all_employees:
@@ -47,38 +49,47 @@ class EmployeeUI:
         print("\n")
         
     def print_flight_attendants(self):
+        rows_len, columns_len = os.get_terminal_size()
 
         print("\tList all flight attendants")
+        print("-" * (rows_len-1))
+        print(self.header)
         flight_attendants = self.LLAPI.ListFlightAttendants()
         for attendant in flight_attendants:
+            print("-" * (rows_len-1))
             print(attendant)
         print("\n")
     
     def print_pilots(self):
+        rows_len, columns_len = os.get_terminal_size()
 
 
         print("\tList all pilots")
+        print("-" * (rows_len - 1))
         all_pilots = self.LLAPI.ListPilots()
         for pilot in all_pilots:
+            print("-" * (rows_len - 1))
             print(pilot)
         print("\n")
     
     def print_assigned_employees(self):
+        rows_len, columns_len = os.get_terminal_size()
 
-
-        print("\tList all assigned employees on a given day")
+        print("\tList all already assigned employees on a given day")
         year = int(input("Input year: "))
         month = int(input("Input month: "))
         day = int(input("Input day: "))
         date_iso = datetime(year, month, day).isoformat()
         assinged_employees = self.LLAPI.ListAssignedEmployees(date_iso)
+        print("-" * (rows_len - 1))
         for employee in assinged_employees:
+            print("-" * (rows_len - 1))
             print(employee)
         print("\n")
 
     
     def print_unassigned_employees(self):
-
+        rows_len, columns_len = os.get_terminal_size()
         
         print("\tList all unassigned employees on a given day")
         year = int(input("Input year: "))
@@ -86,17 +97,19 @@ class EmployeeUI:
         day = int(input("Input day: "))
         date_iso = datetime(year, month, day).isoformat()
         unassinged_employees = self.LLAPI.ListUnassignedEmployees(date_iso)
+        print("-" * (rows_len - 1))
         for employee in unassinged_employees:
+            print("-" * (rows_len - 1))
             print(employee)
         print("\n")
 
     def print_update_employee_infomation():
-
+        rows_len, columns_len = os.get_terminal_size()
         print("\tUpdate employee information")
 
 
     def print_pilots_with_aircraft_privilage(self):
-
+        rows_len, columns_len = os.get_terminal_size()
 
         print("\tList all pilots with a certain aircraft privilage")
         aircraft_model = input("Input aircraft model (case sensitive): ")
@@ -106,13 +119,16 @@ class EmployeeUI:
         print("\n")
 
     def print_work_summary(self):
-
+        rows_len, columns_len = os.get_terminal_size()
 
         employeeSSN = input('Enter Employee SSN: ') 
         # Change this to employee name, even though this is easier,
         # from a user prespective nobody would want to 
         # remember a SSN of an employee.
-        week_of = input('Enter Week of Work: ')
+        year = int(input("Input year: "))
+        month = int(input("Input month: "))
+        day = int(input("Input day: "))
+        date_iso = datetime(year, month, day).isoformat()
 
         work_procedures = self.LLAPI.GetWorkSummaryBySsn(employeeSSN, week_of)
         for voy in work_procedures:
