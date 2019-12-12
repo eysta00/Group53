@@ -1,4 +1,5 @@
 from LogicLayer.LLAPI import LLAPI
+from Exceptions.Exceptions import *
 
 class AircraftUI:
     def __init__(self):
@@ -22,14 +23,19 @@ class AircraftUI:
         print("\n")
     
     def showAircraftStatus(self):
-        print("Aircraft Status")
+        print("\nAircraft Status")
         # aircrafts = self.LLAPI.AircraftStatus()
-        id = input("Enter Aircraft ID:")
-        aircrafts = self.LLAPI.AircraftStatus(id)
-        if id in aircrafts:
-            return LLAPI().ShowStatusOfAircrafts()
-        else:
-            print("Aircraft ID not found!")
+        id = input("\nEnter Aircraft ID: ")
+        try:
+            aircraftStatus = self.LLAPI.AircraftStatus(id)
+            print("\nThe Aircraft is " + aircraftStatus)
+        except EntryNotInDatabase:
+            print("The entered Aircraft ID does not correspond to an entry in the database.")
+        # if id in aircrafts:
+        #     return LLAPI().ShowStatusOfAircrafts()
+        # else:
+        #     print("Aircraft ID not found!")
+
         print("\n")
     
     def printAvailableAircrafts(self):

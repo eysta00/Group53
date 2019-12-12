@@ -56,6 +56,7 @@ class AircraftIO():
             for row in csvReader:
                 if str(row["aircraftID"]) == str(aircraftID):
                     return Aircraft(row['aircraftID'], row['model'], row['total_seats_int'])
+            raise EntryNotInDatabase("The given aircraft id does not correspond to the database")
 
     def AircraftInDatabase_bool(self, AircraftID):
 
