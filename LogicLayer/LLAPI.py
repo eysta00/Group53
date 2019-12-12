@@ -15,6 +15,9 @@ class LLAPI:
 
     ##### EMPLOYEE API #####
 
+    def UpdateEmployeeInfo(self, employee):
+        return self.employee_logic.UpdateEmployeeInfo(employee)
+
     def GetEmployeeBySSN(self, ssn):
         return self.employee_logic.GetEmployeeBySSN(ssn)
 
