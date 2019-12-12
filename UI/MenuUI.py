@@ -47,7 +47,8 @@ class MenuUI:
         print("\n##### Destinations ######")
         print("\n1. Add Destination",
               "\n2. List Destinations",
-              "\n3. Change Destination Contact Info",)
+              "\n3. Change Destination Contact Info",
+              "\n4. List Most Popular Destinations")
         return self.getDInput()
 
     def showAircraftsMenu(self):
@@ -135,6 +136,8 @@ class MenuUI:
             return DestinationUI().print_destinations()
         elif choice == "3":
             return DestinationUI().change_destination_contact_info()
+        elif choice == "4":
+            return DestinationUI().most_popular_destinations()    
         elif choice == "q":
             return
         else:
