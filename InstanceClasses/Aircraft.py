@@ -1,13 +1,13 @@
 class Aircraft:
     id_count = 0 #this would need to be loaded in from data for later
 
-    def __init__(self, aircraftID, model, total_seats_int):
+    def __init__(self, aircraftID, manufacturer, model, total_seats_int):
         self.aircraftID = aircraftID
         self.model = model
         self.total_seats_int = total_seats_int
 
     def __str__(self):
-        return self.model + ' : ' + self.total_seats_int
+        return self.manufacturer + ' : ' + self.model + ' : ' + self.total_seats_int
 
     def __repr__(self):
         return self.aircraftID + ' : ' + self.model

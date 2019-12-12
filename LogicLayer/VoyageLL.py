@@ -17,6 +17,17 @@ class VoyageLL:
         #sort by something here not sure what
         return voyages
 
+    def ListUpcomingVoyages(self):
+        voyages = self.data.getAllVoyages()
+        nowParsed = datetime.now()
+        upcomingVoyages = []
+        for voy in voyages:
+            parsedTime = parse(voy.departureTime)
+            if parsedTime > nowParsed:
+                upcomingVoyages.append(voy)
+        upcomingVoyages.sort(key=lambda x: parse(x.departureTime))
+        return upcomingVoyages
+
     def getVoyageByVoyageID(self, voyageID):
         return self.data.getVoyageByVoyageID(voyageID)
 

@@ -3,4 +3,5 @@
 #            ^              <-             <-
 from UI.MenuUI import MenuUI
 main = MenuUI()
-main.showMainMenu()
+while True:
+    main.showMainMenu()
