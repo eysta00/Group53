@@ -144,6 +144,15 @@ class VoyageLL:
             self.data.updateVoyage(voyage)
             return 1
 
+    def ListVoyagesForDestination(self, dest_id):
+        voyages = self.data.getAllVoyages()
+        voyForDest = []
+
+        for voy in voyages:
+            if str(voy.destination) == str(dest_id):
+                voyForDest.append(voy)
+        return voyForDest
+
     def _GenerateFlightID(self, destinationID, departureTime):
         outgoingFlightID_str = 'NA'
         incomingFlightID_str = 'NA'
