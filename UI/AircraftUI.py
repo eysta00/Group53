@@ -16,7 +16,7 @@ class AircraftUI:
         return
 
     def print_aircrafts(self):
-        print("List all aircrafts")
+        print("\n##### List All Aircrafts #####\n")
         aircrafts = self.LLAPI.ListAllAircrafts()
         for aircraft in aircrafts:
             print(aircraft)
