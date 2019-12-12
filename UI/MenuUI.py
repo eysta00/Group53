@@ -42,7 +42,7 @@ class MenuUI:
               "\n7. List voyages for given week",
               "\n8. List Flights By Location",
               "\n9. Update Voyage Captain",
-              "\10. Sold seats for Voyage")
+              "\n10. Sold seats for Voyage")
         return self.getVInput()
     
     def showDestinationsMenu(self):
