@@ -120,7 +120,7 @@ class EmployeeUI:
         
         print("\n")
 
-    def print_update_employee_infomation():
+    def print_update_employee_infomation(self):
         rows_len, columns_len = os.get_terminal_size()
         print("\n\tUpdate employee information")
         employee_name = input("Input name of employee you want to update: ")
