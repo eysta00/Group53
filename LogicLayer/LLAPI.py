@@ -87,6 +87,9 @@ class LLAPI:
     def UpdateDestinationContactNumber(self, destinationID, contactNr):
         return self.destination_logic.UpdateDestinationContactNumber(destinationID, contactNr)
 
+    def MostPopularDestination(self):
+        return self.destination_logic.MostPopularDestination()
+
     ##### AIRCRAFT API #####
 
     def RegisterAircraft(self, Id_str, model_str, totalseats_str):
