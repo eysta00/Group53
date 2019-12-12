@@ -133,9 +133,12 @@ class EmployeeUI:
                 print(employee)
                 print("-" * (rows_len - 1))
             employee_ssn = input("Please input the ssn of employee you want to update: ")
-            employee = self.LLAPI.GetEmployeeBySSN(employee_ssn)
+            try:
+                employee = self.LLAPI.GetEmployeeBySSN(employee_ssn)
+            except EntryNotInDatabase:
+                print("ERROR! Employee not found, please input correct ssn")
+                return print_update_employee_infomation()
             
-
 
 
     def print_pilots_with_aircraft_privilage(self):
