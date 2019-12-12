@@ -61,8 +61,7 @@ class EmployeeLL:
         except EntryInDatabase:
             return -1
 
-    def UpdateEmployeeInfo(self, ssn_str, name_str, address_str, phone_str, email_str, pilot_bool = False, planeType_id = None):
-        employee = Employee(name_str, ssn_str, address_str, phone_str, email_str, pilot_bool, planeType_id)
+    def UpdateEmployeeInfo(self, employee):
         try:
             self.data.updateEmployee(employee)
             return 1
