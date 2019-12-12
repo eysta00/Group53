@@ -107,7 +107,7 @@ class MenuUI:
         if choice == "1":
             return VoyageUI().register_Voyage()
         elif choice == "2":
-            return VoyageUI().ListVoyages()
+            return VoyageUI().print_Voyages()
         elif choice == "3":
             return VoyageUI().register_employees_to_voyage()
         elif choice == "4":
