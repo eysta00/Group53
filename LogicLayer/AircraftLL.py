@@ -53,6 +53,9 @@ class AircraftLL:
         timeParsed = parse(time)
         for voy in voyages:
             if str(voy.aircraftID) == str(aircraftID):
+                # print('hit this spot')
+                # print(voy.aircraftID, end = ' : ')
+                # print(aircraftID)
                 voyageTimes = self._getTimeOfVoyageActivities(voy)
                 if timeParsed > voyageTimes[0] and timeParsed < voyageTimes[3]:
                     if timeParsed > voyageTimes[2]:

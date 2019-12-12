@@ -6,3 +6,5 @@ class DepartureTimeOccupied(Exception):
     pass
 class ToFewAvailableEmployees(Exception):
     pass
+class EmployeeAlreadyAssigned(Exception):
+    pass

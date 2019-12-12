@@ -39,6 +39,7 @@ class EmployeesIO():
                         employee.name, employee.address, employee.pilot_bool, employee.planeType, employee.phone, employee.email
                     self.__reWriteFileFromList(rows)
                     return
+            print('raising an error')
             raise EntryNotInDatabase('try using addEmployee')
 
 

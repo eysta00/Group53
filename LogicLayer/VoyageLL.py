@@ -23,24 +23,26 @@ class VoyageLL:
 
     # We should possibly edit the code so that it doesn't access the stored instances in the classes directly but through methods
     def AddStaffToVoyage(self, voyageID, employeeSSN): 
+
+        voyage = self.data.getVoyageByVoyageID(voyageID)
+        employee = self.data.getEmployeeBySSN(employeeSSN)
+        print(employee) # did not run nor raise error
         
-        try:
-            voyage = self.data.getVoyageByVoyageID(voyageID)
-            employee = self.data.getEmployeeBySSN(employeeSSN)
-            # print(employee.pilot_bool)
-            # print(type(employee.pilot_bool))
-            if employee.pilot_bool:
-                # print(voyage.pilots_lst)
-                # print(type(voyage.pilots_lst))
-                # print(voyage.pilots_lst)
-                voyage.pilots_lst.append(employeeSSN)
-            else:
-                
-                voyage.flightAttendants_lst.append(employeeSSN)
-            self.data.updateVoyage(voyage)
-            return 1
-        except EntryNotInDatabase: # error code to see if voyage is successfully updated
-            return -1
+        if str(employeeSSN) in voyage.pilot_lst or str(employeeSSN) in voyage.flightAttendants_lst:
+            raise EmployeeAlreadyAssigned('This employee is already assigned to this voyage')
+
+        # print(employee.pilot_bool)
+        # print(type(employee.pilot_bool))
+        if employee.pilot_bool:
+            # print(voyage.pilots_lst)
+            # print(type(voyage.pilots_lst))
+            # print(voyage.pilots_lst)
+            voyage.pilots_lst.append(employeeSSN)
+        else:    
+            voyage.flightAttendants_lst.append(employeeSSN)
+
+        self.data.updateVoyage(voyage)
+
 
     def assignAircraftToVoyage(self, voyageID, aircraftID):
         try:
