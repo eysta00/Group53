@@ -33,5 +33,7 @@ class VoyageUI:
             print(Voyage)
         print("\n")
 
+
+
 # test1 = VoyageUI()
 # test1.addVoyage()

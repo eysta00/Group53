@@ -15,6 +15,9 @@ class LLAPI:
 
     ##### EMPLOYEE API #####
 
+    def RegisterEmployee(self, name, ssn, address, phone, email, pilot, planelicense):
+        return self.employee_logic.RegisterEmployee(name, ssn, address, phone, email, pilot, planelicense)
+
     def ListPilots(self):
         return self.employee_logic.ListPilots()
 
@@ -82,9 +85,6 @@ class LLAPI:
 
     def RegisterAircraft(self, Id_str, model_str, totalseats_str):
         return self.aircraft_logic.RegisterAircraft(Id_str, model_str, totalseats_str)
-
-    def ListAllAircrafts(self):
-        return self.aircraft_logic.ListAllAircrafts()
 
     def ListAllAircrafts(self):
         return self.aircraft_logic.ListAllAircrafts()

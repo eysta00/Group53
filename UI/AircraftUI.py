@@ -21,3 +21,15 @@ class AircraftUI:
         for aircraft in aircrafts:
             print(aircraft)
         print("\n")
+    
+    def showAircraftStatus(self):
+        print("Aircraft Status")
+        # aircrafts = self.LLAPI.AircraftStatus()
+        id = input("Enter Aircraft ID:")
+        aircrafts = self.LLAPI.AircraftStatus(id)
+        if id in aircrafts:
+            return LLAPI().ShowStatusOfAircrafts()
+        else:
+            print("Aircraft ID not found!")
+        
+        print("\n")

@@ -1,4 +1,5 @@
 from LogicLayer.LLAPI import LLAPI
+from LogicLayer.DestinationLL import DestinationLL
 
 class DestinationUI:
     def __init__(self):
@@ -21,7 +22,6 @@ class DestinationUI:
         destinations = self.LLAPI.ListAllDestinations()
         for destination in destinations:
             print(destination)
-        print("\n")
         print("\n")
 
 #test1 = DestinationUI()
