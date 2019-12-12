@@ -5,10 +5,10 @@ class AircraftUI:
         self.LLAPI = LLAPI()
 
     def register_aircraft(self):
-        model = input('Aircraft Model: ')
-        manufacturer = input('Aircraft Manufacturer: ')
+        air_id = input('Aircraft ID: ')
+        manufacturer = input('Aircraft Model: ')
         total_seats = input('Number of Seats: ')
-        error = self.LLAPI.RegisterAircraft(model, manufacturer, total_seats)
+        error = self.LLAPI.RegisterAircraft(air_id, manufacturer, total_seats)
         if error != 1:
             print("Error, input not valid!")
         
@@ -30,5 +30,10 @@ class AircraftUI:
             return LLAPI().ShowStatusOfAircrafts()
         else:
             print("Aircraft ID not found!")
-
+        print("\n")
+    
+    def printAvailableAircrafts(self):
+        aircrafts = self.LLAPI.ShowStatusOfAircrafts()
+        for aircraft in aircrafts:
+            print(aircraft)
         print("\n")

@@ -55,11 +55,6 @@ class VoyageUI:
             print(Voyage)
         print("\n")
     
-    def change_destination_contact_info(self):
-        dest_id = input("Destination ID: ")
-        contactNr = input("New contact number: ")
-        contact = self.LLAPI.UpdateDestinationContactNumber(dest_id, contactNr)
-    
     def print_voyage_by_dest(self):
         dest_id = input("Destination ID: ")
         Voyages = self.LLAPI.ListVoyagesForDestination(dest_id)

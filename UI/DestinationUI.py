@@ -10,10 +10,7 @@ class DestinationUI:
         destination_id = input('Destination ID: ')
         flight_duration = input('Flight duration: ')
         contactNr = input('Contact number: ')
-        error = DestinationLL().RegisterDestination(destination_name, destination_id, flight_duration, contactNr)
-        error = LLAPI().RegisterDestination(destination_name, destination_id, flight_duration)
-        if error != 1:
-            print("Error, input not valid!")
+        LLAPI().RegisterDestination(destination_name, destination_id, flight_duration, contactNr)
         
         return
 
@@ -23,6 +20,12 @@ class DestinationUI:
         for destination in destinations:
             print(destination)
         print("\n")
+      
+    def change_destination_contact_info(self):
+        dest_id = input("Destination ID: ")
+        contactNr = input("New contact number: ")
+        contact = self.LLAPI.UpdateDestinationContactNumber(dest_id, contactNr)
+
 
 #test1 = DestinationUI()
 #test1.print_destinations()
