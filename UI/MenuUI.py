@@ -123,6 +123,10 @@ class MenuUI:
             return VoyageUI().print_voyage_for_week()
         elif choice == "8":
             return VoyageUI().print_voyage_by_dest()
+        elif choice == "9":
+            return
+        elif choice == "10":
+            return
         elif choice == "q":
             return
         else:

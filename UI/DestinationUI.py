@@ -26,6 +26,10 @@ class DestinationUI:
         contactNr = input("New contact number: ")
         contact = self.LLAPI.UpdateDestinationContactNumber(dest_id, contactNr)
 
+    def most_popular_destinations(self):
+        most_dest = self.LLAPI.MostPopularDestination()
+        for dest in most_dest:
+            print(dest)
 
 #test1 = DestinationUI()
 #test1.print_destinations()
