@@ -37,6 +37,35 @@ class DestinationLL():
 
 
 
+    def MostPopularDestination(self): # Returns what destination has sold the most seats to in total
+        voyages = self.data.getAllVoyages()
+        destinations = self.data.getAllDestinatons()
+        destinations_dict = {}
+        for dest in destinations:
+            destinations_dict[dest.dest_id] = 0
+        
+        for voy in voyages:
+            try:
+                destinations_dict[voy.destination] += int(voy.seatingSoldOutgoing)
+            except ValueError:
+                pass
+        
+        maxSold = 0
+        mostPopularDest = None
+        firstRun = True
+        for key in destinations_dict:
+            if firstRun:
+                mostPopularDest = key
+                firstRun = False
+                maxSold = destinations_dict[key]
+                continue
+            if destinations_dict[key] > maxSold:
+                maxSold = destinations_dict[key]
+                mostPopularDest = key
+        return self.data.getDestinationByDestinationID(mostPopularDest)
+
+
+
     def _GenerateNewDestinationID(self):
         destinations = self.data.getAllDestinatons()
         iteration = 1
@@ -49,6 +78,7 @@ class DestinationLL():
             
             iteration += 1
         return int(highest_id) + 1 # returns an integer that is 1 higher than the highest id any voyage has in the database
+
 
 
     
