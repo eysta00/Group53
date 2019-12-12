@@ -1,5 +1,6 @@
 from LogicLayer.LLAPI import LLAPI
 from datetime import datetime
+from Exceptions.Exceptions import *
 import os
 class EmployeeUI:
     def __init__(self):
@@ -158,27 +159,34 @@ class EmployeeUI:
         rows_len, columns_len = os.get_terminal_size()
 
         print("\n\tGet the work summary of an employee")
-        employee_name = input("Input employee name: ")
-        employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
-        if len(employees_with_name) > 1:
-            print("More than one employee has that same name")
-            print("-" * (rows_len - 1))
-            print(self.header)
-            print("-" * (rows_len - 1))
-            for employee in employees_with_name:
-                print(employee)
-                print("-" * (rows_len - 1))
-            
-            employee_ssn = ("Input the ssn of employee you requested: ")
 
-            work_procedures = self.LLAPI.GetWorkSummaryBySsn(employee_ssn, week_of)
-        else:
+        try:
+            employee_name = input("Input employee name: ")
+            employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
+            if len(employees_with_name) > 1:
+                print("More than one employee has that same name")
+                print("-" * (rows_len - 1))
+                print(self.header)
+                print("-" * (rows_len - 1))
+                for employee in employees_with_name:
+                    print(employee)
+                    print("-" * (rows_len - 1))
+
+                employee_ssn = input("Input the ssn of employee you requested: ")
+
+            else:
+                employee_ssn = employees_with_name[0].ssn
             print("Please input the dates to get the work summary of", employee_name)
             year = int(input("Input year: "))
             month = int(input("Input month: "))
             day = int(input("Input day: "))
             date_iso = datetime(year, month, day).isoformat()
             work_procedures = self.LLAPI.GetWorkSummary(employees_with_name[0].ssn, date_iso)
-        
-        for voy in work_procedures:
-            print(voy)
+
+            for voy in work_procedures:
+                print(voy)
+        except EntryNotInDatabase:
+            print("\nThere is No employee with the name " + employee_name)
+
+        except ValueError:
+            print('\nDates must be within defined ranges, months 1-12, days 1-31.\n')

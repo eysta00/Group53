@@ -46,7 +46,7 @@ class LLAPI:
         return self.employee_logic.ListAllEmployeesWithName(name)
 
     def GetWorkSummary(self, employeeSSN, current_date):
-        return self.employee_logic.GetWorkSummaryBySsn(employeeSSN, current_date)
+        return self.employee_logic.GetWorkSummaryBySsn(self ,employeeSSN, current_date)
 
     ##### VOYAGE API #####
 

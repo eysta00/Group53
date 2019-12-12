@@ -50,6 +50,8 @@ class EmployeeLL:
         for emp in employees:
             if emp.name == name:
                 ret_lst.append(emp)
+        if len(ret_lst) == 0:
+            raise EntryNotInDatabase('There is no employee with that name') 
         return ret_lst
 
 
@@ -155,12 +157,12 @@ class EmployeeLL:
     #     return parse((StartTime_dateTime + relativedelta(hour=+(flightTime*2+1))).isoformat()) # Assuming the rest at destination is 1 hour
 
 
-    def GetWorkSummaryBySsn(self, employeeSSN, current_date):
-        voyages_in_week = VoyageLL().ListVoyagesForGivenWeek(current_date)
+    def GetWorkSummaryBySsn(self, apiSelf, employeeSSN, current_date):
+        voyages_in_week = apiSelf.ListVoyagesForGivenWeek(current_date)
         emp_voyages = []
 
         for voyage in voyages_in_week:
-            if employeeSSN in voyage.pilots_lst:
+            if employeeSSN in voyage.pilots_lst or employeeSSN in voyage.flightAttendants_lst:
                 emp_voyages.append(voyage)
 
         return emp_voyages
