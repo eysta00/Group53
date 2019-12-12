@@ -131,10 +131,13 @@ class EmployeeUI:
     def print_work_summary(self):
         rows_len, columns_len = os.get_terminal_size()
 
-        employeeSSN = input('Enter Employee SSN: ') 
+        employee_name = input("Input employee name: ")
+        self.LLAPI.ListAllEmployeesWithName(employee_name)
+
         # Change this to employee name, even though this is easier,
         # from a user prespective nobody would want to 
         # remember a SSN of an employee.
+        print("Please input the following to get the work summary for the week")
         year = int(input("Input year: "))
         month = int(input("Input month: "))
         day = int(input("Input day: "))
