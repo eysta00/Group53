@@ -15,6 +15,9 @@ class LLAPI:
 
     ##### EMPLOYEE API #####
 
+    def RegisterEmployee(self, name, ssn, address, phone, email, pilot, planelicense):
+        return self.employee_logic.RegisterEmployee(name, ssn, address, phone, email, pilot, planelicense)
+
     def ListPilots(self):
         return self.employee_logic.ListPilots()
 
@@ -29,6 +32,9 @@ class LLAPI:
     
     def ListAssignedEmployees(self, date_iso):
         return self.employee_logic.ListAssignedEmployees(date_iso)
+
+    def ListAllEmployeesWithName(self, name):
+        return self.employee_logic.ListAllEmployeesWithName(name)
 
     def GetWorkSummary(self, employeeSSN, current_date):
         return self.employee_logic.GetWorkSummaryBySsn(employeeSSN, current_date)
@@ -60,6 +66,9 @@ class LLAPI:
 
     def SellSeatsForVoyage(self, voyageID, seatsSold):
         return self.voyage_logic.SellSeatsForVoyage(voyageID, seatsSold)
+    
+    def ListAllVoyages(self):
+        return self.voyage_logic.ListAllVoyages()
 
     ##### DESTINATION API #####
 
@@ -76,9 +85,6 @@ class LLAPI:
 
     def RegisterAircraft(self, Id_str, model_str, totalseats_str):
         return self.aircraft_logic.RegisterAircraft(Id_str, model_str, totalseats_str)
-
-    def ListAllAircrafts(self):
-        return self.aircraft_logic.ListAllAircrafts()
 
     def ListAllAircrafts(self):
         return self.aircraft_logic.ListAllAircrafts()

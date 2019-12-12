@@ -73,6 +73,8 @@ class IOAPI():
 
     def getAllAircrafts(self):
         return self.AircraftData.getAllAircrafts()
+    
+    
 
 
 if __name__ == "__main__":
