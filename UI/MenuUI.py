@@ -42,7 +42,7 @@ class MenuUI:
               "\n7. List voyages for given week",
               "\n8. List Flights By Location",
               "\n9. Update Voyage Captain",
-              "\10. Sold seats for Voyage")
+              "\n10. Sold seats for Voyage")
         return self.getVInput()
     
     def showDestinationsMenu(self):
@@ -123,6 +123,10 @@ class MenuUI:
             return VoyageUI().print_voyage_for_week()
         elif choice == "8":
             return VoyageUI().print_voyage_by_dest()
+        elif choice == "9":
+            return
+        elif choice == "10":
+            return
         elif choice == "q":
             return
         else:
