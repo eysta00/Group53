@@ -124,7 +124,7 @@ class MenuUI:
         elif choice == "8":
             return VoyageUI().print_voyage_by_dest()
         elif choice == "9":
-            return
+            return VoyageUI().UpdateVoyageCaptain()
         elif choice == "10":
             return
         elif choice == "q":
