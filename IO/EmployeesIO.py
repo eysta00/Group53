@@ -33,24 +33,23 @@ class EmployeesIO():
         with open(self.filePath, 'r') as csv_file:
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             rows = list(csvReader)
+            # print(rows)
             for emp in rows:
                 if str(emp["ssn"]) == str(employee.ssn):
                     emp["name"], emp["address"], emp["pilot_bool"], emp['planeType'], emp['phone'], emp['email'] = \
                         employee.name, employee.address, employee.pilot_bool, employee.planeType, employee.phone, employee.email
                     self.__reWriteFileFromList(rows)
                     return
-            print('raising an error')
+            # print('raising an error')
             raise EntryNotInDatabase('try using addEmployee')
 
-
+# ["ssn", "name", "address", "phone", "email", "pilot_bool", "planeType"]
 # method to rewrite entire data file from list from update Employee
     def __reWriteFileFromList(self, dictList): # writing to new file then rename-ing files and deleting old 
-        with open(self.tempFilePath, 'w') as csv_file:
+        with open(self.filePath, 'w') as csv_file:
             csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
             for entry in dictList:
                 csvWriter.writerow(entry)
-            os.remove(self.filePath)
-            os.rename(self.tempFilePath, self.filePath)
 
 
 

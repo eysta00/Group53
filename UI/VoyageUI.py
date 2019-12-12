@@ -21,7 +21,8 @@ class VoyageUI:
 
     def register_employees_to_voyage(self):
         Voyage_id = input('Voyage ID: ')
-        Employee = input('Employee ID: ')
+        employee_name = input('Input the Name of the Employee')
+        employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
 
     def assign_captain_to_voyage(self):
         Voyage_id = input('Voyage ID: ')
