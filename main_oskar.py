@@ -2,6 +2,7 @@ from Exceptions.Exceptions import *
 from LogicLayer.LLAPI import *
 from LogicLayer.AircraftLL import *
 from LogicLayer.VoyageLL import *
+from LogicLayer.EmployeeLL import *
 
 from datetime import datetime
 from dateutil.parser import *
@@ -12,6 +13,7 @@ from dateutil.relativedelta import *
 
 logicAPI = LLAPI()
 logicVoyage = VoyageLL()
+logicEmployee = EmployeeLL()
 # time = datetime(2020, 1, 8, 18, 0, 0).isoformat()
 # print(logicAPI.ListAssignedEmployees(time))
 # logicAPI.AddVoyage(3, datetime(2019, 12, 10, 12).isoformat())
@@ -32,11 +34,14 @@ logicVoyage = VoyageLL()
 # logicAPI.UpdateVoyageCaptain(3, '1234567890')
 # logicAPI.SellSeatsForVoyage(3,25)
 # print(logicVoyage._GenerateFlightID(2, datetime.now().isoformat()))
-# logicAPI.AddVoyage(2, datetime(2019, 12, 25, 18, 50).isoformat())
+# logicAPI.AddVoyage(2, datetime(2019, 12, 12, 15, 45).isoformat())
 # logic = AircraftLL()
 # voyage = logicAPI.getVoyageByVoyageID(3)
 # print(voyage)
 # print(logic._getTimeOfVoyageActivities(voyage))
 # employees = logicAPI.ListAllEmployees()
 # print(type(employees[1].pilot_bool))
-print(logicAPI.MostPopularDestination())
+# print(logicAPI.MostPopularDestination())
+voyage = logicAPI.getVoyageByVoyageID(6)
+print(voyage.departureTime)
+print(logicEmployee._getEndTimeOfVoyage(voyage))

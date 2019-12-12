@@ -1,6 +1,5 @@
 from InstanceClasses.Voyage import Voyage
-from Exceptions.Exceptions import EntryInDatabase
-from Exceptions.Exceptions import EntryNotInDatabase
+from Exceptions.Exceptions import *
 from IO.IOAPI import IOAPI
 import dateutil.parser
 from datetime import datetime
@@ -53,9 +52,24 @@ class VoyageLL:
             return -1
 
 
-    def addVoyage(self, destination_id, flightTime_str):
+    def addVoyage(self, apiself, destination_id, flightTime_str):
         
         # implement logic checking if there's enough staff available at the given time here
+
+        if not self._isDepartureTimeFree(flightTime_str):
+            raise DepartureTimeOccupied('There is already a flight at that time')
+
+        freeEmployees = apiself.ListUnassignedEmployees(flightTime_str)
+        freePilots = 0
+        freeFlightAttendants = 0
+        for emp in freeEmployees:
+            if emp.pilot_bool:
+                freePilots += 1
+            else:
+                freeFlightAttendants += 1
+        
+        if freePilots > 2 or freeFlightAttendants > 1:
+            raise ToFewAvailableEmployees("There are not enough available employees on this date to create a voyage")
 
         try:
             flightIDs_lst_str = self._GenerateFlightID(destination_id, flightTime_str)
@@ -65,9 +79,8 @@ class VoyageLL:
         except EntryInDatabase:
             return -1
 
-    def _CheckForVoyageAtTime(self, flightTime_str_iso):
-        voyages = self.data.getAllVoyages()
-        # changes HERE
+        
+
 
     def ListVoyagesForGivenDay(self, date_iso):
         voyages = self.data.getAllVoyages()
@@ -75,7 +88,7 @@ class VoyageLL:
         dateParced = parse(date_iso)
         for voy in voyages:
             parsedStartTime = parse(voy.departureTime)
-            parsedEndTime = self._getEndTimeOfVoyage(voy)
+            parsedEndTime = parse(self._getEndTimeOfVoyage(voy))
 
             if ((dateParced.year == parsedStartTime.year and dateParced.month == parsedStartTime.month and dateParced.day == parsedStartTime.day)\
                 and (dateParced.year == parsedEndTime.year and dateParced.month == parsedEndTime.month and dateParced.day == parsedEndTime.day)):
@@ -92,7 +105,7 @@ class VoyageLL:
         # print(weekLaterParced)
         for voy in voyages:
             parsedStartTime = parse(voy.departureTime)
-            parsedEndTime = self._getEndTimeOfVoyage(voy)
+            parsedEndTime = parse(self._getEndTimeOfVoyage(voy))
             if (parsedEndTime > dateParced and parsedEndTime < weekLaterParced) or (parsedStartTime > dateParced and parsedStartTime < weekLaterParced):
                 voyagesInWeek_lst.append(voy)
         return voyagesInWeek_lst
@@ -157,6 +170,14 @@ class VoyageLL:
                 voyForDest.append(voy)
         return voyForDest
 
+    def _isDepartureTimeFree(self, flightTime_str_iso):
+        voyages = self.data.getAllVoyages()
+        parsedTime = parse(flightTime_str_iso)
+        for voy in voyages:
+            if parsedTime == parse(voy.departureTime):
+                return False
+        return True
+
     def _GenerateFlightID(self, destinationID, departureTime):
         outgoingFlightID_str = 'NA'
         incomingFlightID_str = 'NA'
@@ -185,14 +206,22 @@ class VoyageLL:
 
     def _getEndTimeOfVoyage(self, voyage):
         destination = self.data.getDestinationByDestinationID(voyage.destination)
-        try:
-            StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S.%f')
-        except ValueError:
-            StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S')
+        # try:
+        #     StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S.%f')
+        # except ValueError:
+        #     StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S')
 
-        flightTime = int(destination.flight_duration) # consider changing this to int so as to not miss the disimal places!
+        StartTime_dateTime = parse(voyage.departureTime)
+
+        flightTimeHours = float(destination.flight_duration)
+        flightTimeMinutes = (flightTimeHours % 1) * 60
+        flightTimeSeconds = (flightTimeMinutes % 1) * 60
+        flightTimeHours = int(flightTimeHours)
+        flightTimeMinutes = int(flightTimeMinutes)
+        flightTimeSeconds = int(flightTimeSeconds)
         # print(flightTime)
-        return parse((StartTime_dateTime + relativedelta(hour=+(flightTime*2+1))).isoformat()) # Assuming the rest at destination is 1 hour
+        endTime = StartTime_dateTime + relativedelta(hours= +(flightTimeHours*2+1), minutes = +2*flightTimeMinutes, seconds = +2*flightTimeSeconds)
+        return endTime.isoformat()
 
     def _GenerateNewVoyageID(self):
         voyages = self.data.getAllVoyages()

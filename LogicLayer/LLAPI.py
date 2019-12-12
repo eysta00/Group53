@@ -44,7 +44,7 @@ class LLAPI:
     ##### VOYAGE API #####
 
     def AddVoyage(self, destination_id, flightTime_str):
-        return self.voyage_logic.addVoyage(destination_id, flightTime_str)
+        return self.voyage_logic.addVoyage(self, destination_id, flightTime_str)
 
     def getVoyageByVoyageID(self, voyageID):
         return self.voyage_logic.getVoyageByVoyageID(voyageID)
