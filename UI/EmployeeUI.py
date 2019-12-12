@@ -125,6 +125,7 @@ class EmployeeUI:
         print("\n\tUpdate employee information")
         employee_name = input("Input name of employee you want to update: ")
         employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
+        # If there are more employees with same name you get a list and have to select manually the ssn of the employee.
         if len(employees_with_name) > 1:
             print("More than one employee was found with that name")
             print("-" * (rows_len - 1))
@@ -194,6 +195,8 @@ class EmployeeUI:
             print("No employee with that name was found")
 
         self.LLAPI.UpdateEmployeeInfo(employee)
+        
+        return
 
 
 
