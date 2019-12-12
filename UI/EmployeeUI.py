@@ -122,7 +122,21 @@ class EmployeeUI:
     def print_update_employee_infomation():
         rows_len, columns_len = os.get_terminal_size()
         print("\n\tUpdate employee information")
-        
+        employee_name = input("Input name of employee you want to update: ")
+        employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
+        if len(employees_with_name) > 1:
+            print("More than one employee was found with that name")
+            print("-" * (rows_len - 1))
+            print(self.header)
+            print("-" * (rows_len - 1))
+            for employee in employees_with_name:
+                print(employee)
+                print("-" * (rows_len - 1))
+            employee_ssn = input("Please input the ssn of employee you want to update: ")
+            employee = self.LLAPI.GetEmployeeBySSN(employee_ssn)
+            
+
+
 
     def print_pilots_with_aircraft_privilage(self):
         rows_len, columns_len = os.get_terminal_size()
@@ -163,6 +177,5 @@ class EmployeeUI:
             date_iso = datetime(year, month, day).isoformat()
             work_procedures = self.LLAPI.GetWorkSummary(employees_with_name[0].ssn, date_iso)
         
-
         for voy in work_procedures:
             print(voy)
