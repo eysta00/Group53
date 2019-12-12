@@ -13,7 +13,7 @@ class EmployeeUI:
         print("-" * (rows_len - 1))
         e_name = input("Full employee name: ")
         e_ssn = input("Employee social securtiy number: ")
-        e_address = input("Employee Adress: ")
+        e_address = input("Employee Address: ")
         e_phone = input("Employe phone number: ")
         e_email = input("Employee email: ")
         
@@ -89,7 +89,7 @@ class EmployeeUI:
         date_iso = datetime(year, month, day).isoformat()
         assinged_employees = self.LLAPI.ListAssignedEmployees(date_iso)
         if len(assinged_employees) < 1:
-            print("There are no employees that are assigned")
+            print("\nThere are no employees assigned on the imputed day ")
         else:
             print(self.header)
             print("-" * (rows_len - 1))

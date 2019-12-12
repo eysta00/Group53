@@ -5,9 +5,11 @@ class Aircraft:
         self.aircraftID = aircraftID
         self.model = model
         self.total_seats_int = total_seats_int
+        self.manufacturer = manufacturer
 
     def __str__(self):
-        return self.manufacturer + ' : ' + self.model + ' : ' + self.total_seats_int
+        # print(self.manufacturer)
+        return str(self.manufacturer) + ' : ' + str(self.model) + ' : ' + str(self.total_seats_int)
 
     def __repr__(self):
         return self.aircraftID + ' : ' + self.model

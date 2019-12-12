@@ -19,7 +19,7 @@ class EmployeeLL:
             return -1
 
     def GetEmployeeBySSN(self, ssn):
-        return self.data.GetEmployeeBySSN(ssn)
+        return self.data.getEmployeeBySSN(ssn)
 
     def ListPilots(self):
         employees = self.data.getAllEmployees()
@@ -88,6 +88,8 @@ class EmployeeLL:
 
             if not assigned:
                 unassigned_employees.append(emp)
+        unassigned_employees.sort(key=lambda x: x.name)
+        unassigned_employees.sort(key=lambda x: x.pilot_bool, reverse = True)
         return unassigned_employees
 
     def ListAssignedEmployees(self, date_iso): 
