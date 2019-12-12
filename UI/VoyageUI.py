@@ -77,7 +77,12 @@ class VoyageUI:
             print("ERROR! Pilot not found, please correct ssn")
             return UpdateVoyageCaptain()
 
-
-
+    def soldSeatsForVoyage(self):
+        Voyage_id = input("Enter voyage ID:")
+        sold_seats = input("Enter seats:")  #not sure about this
+        try:
+            voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
+        except EntryNotInDatabase:
+            print("ERROR! Voyage not found, please input correct id")
 # test1 = VoyageUI()
 # test1.addVoyage()

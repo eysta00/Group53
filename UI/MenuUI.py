@@ -126,7 +126,7 @@ class MenuUI:
         elif choice == "9":
             return VoyageUI().UpdateVoyageCaptain()
         elif choice == "10":
-            return
+            return VoyageUI().soldSeatsForVoyage()
         elif choice == "q":
             return
         else:
