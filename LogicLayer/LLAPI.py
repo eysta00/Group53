@@ -15,6 +15,9 @@ class LLAPI:
 
     ##### EMPLOYEE API #####
 
+    def GetEmployeeBySSN(self, ssn):
+        return self.employee_logic.GetEmployeeBySSN(ssn)
+
     def RegisterEmployee(self, name, ssn, address, phone, email, pilot, planelicense):
         return self.employee_logic.RegisterEmployee(name, ssn, address, phone, email, pilot, planelicense)
 
