@@ -6,6 +6,8 @@ from LogicLayer.VoyageLL import *
 from datetime import datetime
 from dateutil.parser import *
 from dateutil.relativedelta import *
+# from InputData.clear_output import *
+# from InputData.converter import *
 
 
 logicAPI = LLAPI()
@@ -35,3 +37,5 @@ logicVoyage = VoyageLL()
 # voyage = logicAPI.getVoyageByVoyageID(3)
 # print(voyage)
 # print(logic._getTimeOfVoyageActivities(voyage))
+employees = logicAPI.ListAllEmployees()
+print(type(employees[1].pilot_bool))

@@ -86,7 +86,15 @@ class EmployeesIO():
         with open(self.filePath, 'r') as csv_file:
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
-                return_list.append(Employee(row["name"], row["ssn"], row["address"], row["phone"], row["email"], row["pilot_bool"], row["planeType"]))
+                name = row["name"]
+                ssn = row["ssn"]
+                address = row["address"]
+                phone = row["phone"]
+                email = row["email"]
+                pilot_bool = row["pilot_bool"] == "True" #this is because it is stored as a string in the file
+                planeType = row["planeType"]
+
+                return_list.append(Employee(name, ssn, address, phone, email, pilot_bool, planeType))
         return return_list
     
     def ListALLStaff(self):
