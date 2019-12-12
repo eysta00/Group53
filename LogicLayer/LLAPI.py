@@ -77,7 +77,7 @@ class LLAPI:
         return self.voyage_logic.ListVoyagesForGivenWeek(date_iso)
 
     def ListVoyagesForDestination(self, dest_id):
-        return self.voyage_logic.ListVoyagesForDestination(self, dest_id)
+        return self.voyage_logic.ListVoyagesForDestination(dest_id)
 
     ##### DESTINATION API #####
 

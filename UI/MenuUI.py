@@ -118,11 +118,11 @@ class MenuUI:
         elif choice == "6":
             return VoyageUI().print_voyage_for_day()
         elif choice == "7":
-            return VoyageUI().print_voyage_for_week
+            return VoyageUI().print_voyage_for_week()
         elif choice == "8":
             return VoyageUI().change_destination_contact_info()
         elif choice == "9":
-            return default_operation()
+            return VoyageUI().print_voyage_by_dest()
         elif choice == "q":
             return
         else:
