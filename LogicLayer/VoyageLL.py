@@ -65,6 +65,10 @@ class VoyageLL:
         except EntryInDatabase:
             return -1
 
+    def _CheckForVoyageAtTime(self, flightTime_str_iso):
+        voyages = self.data.getAllVoyages()
+        # changes HERE
+
     def ListVoyagesForGivenDay(self, date_iso):
         voyages = self.data.getAllVoyages()
         voyagesOnDay_lst = []
