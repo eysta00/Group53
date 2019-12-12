@@ -85,5 +85,6 @@ class VoyageUI:
             voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
         except EntryNotInDatabase:
             print("ERROR! Voyage not found, please input correct id")
+            return soldSeatsForVoyage()
 # test1 = VoyageUI()
 # test1.addVoyage()
