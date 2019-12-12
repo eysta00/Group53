@@ -1,11 +1,14 @@
 from LogicLayer.LLAPI import LLAPI
 from datetime import datetime
-
+import os
 class EmployeeUI:
     def __init__(self):
         self.LLAPI = LLAPI()
+        self.header = "{:40}\t{:10}\t{:20}\t{:10}\t{:35}\t{:20}\t{}".format("Name", "SSN", "Address", "Phone", "Email", "Pilot status", "Licenses")
 
     def print_register_employee(self):
+        rows_len, columns_len = os.get_terminal_size() # checks on length of terminal, this repeats.
+
         print("\tRegister a new employee")
         e_name = input("Full employee name: ")
         e_ssn = input("Employee social securtiy number: ")
@@ -24,17 +27,27 @@ class EmployeeUI:
         error = self.LLAPI.RegisterEmployee(e_name, e_ssn, e_address, e_phone, e_email, e_pilot, e_planelicense)
         if error != 1:
             print("Error, input not valid!")
+            repeat_inquiry = input("Would you like to try again? yes/no: ").lower()
+            if repeat_inquiry == "yes":
+                return print_register_employee()
         print("\n")        
         return
     
     def print_all_employees(self):
+        rows_len, columns_len = os.get_terminal_size()
+
+
         print("\tList all employess")
+        print(self.header)
         all_employees = self.LLAPI.ListAllEmployees()
         for employee in all_employees:
+            print("-" * (rows_len - 1))
             print(employee)
+            
         print("\n")
         
     def print_flight_attendants(self):
+
         print("\tList all flight attendants")
         flight_attendants = self.LLAPI.ListFlightAttendants()
         for attendant in flight_attendants:
@@ -42,6 +55,8 @@ class EmployeeUI:
         print("\n")
     
     def print_pilots(self):
+
+
         print("\tList all pilots")
         all_pilots = self.LLAPI.ListPilots()
         for pilot in all_pilots:
@@ -49,6 +64,8 @@ class EmployeeUI:
         print("\n")
     
     def print_assigned_employees(self):
+
+
         print("\tList all assigned employees on a given day")
         year = int(input("Input year: "))
         month = int(input("Input month: "))
@@ -61,6 +78,8 @@ class EmployeeUI:
 
     
     def print_unassigned_employees(self):
+
+        
         print("\tList all unassigned employees on a given day")
         year = int(input("Input year: "))
         month = int(input("Input month: "))
@@ -71,11 +90,14 @@ class EmployeeUI:
             print(employee)
         print("\n")
 
-    def print_update_employee_infomation(): # Waiting on API to update to inlcude this
+    def print_update_employee_infomation():
+
         print("\tUpdate employee information")
 
 
-    def print_pilots_with_aircraft_privilage(self): # Waiting on API to update to include this
+    def print_pilots_with_aircraft_privilage(self):
+
+
         print("\tList all pilots with a certain aircraft privilage")
         aircraft_model = input("Input aircraft model (case sensitive): ")
         pilot_licenses = self.LLAPI.ListPilotsWithAircraftPrivilege(aircraft_model)
@@ -84,6 +106,8 @@ class EmployeeUI:
         print("\n")
 
     def print_work_summary(self):
+
+
         employeeSSN = input('Enter Employee SSN: ') 
         # Change this to employee name, even though this is easier,
         # from a user prespective nobody would want to 

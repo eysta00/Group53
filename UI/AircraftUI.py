@@ -8,8 +8,7 @@ class AircraftUI:
         model = input('Aircraft Model: ')
         manufacturer = input('Aircraft Manufacturer: ')
         total_seats = input('Number of Seats: ')
-        req_licenses = input('Required Piloting Licenses: ')
-        error = LLAPI().RegisterAircraft(model, manufacturer, total_seats, req_licenses)
+        error = self.LLAPI.RegisterAircraft(model, manufacturer, total_seats)
         if error != 1:
             print("Error, input not valid!")
         
@@ -31,5 +30,5 @@ class AircraftUI:
             return LLAPI().ShowStatusOfAircrafts()
         else:
             print("Aircraft ID not found!")
-        
+
         print("\n")
