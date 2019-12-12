@@ -77,6 +77,9 @@ class LLAPI:
     def ListAllVoyages(self):
         return self.voyage_logic.ListAllVoyages()
 
+    def ListUpcomingVoyages(self):
+        return self.voyage_logic.ListUpcomingVoyages()
+
     def ListVoyagesForGivenDay(self, date_iso):
         return self.voyage_logic.ListVoyagesForGivenDay(date_iso)
 

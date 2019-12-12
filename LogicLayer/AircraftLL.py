@@ -13,7 +13,7 @@ class AircraftLL:
     def __init__(self):
         self.data = IOAPI()
 
-    def RegisterAircraft(self, Id_str, model_str, totalseats_str):
+    def RegisterAircraft(self, Id_str, manufacturer_str, model_str, totalseats_str):
         try:
             self.data.addAircraft(Aircraft( Id_str, model_str, totalseats_str))
             return 1 
