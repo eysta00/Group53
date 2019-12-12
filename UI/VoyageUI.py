@@ -1,4 +1,5 @@
 from LogicLayer.LLAPI import LLAPI
+from datetime import datetime
 
 class VoyageUI:
     def __init__(self):
@@ -26,12 +27,39 @@ class VoyageUI:
         Voyage_id = input('Voyage ID: ')
         Pilot = input('Pilot ID: ')
 
+    def print_voyage_for_day(self):
+        year = int(input("Input year: "))
+        month = int(input("Input month: "))
+        day = int(input("Input day: "))
+        date_iso = datetime(year, month, day).isoformat()
+        voyages = self.LLAPI.ListVoyagesForGivenDay(date_iso)
+        for voyage in voyages:
+            print(voyage)
+        print("\n")
+
+    def print_voyage_for_week(self):
+        print("Input first day of the week you want to look at")
+        year = int(input("Input year: "))
+        month = int(input("Input month: "))
+        day = int(input("Input day: "))
+        date_iso = datetime(year, month, day).isoformat()
+        voyages = self.LLAPI.ListVoyagesForGivenWeek(date_iso)
+        for voyage in voyages:
+            print(voyage)
+        print("\n")
+
     def print_Voyages(self):
         print("List all Voyages")
         Voyages = self.LLAPI.ListAllVoyages()
         for Voyage in Voyages:
             print(Voyage)
         print("\n")
+    
+    def change_destination_contact_info(self):
+        dest_id = input("Destination ID: ")
+        contactNr = input("New contact number: ")
+        contact = self.LLAPI.UpdateDestinationContactNumber(dest_id, contactNr)
+
 
 
 

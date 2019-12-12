@@ -116,11 +116,11 @@ class MenuUI:
         elif choice == "5":
             return VoyageUI().register_aircraft()
         elif choice == "6":
-            return default_operation()
+            return VoyageUI().print_voyage_for_day()
         elif choice == "7":
-            return default_operation()
+            return VoyageUI().print_voyage_for_week
         elif choice == "8":
-            return default_operation()
+            return VoyageUI().change_destination_contact_info()
         elif choice == "9":
             return default_operation()
         elif choice == "q":

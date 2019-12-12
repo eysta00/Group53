@@ -70,6 +70,12 @@ class LLAPI:
     def ListAllVoyages(self):
         return self.voyage_logic.ListAllVoyages()
 
+    def ListVoyagesForGivenDay(self, date_iso):
+        return self.voyage_logic.ListVoyagesForGivenDay(date_iso)
+
+    def ListVoyagesForGivenWeek(self, date_iso):
+        return self.voyage_logic.ListVoyagesForGivenWeek(date_iso)
+
     ##### DESTINATION API #####
 
     def ListAllDestinations(self):
