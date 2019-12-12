@@ -31,12 +31,11 @@ class EmployeeUI:
             repeat_inquiry = input("Would you like to try again? yes/no: ").lower()
             if repeat_inquiry == "yes":
                 return print_register_employee()
-        new_employee = self.LLAPI.ListAllEmployeesWithName(e_name)
         print(("-" * (int((rows_len - 24) / 2))) + "New Employee Registered" + ("-" * ((int((rows_len -24) / 2)))))
         print(self.header)
         print("-" * (rows_len - 1))
-        for employee in new_employee:
-            print(employee)
+        new_employee = self.LLAPI.GetEmployeeBySSN(e_ssn)
+        print(new_employee)
         print("-" * (rows_len - 1))
         print("\n")
         return
@@ -89,11 +88,14 @@ class EmployeeUI:
         day = int(input("Input day: "))
         date_iso = datetime(year, month, day).isoformat()
         assinged_employees = self.LLAPI.ListAssignedEmployees(date_iso)
-        print(self.header)
-        print("-" * (rows_len - 1))
-        for employee in assinged_employees:
+        if len(assinged_employees) < 1:
+            print("There are no employees that are assigned")
+        else:
+            print(self.header)
             print("-" * (rows_len - 1))
-            print(employee)
+            for employee in assinged_employees:
+                print("-" * (rows_len - 1))
+                print(employee)
         print("\n")
 
     
@@ -106,11 +108,15 @@ class EmployeeUI:
         day = int(input("Input day: "))
         date_iso = datetime(year, month, day).isoformat()
         unassinged_employees = self.LLAPI.ListUnassignedEmployees(date_iso)
-        print(self.header)
-        print("-" * (rows_len - 1))
-        for employee in unassinged_employees:
+        if len(unassinged_employees) < 1:
+            print("There are no employees that are unassigned")
+        else:
+            print(self.header)
             print("-" * (rows_len - 1))
-            print(employee)
+            for employee in unassinged_employees:
+                print("-" * (rows_len - 1))
+                print(employee)
+        
         print("\n")
 
     def print_update_employee_infomation():
@@ -124,25 +130,39 @@ class EmployeeUI:
         print("\n\tList all pilots with a certain aircraft privilage")
         aircraft_model = input("Input aircraft model (case sensitive): ")
         pilot_licenses = self.LLAPI.ListPilotsWithAircraftPrivilege(aircraft_model)
+        print(self.header)
+        print("-" * (rows_len - 1))
         for pilot_license in pilot_licenses:
             print(pilot_license)
+            print("-" * (rows_len - 1))
         print("\n")
 
     def print_work_summary(self):
         rows_len, columns_len = os.get_terminal_size()
 
+        print("\n\tGet the work summary of an employee")
         employee_name = input("Input employee name: ")
-        self.LLAPI.ListAllEmployeesWithName(employee_name)
+        employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
+        if len(employees_with_name) > 1:
+            print("More than one employee has that same name")
+            print("-" * (rows_len - 1))
+            print(self.header)
+            print("-" * (rows_len - 1))
+            for employee in employees_with_name:
+                print(employee)
+                print("-" * (rows_len - 1))
+            
+            employee_ssn = ("Input the ssn of employee you requested: ")
 
-        # Change this to employee name, even though this is easier,
-        # from a user prespective nobody would want to 
-        # remember a SSN of an employee.
-        print("Please input the following to get the work summary for the week")
-        year = int(input("Input year: "))
-        month = int(input("Input month: "))
-        day = int(input("Input day: "))
-        date_iso = datetime(year, month, day).isoformat()
+            work_procedures = self.LLAPI.GetWorkSummaryBySsn(employee_ssn, week_of)
+        else:
+            print("Please input the dates to get the work summary of", employee_name)
+            year = int(input("Input year: "))
+            month = int(input("Input month: "))
+            day = int(input("Input day: "))
+            date_iso = datetime(year, month, day).isoformat()
+            work_procedures = self.LLAPI.GetWorkSummary(employees_with_name[0].ssn, date_iso)
+        
 
-        work_procedures = self.LLAPI.GetWorkSummaryBySsn(employeeSSN, week_of)
         for voy in work_procedures:
             print(voy)
