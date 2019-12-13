@@ -45,8 +45,8 @@ class DestinationUI:
 
     def most_popular_destinations(self):
         most_dest = self.LLAPI.MostPopularDestination()
-    
-        print(most_dest)
+        print(self.header)
+        print(self.__printing_information(most_dest))
 
 #test1 = DestinationUI()
 #test1.print_destinations()
