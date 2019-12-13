@@ -56,6 +56,9 @@ class LLAPI:
     def AddVoyage(self, destination_id, flightTime_str):
         return self.voyage_logic.addVoyage(self, destination_id, flightTime_str)
 
+    def AddRecurringVoyages(self, destination_id, flightTime_str, dayInterval_int, quantity_int):
+        return self.voyage_logic.AddRecurringVoyages(self, destination_id, flightTime_str, dayInterval_int, quantity_int)
+
     def getVoyageByVoyageID(self, voyageID):
         return self.voyage_logic.getVoyageByVoyageID(voyageID)
 

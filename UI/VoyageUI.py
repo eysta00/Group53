@@ -62,6 +62,47 @@ class VoyageUI:
             print('The Selected date is invalid, month must be 1-12 and day must be 1-31')
             return
 
+    def register_recuring_voyage(self):
+        try:
+            print('\nRegister A recurring voyage\n')
+
+            destinations = self.LLAPI.ListAllDestinations()
+            idList = [str(dest.dest_id) for dest in destinations]
+            # print(idList)
+            print('Available Destinations:')
+            print('ID \t Name')
+            for dest in destinations:
+                print(str(dest.dest_id) + ' \t' + str(dest.airport_str))
+            Voyage_destination_id = input('Enter Destination ID: ')
+            if Voyage_destination_id not in idList:
+                print('\nInvalid destinationID selection returning to main.')
+                return
+            
+            dayInterval = int(input('\nEnter How Many Days are Desired Between The Recurring Events (7 for a week): '))
+            if dayInterval < 1:
+                print("\nInvalid day interval, returning to main.")
+                return
+
+            print("\nEnter the date and time of the first voyage below:")
+            year = int(input("\nEnter the Year: "))
+            month = int(input("\nEnter The Month: "))
+            day = int(input("\nEnter the Day: "))
+            hour = int(input("\nEnter the Hour: "))
+            minute = int(input("\nEnter the Minute: "))
+
+            firstTime = datetime(year, month, day,hour,minute).isoformat()
+
+            quantity = int(input("\nEnter how many voyages you want to assign with the entered period: "))
+            
+            self.LLAPI.AddRecurringVoyages(Voyage_destination_id, firstTime, dayInterval, quantity)
+            print('\n', quantity, " Voyages have been successfully added.")
+            return
+        except ValueError:
+            print("\nDate is incorrectly set, returning to main")
+            return
+        except DepartureTimeOccupied:
+            print("\nThe selected date and time already has a voyage, consider delaying the voyage, returning to main.")
+            return
 
 
     def register_aircraft_to_voyage(self):
