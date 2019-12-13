@@ -143,16 +143,17 @@ class VoyageUI:
         print("Assign captain and head flight attendant to voyage\n")
         Voyage_id = input('Voyage ID: ')
         voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
-        if len(voyage.pilots_lst) < 1 or len(voyage.flightAttendants_lst) < 1:
-            print('\nYou must assign more employees to Voyage before assigning Captain or Head flight attendant.')
+        if len(voyage.pilots_lst) < 1:
+            print('\nYou must assign more pilots to Voyage before assigning Captain, returning to main')
             return
-        elif len(voyage.pilots_lst) == 1 and len(voyage.flightAttendants_lst) == 1:
+        # if len(voyage.pilots_lst) < 1:
+        #     print('\nYou must assign more flight attendants to voyage before assigning head flight attendant, returning to main')
+
+
+        elif len(voyage.pilots_lst) == 1:
             cap = self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0])
-            head_flightattendant = self.LLAPI.GetEmployeeBySSN(voyage.flightAttendants_lst[0])
             self.LLAPI.UpdateVoyageCaptain(Voyage_id, voyage.pilots_lst[0])
-            self.LLAPI.UpdateHeadFlightAttendant(Voyage_id, voyage.flightAttendants_lst[0])
-            print(str(cap.name) + ' Has Been set as voyage Captain')
-            print(str(head_flightattendant) + 'Has Been set as head Flightattendant')
+            print('\n' + str(cap.name) + ' Has Been set as voyage Captain')
             
             return
         else:
@@ -164,11 +165,6 @@ class VoyageUI:
                 print('Invalid Selection, Returning to menu.')
                 return
             self.LLAPI.UpdateVoyageCaptain(Voyage_id, capSSN)
-            print('\nPlease Select which flight attendant you want to make captain:\n')
-            for flight_attendant in voyage.flightAttendants_lst:
-                print(flight_attendant)
-            flight_attendantssn = input("Head flight attendant SSN: ")
-            self.LLAPI.UpdateVoyageHeadFlightAttendant(Voyage_id, flight_attendantssn)
             return 
 
     def print_voyage_for_day(self):
@@ -177,6 +173,11 @@ class VoyageUI:
         day = int(input("Input day: "))
         date_iso = datetime(year, month, day).isoformat()
         voyages = self.LLAPI.ListVoyagesForGivenDay(date_iso)
+
+        if len(voyages) == 0:
+            print("\nNo Assigned Voyages for date: ", date_iso)
+            return
+
         print(self.header)
         for voyage in voyages:
             self.__print_information(voyage)
@@ -204,6 +205,7 @@ class VoyageUI:
         print("\n")
     
     def print_voyage_by_dest(self):
+        # destinations = self.LLAPI.
         dest_id = input("Destination ID: ")
         Voyages = self.LLAPI.ListVoyagesForDestination(dest_id)
         print(self.header)
