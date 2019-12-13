@@ -276,6 +276,13 @@ class EmployeeUI:
         try:
             employee_name = input('Input employee name: ')
             employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
-            print(employees_with_name)
+            print("{:30}\t{:10}\t{:20}\t{:10}\t{:25}\t{:20}\t{}".format("Name", "SSN", "Address", "Phone", "Email", "Pilot status", "Licenses"))
+            emp_id = str(employees_with_name)[-11:-1]
+            emp = self.LLAPI.GetEmployeeBySSN(emp_id)
+            if emp.pilot_bool:
+                pilot = "True"
+            else:
+                pilot = "False"
+            print("{:30}\t{:10}\t{:20}\t{:10}\t{:25}\t{:20}\t{}".format(emp.name, emp.ssn, emp.address, emp.phone, emp.email, pilot, emp.planeType))
         except EntryNotInDatabase:
             print("\nThere is No employee with the name " + employee_name)
