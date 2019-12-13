@@ -6,12 +6,10 @@ class AircraftUI:
         self.LLAPI = LLAPI()
 
     def register_aircraft(self):
-        air_id = input('Aircraft ID: ')
-        manufacturer = input('Aircraft Model: ')
-        total_seats = input('Number of Seats: ')
+        manufacturer = input('Enter Aircraft Manufacturer: ')
+        model = input('Enter Aircraft Model: ')
+        total_seats = input('Enter Total Number of Seats: ')
         error = self.LLAPI.RegisterAircraft(air_id, manufacturer, total_seats)
-        if error != 1:
-            print("Error, input not valid!")
         
         return
 

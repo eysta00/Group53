@@ -96,6 +96,7 @@ class VoyageUI:
             return
 
     def register_employees_to_voyage(self):
+        employee_name = "default"
         try:
             rows_len, columns_len = os.get_terminal_size()
             
