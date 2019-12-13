@@ -46,7 +46,8 @@ class MenuUI:
               "\n9. List Flights By Location",
               "\n10. Update Voyage Captain",
               "\n11. Sold seats for Voyage",
-              "\n12. List Satus of Voyages")
+              "\n12. List Satus of Voyages",
+              "\n13. Add Recurring Voyages")
         return self.getVInput()
     
     def showDestinationsMenu(self):
@@ -137,6 +138,8 @@ class MenuUI:
             return VoyageUI().soldSeatsForVoyage()
         elif choice == "12":
             return VoyageUI().ListStatusOfVoyages()
+        elif choice == "13":
+            return VoyageUI().register_recuring_voyage()
 
         elif choice == "q":
             return "quit_run"

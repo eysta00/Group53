@@ -97,6 +97,16 @@ class VoyageLL:
         self.data.addVoyage(voyage)
         
         
+    def AddRecurringVoyages(self, apiself, destination_id, flightTime_str, dayInterval_int, quantity_int):
+        parsedTime = parse(flightTime_str)
+        deltaTime = relativedelta(days = +dayInterval_int)
+
+        for _ in range(quantity_int):
+            self.addVoyage(apiself, destination_id, parsedTime.isoformat())
+            parsedTime = parsedTime + deltaTime
+        return
+
+        
 
 
     def ListVoyagesForGivenDay(self, date_iso):
@@ -213,6 +223,7 @@ class VoyageLL:
             return "In Transit To Iceland"
         else:
             return "Voyage is Complete"
+
 
 
     def _getTimeOfVoyageActivities(self, voyage): # returns list [<Departure from iceland>, <Arrival at destination>, <departure from destination>, <Arrival at Iceland>]
