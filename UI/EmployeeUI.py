@@ -138,35 +138,35 @@ class EmployeeUI:
                     print("-" * (rows_len - 1))
                 employee_ssn = input("Please input the ssn of employee you want to update: ")
                 
-                    employee = self.LLAPI.GetEmployeeBySSN(employee_ssn)
-                    print("What would you like to change?")
-                    while finalize:
-                        print("1. Address",
-                        "2. Phone number ",
-                        "3. Email",
-                        "4. Pilot status",
-                        "5. Plane license\n")
-                        command_index = int(input("Please input a number: "))
-                        if command_index == 1:
-                            employee.address = input("New employee Address: ")
-                        elif command_index == 2:
-                            employee.phone = input("New employee phone number: ")
-                        elif command_index == 3:
-                            employee.email = input("New employee email address: ")
-                        elif command_index == 4:
-                            employee.phone = input("New employee phone number: ")
-                            pilot_str = input("Is employee a Pilot? yes/no: ").lower()
-                            if pilot_str == "yes":
-                                employee.pilot_bool = True
-                            else:
-                                employee.pilot_bool = False
-                        elif command_index == 5:
-                            employee.planeType = input("New plane license: ")
-                        finalize_changes = input("Would you like to finalze your changes? yes/no: ").lower()
-                        if finalize_changes == "yes":
-                            finalize = False
+                employee = self.LLAPI.GetEmployeeBySSN(employee_ssn)
+                print("What would you like to change?")
+                while finalize:
+                    print("1. Address",
+                    "2. Phone number ",
+                    "3. Email",
+                    "4. Pilot status",
+                    "5. Plane license\n")
+                    command_index = int(input("Please input a number: "))
+                    if command_index == 1:
+                        employee.address = input("New employee Address: ")
+                    elif command_index == 2:
+                        employee.phone = input("New employee phone number: ")
+                    elif command_index == 3:
+                        employee.email = input("New employee email address: ")
+                    elif command_index == 4:
+                        employee.phone = input("New employee phone number: ")
+                        pilot_str = input("Is employee a Pilot? yes/no: ").lower()
+                        if pilot_str == "yes":
+                            employee.pilot_bool = True
                         else:
-                            finalize = True
+                            employee.pilot_bool = False
+                    elif command_index == 5:
+                        employee.planeType = input("New plane license: ")
+                    finalize_changes = input("Would you like to finalze your changes? yes/no: ").lower()
+                    if finalize_changes == "yes":
+                        finalize = False
+                    else:
+                        finalize = True
             # If there is only one employee with the name requested it goes straight to asking what would user want to change
             elif len(employees_with_name) == 1:
                 employee = self.LLAPI.GetEmployeeBySSN(employees_with_name[0].ssn)
