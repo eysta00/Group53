@@ -1,16 +1,19 @@
 from LogicLayer.LLAPI import LLAPI
 from datetime import datetime
 import os
+from Exceptions.Exceptions import *
 class VoyageUI:
     def __init__(self):
         self.LLAPI = LLAPI()
+        self.header = ""
 
     def __print_information(self, voyage):
+        '''Prints information regarding voyages '''
         row_len, coloumn_len = os.get_terminal_size()
         row_len_half = 2 // row_len
         seperator_str =("-" * (row_len - 1) + "\n")
-        info_str = "{:10} \t{:20} \t{:20} \t{:20} \t{:20} \t{:20} \t{:10} \t{:10}".format(voyage.destinaion, voyage.departureTime,
-        voyage.aircraftID, voyage.captain ,voyage.seatingsSoldOutgoing, voyage.outgoingFlightID, voyage.seatingsSoldIncoming, voyage.incomingFlightID)
+        info_str = "{:^20} {:30} {:>20} {:>20} {:>20} {:>20} {:>10} {:>10}".format(voyage.destination, voyage.departureTime,
+        voyage.aircraftID, voyage.captain ,voyage.seatingSoldOutgoing, voyage.outgoingFlightID, voyage.seatingSoldIncoming, voyage.incomingFlightID)
         print(seperator_str, info_str)
 
     def register_Voyage(self):
@@ -72,7 +75,7 @@ class VoyageUI:
         date_iso = datetime(year, month, day).isoformat()
         voyages = self.LLAPI.ListVoyagesForGivenDay(date_iso)
         for voyage in voyages:
-            print(voyage)
+            self.__print_information(voyage)
         print("\n")
 
     def print_voyage_for_week(self):
@@ -83,7 +86,7 @@ class VoyageUI:
         date_iso = datetime(year, month, day).isoformat()
         voyages = self.LLAPI.ListVoyagesForGivenWeek(date_iso)
         for voyage in voyages:
-            print(voyage)
+            self.__print_information(voyage)
         print("\n")
 
     def print_Voyages(self):
@@ -91,14 +94,14 @@ class VoyageUI:
         print("\n\tList all Voyages")
         Voyages = self.LLAPI.ListAllVoyages()
         for Voyage in Voyages:
-            print(Voyage)
+            self.__print_information(Voyage)
         print("\n")
     
     def print_voyage_by_dest(self):
         dest_id = input("Destination ID: ")
         Voyages = self.LLAPI.ListVoyagesForDestination(dest_id)
         for voyage in Voyages:
-            print(voyage)
+            self.__print_information(voyage)
         print("\n")
 
     def UpdateVoyageCaptain(self):
