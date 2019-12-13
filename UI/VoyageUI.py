@@ -5,6 +5,14 @@ class VoyageUI:
     def __init__(self):
         self.LLAPI = LLAPI()
 
+    def __print_information(self, voyage):
+        row_len, coloumn_len = os.get_terminal_size()
+        row_len_half = 2 // row_len
+        seperator_str =("-" * (row_len - 1) + "\n")
+        info_str = "{:10} \t{:20} \t{:20} \t{:20} \t{:20} \t{:20} \t{:10} \t{:10}".format(voyage.destinaion, voyage.departureTime,
+        voyage.aircraftID, voyage.captain ,voyage.seatingsSoldOutgoing, voyage.outgoingFlightID, voyage.seatingsSoldIncoming, voyage.incomingFlightID)
+        print(seperator_str, info_str)
+
     def register_Voyage(self):
         try:
             print('\n##### Register New Voyage #####\n')
