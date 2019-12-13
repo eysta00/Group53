@@ -148,17 +148,22 @@ class VoyageLL:
 
     def SellSeatsForVoyageOutgoing(self, voyageID, soldSeats):
         voyage = self.data.getVoyageByVoyageID(voyageID)
+        
         # Raise exception if no aircraft has been registered
-        aircraft = self.data.getAircraftByAircraftID(voyage.aircraftID)
-        print("1. " + str(voyage.seatingSoldOutgoing))
-        print("2. " + str(soldSeats))
-        print("3. " + str(aircraft.total_seats_int))
+        try:
+            aircraft = self.data.getAircraftByAircraftID(voyage.aircraftID)
+        except EntryNotInDatabase:
+            raise AircraftNotRegistered('The voyage does not have a Aircraft registered')
+        # print("1. " + str(voyage.seatingSoldOutgoing))
+        # print("2. " + str(soldSeats))
+        # print("3. " + str(aircraft.total_seats_int))
         if (int(voyage.seatingSoldOutgoing) + int(soldSeats)) > int(aircraft.total_seats_int):
-            return -1
+
+            raise NotEnoughSeats("There are not enough available seats")
         else:
             voyage.seatingSoldOutgoing = int(voyage.seatingSoldOutgoing) + int(soldSeats)
             self.data.updateVoyage(voyage)
-            return 1
+            return
     
     def SellSeatsForVoyageIncoming(self, voyageID, soldSeats):
         voyage = self.data.getVoyageByVoyageID(voyageID)
