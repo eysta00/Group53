@@ -2,43 +2,44 @@
 from InstanceClasses.Destination import Destination
 from IO.IOAPI import IOAPI
 from datetime import datetime
-from Exceptions.Exceptions import EntryInDatabase
-from Exceptions.Exceptions import EntryNotInDatabase
-# import dateutil.parser
+from Exceptions.Exceptions import *
+import dateutil.parser
 
 class DestinationLL():
     def __init__(self):
         self.data = IOAPI()
-    # country_str, airport_str, dest_id, flight_duration, distanceFromReykjavik, contactName_str = None, contactNr_str = None
+
+# Method to Register a new Destination to the io layer
     def RegisterDestination(self, country_str, airport_str, flight_duration, distanceFromReykjavik, contactName_str, contactNr_str):
             
             dest_id = self._GenerateNewDestinationID()
             self.data.addDestination(Destination(country_str, airport_str, dest_id, flight_duration, distanceFromReykjavik, contactName_str, contactNr_str))
 
+# Method to get a destination by its destination id
     def GetDestinationByDestinationID(self, destinationID):
         return self.data.getDestinationByDestinationID(destinationID)
 
+# Method to get all destinations in the system
     def ListAllDestinations(self):
         destinations = self.data.getAllDestinatons()
-        # dst = []
-        # for d in destinations:
-        #     dst.append(d)
-        # destinations.sort(key=lambda x: x.name)
         return destinations
 
+
+# method to update the destinations contact number
     def UpdateDestinationContactNumber(self, destinationID, contactNr_str):
         destination = self.data.getDestinationByDestinationID(destinationID)
         destination.contactNr_str = contactNr_str
 
         self.data.updateDestination(destination)
 
-
+# method to update the destinations contact name
     def UpdateDestinationContactName(self, destinationID, contactName):
         destination = self.data.getDestinationByDestinationID(destinationID)
         destination.contactNr_str = contactNr_str
 
         self.data.updateDestination(destination)
 
+# Method to find the most popular location based on tickets sold
     def MostPopularDestination(self): # Returns what destination has sold the most seats to in total
         voyages = self.data.getAllVoyages()
         destinations = self.data.getAllDestinatons()
@@ -67,7 +68,7 @@ class DestinationLL():
         return self.data.getDestinationByDestinationID(mostPopularDest)
 
 
-
+# Method to generate a new unique destination id
     def _GenerateNewDestinationID(self):
         destinations = self.data.getAllDestinatons()
         iteration = 1

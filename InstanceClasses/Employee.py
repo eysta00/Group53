@@ -1,6 +1,7 @@
 class Employee:
+    # Instance Class for Employees
     def __init__(self, name, ssn, address, phone, email, pilot_bool = False, planeType = None):
-        self.name = name #split for first, and surname
+        self.name = name 
         self.ssn = ssn
         self.address = address
         self.phone = phone
@@ -9,25 +10,9 @@ class Employee:
         self.date = ''
         self.dest = ''
         self.pilot_bool = pilot_bool
-        # self.attendant = attend_bool
         self.permissions = []
-        # self.licenses = licenses.split()
         self.data = {}
         self.planeType = planeType
-
-    def updatdata(self):
-        self.data['name'] = self.name
-        self.data['ssn'] = self.ssn
-        self.data['address'] =self.address
-        self.data['phone'] = self.phone
-        self.data['email'] = self.email
-        self.data['assigned'] = self.assigned
-        self.data['date'] = self.date
-        self.data['dest'] = self.dest
-        self.data['is pilot'] = self.pilot_bool
-        self.data['is attendant'] = self.attendant
-        self.data['permissions'] = self.permissions
-        self.data['licenses'] = self.licenses
 
     def __str__(self):
         if self.pilot_bool:

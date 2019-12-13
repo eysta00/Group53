@@ -9,7 +9,6 @@ class AircraftIO():
     def __init__(self, filePath):
         self.filePath = filePath
         self.tempFilePath = 'Data/AircraftTemp.csv'
-        # aircraftID, model, total_seats_int
         self.__fieldNames_lst = ['aircraftID', 'manufacturer', 'model', 'total_seats_int']
 
     def addAircraft(self, aircraft):
@@ -47,7 +46,7 @@ class AircraftIO():
 
 
 
-#class to access an Employe by Social Security Number
+# Method to access an Employe by Social Security Number
     def getAircraftByAircraftID(self, aircraftID):
 
         with open(self.filePath, 'r') as csv_file:
@@ -58,12 +57,12 @@ class AircraftIO():
                     manufacturer = row['manufacturer']
                     model = row['model']
                     total_seats_int = row['total_seats_int']
-                    # print("Within AircraftIO: " + str(total_seats_int))
                     if total_seats_int == '' or total_seats_int == None:
                         total_seats_int = 0
                     return Aircraft(aircraftID, manufacturer, model, total_seats_int)
             raise EntryNotInDatabase("The given aircraft id does not correspond to the database")
 
+# Method to check if the aircraft is already in the database
     def AircraftInDatabase_bool(self, AircraftID):
 
         with open(self.filePath, 'r') as csv_file:
@@ -73,7 +72,7 @@ class AircraftIO():
                     return True
             return False
 
-
+# Method That Returns all aircrafts in the database
     def getAllAircrafts(self):
         return_list = []
 

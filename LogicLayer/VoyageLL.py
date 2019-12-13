@@ -5,16 +5,16 @@ import dateutil.parser
 from datetime import datetime
 from dateutil.parser import *
 from dateutil.relativedelta import *
-# import dateutil.parser
 
 
 class VoyageLL:
     def __init__(self):
         self.data = IOAPI()
 
+
+# Method to list all voyages in teh
     def ListAllVoyages(self):
         voyages = self.data.getAllVoyages()
-        #sort by something here not sure what
         return voyages
 
     def ListUpcomingVoyages(self):

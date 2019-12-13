@@ -13,17 +13,18 @@ class AircraftLL:
     def __init__(self):
         self.data = IOAPI()
 
+# Method to register a new employee
     def RegisterAircraft(self, manufacturer_str, model_str, totalseats_str):
         aircraft_id = self._GenerateNewAircraftID()
         self.data.addAircraft(Aircraft(aircraft_id, manufacturer_str, model_str, totalseats_str))
 
-
+# Method to return a sorted list of all employees
     def ListAllAircrafts(self):
         aircrafts = self.data.getAllAircrafts()
         aircrafts.sort(key=lambda x: x.model)
         return aircrafts
 
-
+# Method to show the status of all aircrafts
     def ShowStatusOfAircrafts(self): # returns a list of tuples (aircraft, status)
         aircrafts = self.data.getAllAircrafts()
         ret_list = []
@@ -32,16 +33,13 @@ class AircraftLL:
             ret_list.append((air, self.AircraftStatus(air.aircraftID, time)))
         return ret_list
         
-
+# Method to see employee of specific employee
     def AircraftStatus(self, aircraftID, time_iso):
         aircraft = self.data.getAircraftByAircraftID(aircraftID)
         voyages = self.data.getAllVoyages()
         timeParsed = parse(time_iso)
         for voy in voyages:
             if str(voy.aircraftID) == str(aircraftID):
-                # print('hit this spot')
-                # print(voy.aircraftID, end = ' : ')
-                # print(aircraftID)
                 
                 voyageTimes = self._getTimeOfVoyageActivities(voy)
                 if timeParsed > voyageTimes[0] and timeParsed < voyageTimes[3]:
@@ -53,6 +51,8 @@ class AircraftLL:
                         return "Flying to Destination"
         return "Unoccupied"
 
+
+# Method to list all available aircrafts
     def ListAvailableAircrafts(self, time):
         aircrafts = self.data.getAllAircrafts()
         availableAircrafts = []
@@ -61,7 +61,7 @@ class AircraftLL:
                 availableAircrafts.append(air)
         return availableAircrafts
 
-                    
+# Method to generate a new unique ID for a aircraft                    
     def _GenerateNewAircraftID(self):
         aircrafts = self.data.getAllAircrafts()
         iteration = 1
@@ -86,7 +86,7 @@ class AircraftLL:
         except ValueError:
             StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S')
 
-        flightTime = float(destination.flight_duration) # consider changing this to int so as to not miss the disimal places!
+        flightTime = float(destination.flight_duration) 
         deltaHours = flightTime
         deltaMinutes = (deltaHours%1)*60
         deltaSeconds = (deltaMinutes%1)*60

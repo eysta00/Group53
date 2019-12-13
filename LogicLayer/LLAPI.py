@@ -7,7 +7,7 @@ from LogicLayer.VoyageLL import VoyageLL
 
 class LLAPI:
     def __init__(self):
-        self.employee_logic = EmployeeLL() # More logic layer classes to be added when implementation starts
+        self.employee_logic = EmployeeLL() 
         self.aircraft_logic = AircraftLL()    
         self.destination_logic = DestinationLL()
         self.voyage_logic = VoyageLL()
@@ -129,8 +129,8 @@ class LLAPI:
     def ListAllAircrafts(self):
         return self.aircraft_logic.ListAllAircrafts()
 
-    def AircraftStatus(self, aircraftID):
-        return self.aircraft_logic.AircraftStatus(aircraftID)
+    def AircraftStatus(self, aircraftID, time_iso):
+        return self.aircraft_logic.AircraftStatus(aircraftID, time_iso)
 
     def ShowStatusOfAircrafts(self):
         return self.aircraft_logic.ShowStatusOfAircrafts()

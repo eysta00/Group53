@@ -9,9 +9,9 @@ class VoyageIO():
     def __init__(self, filePath):
         self.filePath = filePath
         self.tempFilePath = 'Data/VoyageTemp.csv'
-        # voyageID, destination, departureTime, aircraftID = None, pilots_lst = None, flightAttendants_lst = None, captain = None
         self.__fieldNames_lst = ['voyageID','destination', 'departureTime', 'aircraftID', 'pilots_lst', 'flightAttendants_lst', 'captain', 'headFlightAttendant', 'seatingSoldOutgoing', 'seatingSoldIncoming', 'outgoingFlightID', 'incomingFlightID']
 
+# Method to add voyage in database
     def addVoyage(self, voyage):
         
         if self.VoyageInDatabase_bool(voyage.voyageID): # Custom exception raised if trying to add duplicate data
@@ -24,7 +24,7 @@ class VoyageIO():
                 "flightAttendants_lst" : voyage.flightAttendants_lst, "captain" : voyage.captain, 'headFlightAttendant' : voyage.headFlightAttendant, 'seatingSoldOutgoing' : voyage.seatingSoldOutgoing, 'seatingSoldIncoming': voyage.seatingSoldIncoming, 'outgoingFlightID' : voyage.outgoingFlightID, 'incomingFlightID' : voyage.incomingFlightID})
 
     
-    
+# Method to update Voyage in database
     def updateVoyage(self, voyage):
         with open(self.filePath, 'r') as csv_file:
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
@@ -37,22 +37,9 @@ class VoyageIO():
                     return
             raise EntryNotInDatabase('try using addVoyage')
 
-# ------ This Method Creates A New File And Transfers The Data To Negate Likelyhood Of Data Loss ------
-# method to rewrite entire data file from list from update Employee
-    # def __reWriteFileFromList(self, dictList): # writing to new file then rename-ing files and deleting old 
-    #     with open(self.tempFilePath, 'w') as csv_file:
-    #         csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
-    #         for entry in dictList:
-    #             csvWriter.writerow(entry)
-            
-    #     os.remove(self.filePath)
-    #     os.rename(self.tempFilePath, self.filePath)
-    #         # os.rename(self.filePath, 'Data/temp.csv')
-    #         # os.rename(self.tempFilePath, self.filePath)
-    #         # os.rename('Data/temp.csv', self.tempFilePath)
 
-# ------ Same Purpose As Commented Function Above But Less Redundancy But Does Not Require Delete Priveledges ------
-    def __reWriteFileFromList(self, dictList): # writing to new file then rename-ing files and deleting old 
+# Method to rewrite the database with the entered data
+    def __reWriteFileFromList(self, dictList): 
         with open(self.filePath, 'w') as csv_file:
             csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
             for entry in dictList:
@@ -75,10 +62,8 @@ class VoyageIO():
                     destination = row['destination']
                     departureTime = row['departureTime']
                     aircraftID = row['aircraftID']
-                    # print(row['pilots_lst'])
-                    # print(type(row['pilots_lst']))
 
-                    pilots_lst = row['pilots_lst'].strip('][').split(', ') # this code is to convert pilots list to 
+                    pilots_lst = row['pilots_lst'].strip('][').split(', ') # this code is to convert pilots list from string to list
                     pilots_lst = [s.replace("'", "") for s in pilots_lst]
 
                     flightAttendants_lst = row['flightAttendants_lst'].strip('][').split(', ')
@@ -109,7 +94,7 @@ class VoyageIO():
                     return Voyage(voyageID, destination, departureTime, aircraftID, pilots_lst, flightAttendants_lst, captain, headFlightAttendant, seatingSoldOutgoing, seatingSoldIncoming, outgoingFlightID, incomingFlightID)
             raise EntryNotInDatabase
 
-
+# Method to check if voyageid is in database
     def VoyageInDatabase_bool(self, voyageID):
 
         with open(self.filePath, 'r') as csv_file:
@@ -119,6 +104,7 @@ class VoyageIO():
                     return True
             return False
 
+# Method to get a list of all voyages
     def getAllVoyages(self):
         return_list = []
 
@@ -129,9 +115,7 @@ class VoyageIO():
                 destination = row['destination']
                 departureTime = row['departureTime']
                 aircraftID = row['aircraftID']
-                # print(row['pilots_lst'])
-                # print(type(row['pilots_lst']))
-                pilots_lst = row['pilots_lst'].strip('][').split(', ') # this code is to convert pilots list to 
+                pilots_lst = row['pilots_lst'].strip('][').split(', ') # this code is to convert pilots from string to list 
                 pilots_lst = [s.replace("'", "") for s in pilots_lst]
                 flightAttendants_lst = row['flightAttendants_lst'].strip('][').split(', ')
                 flightAttendants_lst = [s.replace("'", "") for s in flightAttendants_lst]
