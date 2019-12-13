@@ -137,6 +137,29 @@ class VoyageUI:
         except AircraftNotRegistered:
             print('\nYou Must Assign a Plane to the Voyage before Assigning Staff, returning to main\n')
                 
+    def assign_head_flightattendant_to_voyage(self):
+        print("Assign head flightattendant to voyage\n")
+        Voyage_id = input('Voyage ID: ')
+        voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
+        if len(voyage.flightAttendants_lst) < 1:
+            print('\nYou must assign a flight attendant to Voyage before assigning Captain.')
+            return
+        elif len(voyage.flightAttendants_lst) == 1:
+            flight_att = self.LLAPI.GetEmployeeBySSN(voyage.flightAttendants_lst[0])
+            self.LLAPI.UpdateVoyageCaptain(Voyage_id, voyage.flightAttendants_lst[0])
+            print(str(flight_att.name) + ' Has Been set as voyage Captain')
+            
+            return
+        else:
+            print('\nPlease Select what Flight Attendant You Want To Make Head flight attendant:\n')
+            for flight_person in voyage.flightAttendants_lst
+                print(self.LLAPI.GetEmployeeBySSN(flight_person))
+            SSN = input('Flight attendant SSN: ')
+            if SSN not in voyage.flightAttendants_lst:
+                print('Invalid Selection, Returning to menu.')
+                return
+            self.LLAPI.UpdateVoyageHeadFlightAttendant(Voyage_id, SSN)
+            return 
 
     def assign_captain_to_voyage(self):
         print("Assign captain to voyage\n")
