@@ -127,7 +127,6 @@ class VoyageUI:
             else:
                 print("\nThere is no employee called " + employee_name + " in our system, returning to main.\n")
                 return
-            # print('------------')
             self.LLAPI.AddStaffToVoyage(voyage_id, employeeSSN)
 
         except EntryNotInDatabase:
@@ -140,15 +139,12 @@ class VoyageUI:
                 
 
     def assign_captain_to_voyage(self):
-        print("Assign captain and head flight attendant to voyage\n")
+        print("Assign captain to voyage\n")
         Voyage_id = input('Voyage ID: ')
         voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
         if len(voyage.pilots_lst) < 1:
             print('\nYou must assign more pilots to Voyage before assigning Captain, returning to main')
             return
-        # if len(voyage.pilots_lst) < 1:
-        #     print('\nYou must assign more flight attendants to voyage before assigning head flight attendant, returning to main')
-
 
         elif len(voyage.pilots_lst) == 1:
             cap = self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0])
