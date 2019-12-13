@@ -1,5 +1,5 @@
 class Voyage:
-    def __init__(self, voyageID, destination, departureTime, aircraftID = None, pilots_lst = None, flightAttendants_lst = None, captain = None, seatingSoldOutgoing = 0, seatingSoldIncoming = 0, outgoingFlightID = None, incomingFlightID = None):
+    def __init__(self, voyageID, destination, departureTime, aircraftID = None, pilots_lst = None, flightAttendants_lst = None, captain = None, headFlightAttendant = None, seatingSoldOutgoing = 0, seatingSoldIncoming = 0, outgoingFlightID = None, incomingFlightID = None):
         # self.flight_init = flight_init
         # self.flight_sec = flight_sec
         # self.v_title = flight_init.f_destination 

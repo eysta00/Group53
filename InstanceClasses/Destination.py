@@ -1,10 +1,12 @@
 class Destination:
-    def __init__(self,dest_name, dest_id, flight_duration, contactNr = None):
-        self.dest_name = dest_name
+    def __init__(self, country_str, airport_str, dest_id, flight_duration, distanceFromReykjavik, contactName_str = None, contactNr_str = None):
+        self.country_str = country_str
+        self.airport_str = airport_str 
         self.dest_id = dest_id
         self.flight_duration = flight_duration
-        self.d_data ={}
-        self.contactNr = contactNr
+        self.distanceFromReykjavik = distanceFromReykjavik
+        self.contactName_str = contactName_str
+        self.contactNr_str = contactNr_str
 
     # def update_data(self, new_dname, new_did):
     #     self.d_data['dest_name'] = self.dest_name

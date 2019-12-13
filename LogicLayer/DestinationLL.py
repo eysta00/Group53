@@ -9,13 +9,12 @@ from Exceptions.Exceptions import EntryNotInDatabase
 class DestinationLL():
     def __init__(self):
         self.data = IOAPI()
-    
-    def RegisterDestination(self, dest_name, dest_id, flight_duration, contactNr):
-        try:
-            self.data.addDestination(Destination(dest_name, dest_id, flight_duration, contactNr))
-            return 1 
-        except EntryInDatabase:
-            return -1
+    # country_str, airport_str, dest_id, flight_duration, distanceFromReykjavik, contactName_str = None, contactNr_str = None
+    def RegisterDestination(self, country_str, airport_str, flight_duration, distanceFromReykjavik, contactName_str, contactNr_str):
+            
+            dest_id = self._GenerateNewDestinationID()
+            self.data.addDestination(Destination(country_str, airport_str, dest_id, flight_duration, distanceFromReykjavik, contactName_str, contactNr_str))
+            
 
     def ListAllDestinations(self):
         destinations = self.data.getAllDestinatons()
@@ -25,17 +24,18 @@ class DestinationLL():
         # destinations.sort(key=lambda x: x.name)
         return destinations
 
-    def UpdateDestinationContactNumber(self, destinationID, contactNr):
+    def UpdateDestinationContactNumber(self, destinationID, contactNr_str):
         destination = self.data.getDestinationByDestinationID(destinationID)
-        destination.contactNr = contactNr
+        destination.contactNr_str = contactNr_str
 
-        try:
-            self.data.updateDestination(destination)
-            return 1
-        except EntryNotInDatabase:
-            return -1
+        self.data.updateDestination(destination)
 
 
+    def UpdateDestinationContactName(self, destinationID, contactName)
+        destination = self.data.getDestinationByDestinationID(destinationID)
+        destination.contactNr_str = contactNr_str
+
+        self.data.updateDestination(destination)
 
     def MostPopularDestination(self): # Returns what destination has sold the most seats to in total
         voyages = self.data.getAllVoyages()

@@ -112,7 +112,7 @@ class LLAPI:
     ##### AIRCRAFT API #####
 
     def RegisterAircraft(self, Id_str, model_str, totalseats_str):
-        return self.aircraft_logic.RegisterAircraft(Id_str, model_str, totalseats_str)
+        return self.aircraft_logic.RegisterAircraft(Id_str, manufacturer_str, model_str, totalseats_str)
 
     def ListAllAircrafts(self):
         return self.aircraft_logic.ListAllAircrafts()

@@ -10,7 +10,7 @@ class VoyageIO():
         self.filePath = filePath
         self.tempFilePath = 'Data/VoyageTemp.csv'
         # voyageID, destination, departureTime, aircraftID = None, pilots_lst = None, flightAttendants_lst = None, captain = None
-        self.__fieldNames_lst = ['voyageID','destination', 'departureTime', 'aircraftID', 'pilots_lst', 'flightAttendants_lst', 'captain', 'seatingSoldOutgoing', 'seatingSoldIncoming', 'outgoingFlightID', 'incomingFlightID']
+        self.__fieldNames_lst = ['voyageID','destination', 'departureTime', 'aircraftID', 'pilots_lst', 'flightAttendants_lst', 'captain', 'headFlightAttendant', 'seatingSoldOutgoing', 'seatingSoldIncoming', 'outgoingFlightID', 'incomingFlightID']
 
     def addVoyage(self, voyage):
         
@@ -21,7 +21,7 @@ class VoyageIO():
             csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
             
             csvWriter.writerow({'voyageID' : voyage.voyageID,"destination" : voyage.destination, "departureTime" : voyage.departureTime, "aircraftID" : voyage.aircraftID, "pilots_lst" : voyage.pilots_lst,\
-                "flightAttendants_lst" : voyage.flightAttendants_lst, "captain" : voyage.captain, 'seatingSoldOutgoing' : voyage.seatingSoldOutgoing, 'seatingSoldIncoming': voyage.seatingSoldIncoming, 'outgoingFlightID' : voyage.outgoingFlightID, 'incomingFlightID' : voyage.incomingFlightID})
+                "flightAttendants_lst" : voyage.flightAttendants_lst, "captain" : voyage.captain, 'headFlightAttendant' : voyage.headFlightAttendant, 'seatingSoldOutgoing' : voyage.seatingSoldOutgoing, 'seatingSoldIncoming': voyage.seatingSoldIncoming, 'outgoingFlightID' : voyage.outgoingFlightID, 'incomingFlightID' : voyage.incomingFlightID})
 
     
     
@@ -31,8 +31,8 @@ class VoyageIO():
             rows = list(csvReader)
             for entry in rows:
                 if str(entry["voyageID"]) == str(voyage.voyageID):
-                    entry["voyageID"], entry["destination"], entry["departureTime"], entry['aircraftID'], entry['pilots_lst'], entry['flightAttendants_lst'], entry['captain'], entry['seatingSoldOutgoing'], entry['seatingSoldIncoming'], entry['outgoingFlightID'], entry['incomingFlightID'] = \
-                        voyage.voyageID, voyage.destination, voyage.departureTime, voyage.aircraftID, voyage.pilots_lst, voyage.flightAttendants_lst, voyage.captain, voyage.seatingSoldOutgoing, voyage.seatingSoldIncoming, voyage.outgoingFlightID, voyage.incomingFlightID
+                    entry["voyageID"], entry["destination"], entry["departureTime"], entry['aircraftID'], entry['pilots_lst'], entry['flightAttendants_lst'], entry['captain'], entry['headFlightAttendant'] entry['seatingSoldOutgoing'], entry['seatingSoldIncoming'], entry['outgoingFlightID'], entry['incomingFlightID'] = \
+                        voyage.voyageID, voyage.destination, voyage.departureTime, voyage.aircraftID, voyage.pilots_lst, voyage.flightAttendants_lst, voyage.captain, voyage.headFlightAttendant, voyage.seatingSoldOutgoing, voyage.seatingSoldIncoming, voyage.outgoingFlightID, voyage.incomingFlightID
                     self.__reWriteFileFromList(rows)
                     return
             raise EntryNotInDatabase('try using addVoyage')
@@ -89,6 +89,7 @@ class VoyageIO():
                         flightAttendants_lst = []
 
                     captain = row['captain']
+                    headFlightAttendant = row['headFlightAttendant']
                     seatingSoldOutgoing = row['seatingSoldOutgoing']
                     seatingSoldIncoming = row['seatingSoldIncoming']
 
@@ -105,7 +106,7 @@ class VoyageIO():
                     if flightAttendants_lst == '':
                         flightAttendants_lst = []
 
-                    return Voyage(voyageID, destination, departureTime, aircraftID, pilots_lst, flightAttendants_lst, captain, seatingSoldOutgoing, seatingSoldIncoming, outgoingFlightID, incomingFlightID)
+                    return Voyage(voyageID, destination, departureTime, aircraftID, pilots_lst, flightAttendants_lst, captain, headFlightAttendant, seatingSoldOutgoing, seatingSoldIncoming, outgoingFlightID, incomingFlightID)
             raise EntryNotInDatabase
 
 
@@ -124,7 +125,7 @@ class VoyageIO():
         with open(self.filePath, 'r') as csv_file:
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
-                    return_list.append(Voyage(row['voyageID'], row['destination'], row['departureTime'], row['aircraftID'], row['pilots_lst'], row['flightAttendants_lst'], row['captain'], row['seatingSoldOutgoing'], row['seatingSoldIncoming'], row['outgoingFlightID'], row['incomingFlightID']))
+                    return_list.append(Voyage(row['voyageID'], row['destination'], row['departureTime'], row['aircraftID'], row['pilots_lst'], row['flightAttendants_lst'], row['captain'], row['headFlightAttendant'], row['seatingSoldOutgoing'], row['seatingSoldIncoming'], row['outgoingFlightID'], row['incomingFlightID']))
         return return_list
 
 
