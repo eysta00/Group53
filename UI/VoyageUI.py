@@ -13,8 +13,8 @@ class VoyageUI:
         row_len, coloumn_len = os.get_terminal_size()
         row_len_half = 2 // row_len
         seperator_str =("-" * (row_len - 1) + "\n")
-        info_str = "{:5} {:^20} {:30} {:>20} {:>10} {:>20} {:>20} {:>10} {:>10}".format(voyage.voyageID ,voyage.destination, voyage.departureTime, 
-        voyage.aircraftID, voyage.captain ,voyage.seatingSoldOutgoing, voyage.outgoingFlightID, voyage.seatingSoldIncoming, voyage.incomingFlightID)
+        info_str = "{:5} {:^20} {:30} {:>20} {:>10} {:>20} {:>20} {:>10} {:>10}".format(str(voyage.voyageID) ,str(voyage.destination), str(voyage.departureTime), 
+        str(voyage.aircraftID), str(voyage.captain) ,str(voyage.seatingSoldOutgoing), str(voyage.outgoingFlightID), str(voyage.seatingSoldIncoming), str(voyage.incomingFlightID))
         print(seperator_str, info_str)
 
     def register_Voyage(self):
