@@ -1,9 +1,4 @@
-1,Airbus,123,200
-2,Boeng,747,300
-3,RolsRoyce,spitfire,3
-4,Boing,Tesla,150
-
-5,Tesla,Fly,213
-
-6,Boing,757,250
-
+planeTypeId,model,temp
+NABAE146,146,temp
+NAFokkerF28,F28,temp
+NAFokker100,F100,temp

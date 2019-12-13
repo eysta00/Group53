@@ -116,7 +116,7 @@ class MenuUI:
         elif choice == "4":
             return VoyageUI().assign_captain_to_voyage()
         elif choice == "5":
-            return VoyageUI().register_aircraft()
+            return VoyageUI().register_aircraft_to_voyage()
         elif choice == "6":
             return VoyageUI().print_voyage_for_day()
         elif choice == "7":
