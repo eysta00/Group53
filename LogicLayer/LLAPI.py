@@ -103,8 +103,8 @@ class LLAPI:
     def ListAllDestinations(self):
         return self.destination_logic.ListAllDestinations()
 
-    def RegisterDestination(self, dest_name_str, dest_id_int, flight_duration_double, contactNr):
-        return self.destination_logic.RegisterDestination(dest_name_str, dest_id_int, flight_duration_double, contactNr)
+    def RegisterDestination(self, country_str, airport_str, flight_duration, distanceFromReykjavik, contactName_str, contactNr_str):
+        return self.destination_logic.RegisterDestination(country_str, airport_str, flight_duration, distanceFromReykjavik, contactName_str, contactNr_str)
 
     def UpdateDestinationContactNumber(self, destinationID, contactNr):
         return self.destination_logic.UpdateDestinationContactNumber(destinationID, contactNr)

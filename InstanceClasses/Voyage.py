@@ -12,6 +12,7 @@ class Voyage:
         self.flightAttendants_lst = flightAttendants_lst #
         self.pilots_lst = pilots_lst #
         self.captain = captain
+        self.headFlightAttendant = headFlightAttendant
         self.seatingSoldOutgoing = seatingSoldOutgoing
         self.seatingSoldIncoming = seatingSoldIncoming
         self.outgoingFlightID = outgoingFlightID

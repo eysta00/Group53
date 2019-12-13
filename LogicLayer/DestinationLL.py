@@ -69,6 +69,7 @@ class DestinationLL():
     def _GenerateNewDestinationID(self):
         destinations = self.data.getAllDestinatons()
         iteration = 1
+        highest_id  = 0
         for dest in destinations:
             if iteration <= 1:
                 highest_id = int(dest.dest_id)
