@@ -9,21 +9,29 @@ class AircraftUI:
 
 # method to register a new aircraft
     def register_aircraft(self):
-        manufacturer = input('Enter Aircraft Manufacturer: ')
-        model = input('Enter Aircraft Model: ')
-        total_seats = input('Enter Total Number of Seats: ')
+        try:
+            manufacturer = input('Enter Aircraft Manufacturer: ')
+            model = input('Enter Aircraft Model: ')
+            total_seats = input('Enter Total Number of Seats: ')
 
-        self.LLAPI.RegisterAircraft(manufacturer, model, total_seats)
-        
+            self.LLAPI.RegisterAircraft(manufacturer, model, total_seats)
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
         return
 
 # method to print all aircrafts
     def print_aircrafts(self):
-        print("\n##### List All Aircrafts #####\n")
-        aircrafts = self.LLAPI.ListAllAircrafts()
-        for aircraft in aircrafts:
-            print(aircraft)
-        print("\n")
+        try:
+            print("\n##### List All Aircrafts #####\n")
+            aircrafts = self.LLAPI.ListAllAircrafts()
+            for aircraft in aircrafts:
+                print(aircraft)
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
+
     
 # method to show status of all aircrafts
     def showAircraftStatus(self):
@@ -34,12 +42,20 @@ class AircraftUI:
             print("\nThe Aircraft is " + aircraftStatus)
         except EntryNotInDatabase:
             print("The entered Aircraft ID does not correspond to an entry in the database.")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
+     
 
         print("\n")
     
 # method to print available aircrafts
     def printAvailableAircrafts(self):
-        aircrafts = self.LLAPI.ShowStatusOfAircrafts()
-        for aircraft in aircrafts:
-            print(aircraft)
-        print("\n")
+        try:
+            aircrafts = self.LLAPI.ShowStatusOfAircrafts()
+            for aircraft in aircrafts:
+                print(aircraft)
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
