@@ -13,7 +13,8 @@ class MenuUI:
         print("1. Employees"
               "\n2. Voyages"
               "\n3. Destinations"
-              "\n4. Aircrafts")
+              "\n4. Aircrafts",
+              "\nIf you want to close the program enter \"q\"")
         
         return self.getMInput()
     
