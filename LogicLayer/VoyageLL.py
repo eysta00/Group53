@@ -183,6 +183,9 @@ class VoyageLL:
                 voyForDest.append(voy)
         return voyForDest
 
+    def IsFullyStaffed(self, voyage):
+        return len(voyage.pilots_lst) > 1 and len(voyage.flightAttendants_lst) > 0
+
     def _isDepartureTimeFree(self, flightTime_str_iso):
         voyages = self.data.getAllVoyages()
         parsedTime = parse(flightTime_str_iso)

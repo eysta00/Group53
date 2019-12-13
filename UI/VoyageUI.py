@@ -53,7 +53,8 @@ class VoyageUI:
 
 
     def register_aircraft_to_voyage(self):
-        Voyage_id = input('Voyage ID: ')
+        Voyage_id = input('Enter Desired Voyage ID: ')
+        voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
         aircraft = input('Aircraft: ')
 
     def register_employees_to_voyage(self):
