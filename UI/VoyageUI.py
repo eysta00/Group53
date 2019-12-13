@@ -127,7 +127,6 @@ class VoyageUI:
             else:
                 print("\nThere is no employee called " + employee_name + " in our system, returning to main.\n")
                 return
-            # print('------------')
             self.LLAPI.AddStaffToVoyage(voyage_id, employeeSSN)
 
         except EntryNotInDatabase:
@@ -140,19 +139,16 @@ class VoyageUI:
                 
 
     def assign_captain_to_voyage(self):
-        print("Assign captain and head flight attendant to voyage\n")
+        print("Assign captain to voyage\n")
         Voyage_id = input('Voyage ID: ')
         voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
-        if len(voyage.pilots_lst) < 1 or len(voyage.flightAttendants_lst) < 1:
-            print('\nYou must assign more employees to Voyage before assigning Captain or Head flight attendant.')
+        if len(voyage.pilots_lst) < 1:
+            print('\nYou must assign a Pilot to Voyage before assigning Captain.')
             return
-        elif len(voyage.pilots_lst) == 1 and len(voyage.flightAttendants_lst) == 1:
+        elif len(voyage.pilots_lst) == 1:
             cap = self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0])
-            head_flightattendant = self.LLAPI.GetEmployeeBySSN(voyage.flightAttendants_lst[0])
             self.LLAPI.UpdateVoyageCaptain(Voyage_id, voyage.pilots_lst[0])
-            self.LLAPI.UpdateHeadFlightAttendant(Voyage_id, voyage.flightAttendants_lst[0])
             print(str(cap.name) + ' Has Been set as voyage Captain')
-            print(str(head_flightattendant) + 'Has Been set as head Flightattendant')
             
             return
         else:
@@ -164,11 +160,6 @@ class VoyageUI:
                 print('Invalid Selection, Returning to menu.')
                 return
             self.LLAPI.UpdateVoyageCaptain(Voyage_id, capSSN)
-            print('\nPlease Select which flight attendant you want to make captain:\n')
-            for flight_attendant in voyage.flightAttendants_lst:
-                print(flight_attendant)
-            flight_attendantssn = input("Head flight attendant SSN: ")
-            self.LLAPI.UpdateVoyageHeadFlightAttendant(Voyage_id, flight_attendantssn)
             return 
 
     def print_voyage_for_day(self):
