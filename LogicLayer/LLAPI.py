@@ -50,6 +50,9 @@ class LLAPI:
 
     ##### VOYAGE API #####
 
+    def UpdateVoyageHeadFlightAttendant(self, voyageID, flightAttendantSSN):
+        return self.voyage_logic.UpdateVoyageHeadFlightAttendant(voyageID, flightAttendantSSN)
+
     def AddVoyage(self, destination_id, flightTime_str):
         return self.voyage_logic.addVoyage(self, destination_id, flightTime_str)
 
