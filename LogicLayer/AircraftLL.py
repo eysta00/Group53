@@ -13,12 +13,10 @@ class AircraftLL:
     def __init__(self):
         self.data = IOAPI()
 
-    def RegisterAircraft(self, Id_str, manufacturer_str, model_str, totalseats_str):
-        try:
-            self.data.addAircraft(Aircraft( Id_str, model_str, totalseats_str))
-            return 1 
-        except EntryInDatabase:
-            return -1
+    def RegisterAircraft(self, manufacturer_str, model_str, totalseats_str):
+        aircraft_id = self._GenerateNewAircraftID()
+        self.data.addAircraft(Aircraft(aircraft_id, manufacturer_str, model_str, totalseats_str))
+
 
     def ListAllAircrafts(self):
         aircrafts = self.data.getAllAircrafts()
@@ -67,8 +65,10 @@ class AircraftLL:
     def _GenerateNewAircraftID(self):
         aircrafts = self.data.getAllAircrafts()
         iteration = 1
+        highest_id = 0
         for air in aircrafts:
             if iteration <= 1:
+                print('aircraftID: ', air.aircraftID)
                 highest_id = int(air.aircraftID)
             else:
                 if int(air.aircraftID) > highest_id:

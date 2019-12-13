@@ -13,7 +13,7 @@ class Destination:
     #     self.d_data['dest_id'] = self.dest_id
 
     def __str__(self):
-        return self.dest_name + ' : ' + self.flight_duration
+        return self.airport_str + ' : ' + self.flight_duration
 
     def __repr__(self):
         return self.dest_id + ' : ' + self.dest_name
