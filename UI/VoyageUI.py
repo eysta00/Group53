@@ -6,15 +6,16 @@ import os
 class VoyageUI:
     def __init__(self):
         self.LLAPI = LLAPI()
-        self.header = "{:^8}|{:^15}|{:^25}|{:^12}|{:^20}|{:^14}|{:^25}|{:^25}|{:^25}|{:^25}".format("VoyageID","DestinationID", "Departure Time", "Aircraft ID", "Head flight attendant", "Captain SSN", "Outgoing seats sold", "Outgoing Flight ID", "Incoming seats sold", "Incoming flight ID")
+        self.header = "{:^8}|{:^15}|{:^25}|{:^12}|{:^20}|{:^14}|{:^9}|{:^21}|{:^21}|{:^21}|{:^21}".format("VoyageID","DestinationID", "Departure Time", "Aircraft ID", "Head flight attendant", "Captain SSN","IsStaffed", "Outgoing seats sold", "Outgoing Flight ID", "Incoming seats sold", "Incoming flight ID")
 
     def __print_information(self, voyage):
         '''Prints information regarding voyages'''
+        is_full_bool = self.LLAPI.IsFullyStaffed(voyage)
         row_len, coloumn_len = os.get_terminal_size()
         row_len_half = 2 // row_len
         seperator_str =("-" * (row_len - 1) + "\n")
-        info_str = "{:^8} {:^15} {:^25} {:^12} {:^20} {:^14} {:^25} {:^25} {:^25} {:^25}".format(str(voyage.voyageID) ,str(voyage.destination), str(voyage.departureTime), 
-        str(voyage.aircraftID),str(voyage.headFlightAttendant), str(voyage.captain) ,str(voyage.seatingSoldOutgoing), str(voyage.outgoingFlightID), str(voyage.seatingSoldIncoming), str(voyage.incomingFlightID))
+        info_str = "{:^8} {:^15} {:^25} {:^12} {:^20} {:^14} {:^9} {:^21} {:^21} {:^21} {:^21}".format(str(voyage.voyageID) ,str(voyage.destination), str(voyage.departureTime), 
+        str(voyage.aircraftID),str(voyage.headFlightAttendant), str(voyage.captain) ,str(is_full_bool),str(voyage.seatingSoldOutgoing), str(voyage.outgoingFlightID), str(voyage.seatingSoldIncoming), str(voyage.incomingFlightID))
         print(seperator_str, info_str)
 
     def register_Voyage(self):
