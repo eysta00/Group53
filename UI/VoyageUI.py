@@ -2,7 +2,7 @@ from LogicLayer.LLAPI import LLAPI
 from datetime import datetime
 from Exceptions.Exceptions import *
 import os
-from Exceptions.Exceptions import *
+
 class VoyageUI:
     def __init__(self):
         self.LLAPI = LLAPI()
@@ -96,9 +96,44 @@ class VoyageUI:
             return
 
     def register_employees_to_voyage(self):
-        Voyage_id = input('Voyage ID: ')
-        employee_name = input('Input the Name of the Employee')
-        employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
+        try:
+            rows_len, columns_len = os.get_terminal_size()
+            
+            voyage_id = input('Voyage ID: ')
+            voyage = self.LLAPI.getVoyageByVoyageID(voyage_id)
+            employee_name = input('Input the Name of the Employee: ')
+            employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
+            
+            if len(employees_with_name) == 1:
+                employeeSSN = employees_with_name[0].ssn
+            
+            elif len(employees_with_name) > 1:
+                employeeSSN_lst = [emp.ssn for emp in employees_with_name]
+
+                print("More than one employee was found with that name")
+                print("-" * (rows_len - 1))
+                print("{:40}\t{:10}\t{:20}\t{:10}\t{:35}\t{:20}\t{}".format("Name", "SSN", "Address", "Phone", "Email", "Pilot status", "Licenses"))
+                print("-" * (rows_len - 1))
+                for employee in employees_with_name:
+                    print(employee)
+                    print("-" * (rows_len - 1))
+                employeeSSN = input("\nPlease input the ssn of employee you want to update: ")
+                
+                if employeeSSN not in employeeSSN_lst:
+                    print("\nInvalid ssn Selection, returning to main.\n")
+                    return
+
+            self.LLAPI.AddStaffToVoyage(voyage_id, employeeSSN)
+
+            else:
+                print("\nThere is no employee called " + employee_name + " in our system, returning to main.\n")
+                return
+        except EntryNotInDatabase:
+            print("\nThere is no employee called " + employee_name + " in our system, returning to main.\n")
+            return
+        except EmployeeAlreadyAssigned:
+            print('\n' + employee_name + ' is already assigned to this flight')
+                
 
     def assign_captain_to_voyage(self):
         Voyage_id = input('Voyage ID: ')
