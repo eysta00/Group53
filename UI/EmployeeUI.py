@@ -139,13 +139,13 @@ class EmployeeUI:
                 employee_ssn = input("Please input the ssn of employee you want to update: ")
                 
                 employee = self.LLAPI.GetEmployeeBySSN(employee_ssn)
-                print("What would you like to change?")
+                print("What would you like to change?\n")
                 while finalize:
-                    print("1. Address",
-                    "2. Phone number ",
-                    "3. Email",
-                    "4. Pilot status",
-                    "5. Plane license\n")
+                    print("\t1. Address",
+                    "\n\t2. Phone number ",
+                    "\n\t3. Email",
+                    "\n\t4. Pilot status",
+                    "\n\t5. Plane license\n")
                     command_index = int(input("Please input a number: "))
                     if command_index == 1:
                         employee.address = input("New employee Address: ")
@@ -170,13 +170,13 @@ class EmployeeUI:
             # If there is only one employee with the name requested it goes straight to asking what would user want to change
             elif len(employees_with_name) == 1:
                 employee = self.LLAPI.GetEmployeeBySSN(employees_with_name[0].ssn)
-                print("What would you like to change?")
+                print("What would you like to change?\n")
                 while finalize:
-                    print("1. Address",
-                    "2. Phone number ",
-                    "3. Email",
-                    "4. Pilot status",
-                    "5. Plane license\n")
+                    print("\t1. Address",
+                    "\n\t2. Phone number ",
+                    "\n\t3. Email",
+                    "\n\t4. Pilot status",
+                    "\n\t5. Plane license\n")
                     command_index = int(input("Please input a number: "))
                     if command_index == 1:
                         employee.address = input("New employee Address: ")
