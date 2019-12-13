@@ -38,12 +38,13 @@ class MenuUI:
               "\n2. List Voyages",
               "\n3. Assign Staff to Voyage",
               "\n4. Assign Captain to Voyage",
-              "\n5. Assign Aircraft to Voyage",
-              "\n6. List voyage for given day",
-              "\n7. List voyages for given week",
-              "\n8. List Flights By Location",
-              "\n9. Update Voyage Captain",
-              "\n10. Sold seats for Voyage")
+              "\n5. Assign lead Flight Attendant to Voyage",
+              "\n6. Assign Aircraft to Voyage",
+              "\n7. List voyage for given day",
+              "\n8. List voyages for given week",
+              "\n9. List Flights By Location",
+              "\n10. Update Voyage Captain",
+              "\n11. Sold seats for Voyage")
         return self.getVInput()
     
     def showDestinationsMenu(self):
@@ -117,16 +118,18 @@ class MenuUI:
         elif choice == "4":
             return VoyageUI().assign_captain_to_voyage()
         elif choice == "5":
-            return VoyageUI().register_aircraft_to_voyage()
+            return VoyageUI().assign_head_flightattendant_to_voyage()
         elif choice == "6":
-            return VoyageUI().print_voyage_for_day()
+            return VoyageUI().register_aircraft_to_voyage()
         elif choice == "7":
-            return VoyageUI().print_voyage_for_week()
+            return VoyageUI().print_voyage_for_day()
         elif choice == "8":
-            return VoyageUI().print_voyage_by_dest()
+            return VoyageUI().print_voyage_for_week()
         elif choice == "9":
-            return VoyageUI().UpdateVoyageCaptain()
+            return VoyageUI().print_voyage_by_dest()
         elif choice == "10":
+            return VoyageUI().UpdateVoyageCaptain()
+        elif choice == "11":
             return VoyageUI().soldSeatsForVoyage()
         elif choice == "q":
             return "quit_run"
