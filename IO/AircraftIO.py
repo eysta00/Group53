@@ -54,7 +54,14 @@ class AircraftIO():
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
                 if str(row["aircraftID"]) == str(aircraftID):
-                    return Aircraft(row['aircraftID'], row['manufacturer'], row['model'], row['total_seats_int'])
+                    aircraftID = row['aircraftID']
+                    manufacturer = row['manufacturer']
+                    model = row['model']
+                    total_seats_int = row['total_seats_int']
+                    # print("Within AircraftIO: " + str(total_seats_int))
+                    if total_seats_int == '' or total_seats_int == None:
+                        total_seats_int = 0
+                    return Aircraft(aircraftID, manufacturer, model, total_seats_int)
             raise EntryNotInDatabase("The given aircraft id does not correspond to the database")
 
     def AircraftInDatabase_bool(self, AircraftID):

@@ -1,5 +1,6 @@
 from LogicLayer.LLAPI import LLAPI
 from datetime import datetime
+from Exceptions.Exceptions import *
 
 class VoyageUI:
     def __init__(self):
@@ -79,12 +80,31 @@ class VoyageUI:
             return UpdateVoyageCaptain()
 
     def soldSeatsForVoyage(self):
-        Voyage_id = input("Enter voyage ID:")
-        sold_seats = input("Enter seats:")  #not sure about this
         try:
-            voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
+            Voyage_id = input("Enter voyage ID:")
+            voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id) # so error code hits at the right moment
+            flightType = input("Is the flight:\n 1. Outgoing\n 2. Incoming\nFromIceland?: ")
+            sold_seats = input("Enter seats:")  #not sure about this
+            if flightType.lower() == "outgoing" or flightType == '1':
+                # print('going into outgoingl thing')
+                self.LLAPI.SellSeatsForVoyageOutgoing(Voyage_id ,int(sold_seats))
+                print('\nSold ' + str(sold_seats) + ' seats for the flight, the total is now ' + str(int(sold_seats) + int(voyage.seatingSoldOutgoing)))
+                return
+            elif flightType.lower() == "incoming" or flightType == '2':
+                self.LLAPI.SellSeatsForVoyageIncoming(Voyage_id, int(sold_seats))
+                print('\nSold ' + str(sold_seats) + ' seats for the flight, the total is now ' + str(int(sold_seats) + int(voyage.seatingSoldIncoming)))
+                return
+            else:
+                print('\nInvalid Flight Type Selection, Returning to main menu.')
+                return
         except EntryNotInDatabase:
-            print("ERROR! Voyage not found, please input correct id")
-            return soldSeatsForVoyage()
+            print("\nERROR! Voyage not found, please input correct id")
+            return
+        except NotEnoughSeats:
+            print("\nThere are not enough available seats to sell " + str(sold_seats) + ' seats.')
+            return
+        except AircraftNotRegistered:
+            print("\nYou must register an aircraft to the voyage before selling seats.")
+            
 # test1 = VoyageUI()
 # test1.addVoyage()

@@ -8,3 +8,7 @@ class ToFewAvailableEmployees(Exception):
     pass
 class EmployeeAlreadyAssigned(Exception):
     pass
+class NotEnoughSeats(Exception):
+    pass
+class AircraftNotRegistered(Exception):
+    pass
