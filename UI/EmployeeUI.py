@@ -252,15 +252,17 @@ class EmployeeUI:
             day = int(input("Input day: "))
             date_iso = datetime(year, month, day).isoformat()
             work_procedures = self.LLAPI.GetWorkSummary(employees_with_name[0].ssn, date_iso)
-
-            for voy in work_procedures:
-                print("-" * (rows_len - 1))
-                print("-" * (int((row_len - len(employees_with_name[0])) / 2)), employees_with_name[0], "-" * (int((row_len - len(employees_with_name[0])) / 2)))
-                print("Destination: ", voy.destination, "\tDeparture: ", voy.departureTime)
-                print("Aircraft ID: ", voy.aircraftID, "\tCaptain of Aircraft: ", voy.captain)
-                print("Incoming flight ID: ", voy.incomingFlightID, "\tOutgoing flight ID: ", voy.outgoingFlightID)
-                print("Flight Attendants: ",voy.flightAttendants_lst,"\nPilots: " ,voy.pilots_lst)
-                print("-" * (rows_len - 1))
+            if len(work_procedures) > 0:
+                for voy in work_procedures:
+                    print("-" * (rows_len - 1))
+                    print("-" * (int((row_len - len(employees_with_name[0])) / 2)), employees_with_name[0], "-" * (int((row_len - len(employees_with_name[0])) / 2)))
+                    print("Destination: ", voy.destination, "\tDeparture: ", voy.departureTime)
+                    print("Aircraft ID: ", voy.aircraftID, "\tCaptain of Aircraft: ", voy.captain)
+                    print("Incoming flight ID: ", voy.incomingFlightID, "\tOutgoing flight ID: ", voy.outgoingFlightID)
+                    print("Flight Attendants: ",voy.flightAttendants_lst,"\nPilots: " ,voy.pilots_lst)
+                    print("-" * (rows_len - 1))
+            else:
+                print("\nNo work procedures were found")
 
 
 

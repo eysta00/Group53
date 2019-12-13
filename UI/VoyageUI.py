@@ -147,7 +147,7 @@ class VoyageUI:
             return
         elif len(voyage.flightAttendants_lst) == 1:
             flight_att = self.LLAPI.GetEmployeeBySSN(voyage.flightAttendants_lst[0])
-            self.LLAPI.UpdateVoyageCaptain(Voyage_id, voyage.flightAttendants_lst[0])
+            self.LLAPI.UpdateVoyageHeadFlightAttendant(Voyage_id, voyage.flightAttendants_lst[0])
             print(str(flight_att.name) + ' Has Been set as head flight attendant')
             
             return
