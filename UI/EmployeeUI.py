@@ -262,6 +262,10 @@ class EmployeeUI:
                 print("Flight Attendants: ",voy.flightAttendants_lst,"\nPilots: " ,voy.pilots_lst)
                 print("-" * (rows_len - 1))
 
+    #def print_specific_employee(self):
+        #employee_name = input('Input employee name: ')
+
+
 
 
         except EntryNotInDatabase:
