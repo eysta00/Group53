@@ -39,7 +39,7 @@ def conv_emp(root):
             for row in crewfile:
                 pilot_bool = 0
                 if row[2] == 'Pilot':
-                    pilot_bool = 1
+                    pilot_bool = "True"
                 newfile.writerow({"ssn" : row[0], "name" : row[1], "address" : row[5], "pilot_bool" : pilot_bool, "planeType" : 'temp', "phone" : row[6], "email" : 'temp'})
     pass
 

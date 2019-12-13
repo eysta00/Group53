@@ -6,14 +6,14 @@ import os
 class VoyageUI:
     def __init__(self):
         self.LLAPI = LLAPI()
-        self.header = ""
+        self.header = "{:5} {:^20} {:30} {:>20} {:>10} {:>20} {:>20} {:>10} {:>10}".format("VoyageID","Destination", "Departure Time", "Aircraft ID", "Captain SSN", "Outgoing seats sold", "Outgoing Flight ID", "Incoming seats sold", "Incoming flight ID")
 
     def __print_information(self, voyage):
         '''Prints information regarding voyages '''
         row_len, coloumn_len = os.get_terminal_size()
         row_len_half = 2 // row_len
         seperator_str =("-" * (row_len - 1) + "\n")
-        info_str = "{:^20} {:30} {:>20} {:>20} {:>20} {:>20} {:>10} {:>10}".format(voyage.destination, voyage.departureTime,
+        info_str = "{:5} {:^20} {:30} {:>20} {:>10} {:>20} {:>20} {:>10} {:>10}".format(voyage.voyageID ,voyage.destination, voyage.departureTime,
         voyage.aircraftID, voyage.captain ,voyage.seatingSoldOutgoing, voyage.outgoingFlightID, voyage.seatingSoldIncoming, voyage.incomingFlightID)
         print(seperator_str, info_str)
 
@@ -163,6 +163,7 @@ class VoyageUI:
         day = int(input("Input day: "))
         date_iso = datetime(year, month, day).isoformat()
         voyages = self.LLAPI.ListVoyagesForGivenDay(date_iso)
+        print(self.header)
         for voyage in voyages:
             self.__print_information(voyage)
         print("\n")
@@ -174,6 +175,7 @@ class VoyageUI:
         day = int(input("Input day: "))
         date_iso = datetime(year, month, day).isoformat()
         voyages = self.LLAPI.ListVoyagesForGivenWeek(date_iso)
+        print(self.header)
         for voyage in voyages:
             self.__print_information(voyage)
         print("\n")
@@ -182,6 +184,7 @@ class VoyageUI:
         row_len, coloumns_len = os.get_terminal_size()
         print("\n\tList all Voyages")
         Voyages = self.LLAPI.ListAllVoyages()
+        print(self.header)
         for Voyage in Voyages:
             self.__print_information(Voyage)
         print("\n")
@@ -189,6 +192,7 @@ class VoyageUI:
     def print_voyage_by_dest(self):
         dest_id = input("Destination ID: ")
         Voyages = self.LLAPI.ListVoyagesForDestination(dest_id)
+        print(self.header)
         for voyage in Voyages:
             self.__print_information(voyage)
         print("\n")
