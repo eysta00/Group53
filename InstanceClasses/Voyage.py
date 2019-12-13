@@ -31,7 +31,6 @@ class Voyage:
 
 
     def __str__(self):
-
         return self.destination + ' : ' + self.departureTime
 
     def __repr__(self):
