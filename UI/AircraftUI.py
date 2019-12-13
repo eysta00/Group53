@@ -9,7 +9,8 @@ class AircraftUI:
         manufacturer = input('Enter Aircraft Manufacturer: ')
         model = input('Enter Aircraft Model: ')
         total_seats = input('Enter Total Number of Seats: ')
-        error = self.LLAPI.RegisterAircraft(air_id, manufacturer, total_seats)
+
+        self.LLAPI.RegisterAircraft(manufacturer, model, total_seats)
         
         return
 
