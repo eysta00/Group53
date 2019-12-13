@@ -167,7 +167,7 @@ class VoyageUI:
             for flight_attendant in voyage.flightAttendants_lst:
                 print(flight_attendant)
             flight_attendantssn = input("Head flight attendant SSN: ")
-            self.LLAPI.head_flightattendant
+            self.LLAPI.UpdateVoyageHeadFlightAttendant(Voyage_id, flight_attendantssn)
             return 
 
     def print_voyage_for_day(self):
