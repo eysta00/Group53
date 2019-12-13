@@ -72,7 +72,7 @@ class MenuUI:
         elif choice == "4":
             return self.showAircraftsMenu()
         elif choice == "q":
-            return
+            return "quit_run"
         else:
             print("\nInvalid choice! Going to main menu....\n")
 
@@ -99,7 +99,7 @@ class MenuUI:
         elif choice == "9":
             return EmployeeUI().print_work_summary()
         elif choice == "q":
-            return
+            return "quit_run"
         else:
             print("\nInvalid choice! Going to main menu....\n")
 
@@ -128,7 +128,7 @@ class MenuUI:
         elif choice == "10":
             return VoyageUI().soldSeatsForVoyage()
         elif choice == "q":
-            return
+            return "quit_run"
         else:
             print("\nInvalid choice! Going to main menu....\n")
 
@@ -145,7 +145,7 @@ class MenuUI:
         elif choice == "4":
             return DestinationUI().most_popular_destinations()    
         elif choice == "q":
-            return
+            return "quit_run"
         else:
             print("\nInvalid choice! Going to main menu....\n")
 
@@ -162,7 +162,7 @@ class MenuUI:
         elif choice == "4":
             return AircraftUI().printAvailableAircrafts()
         elif choice == "q":
-            return
+            return "quit_run"
         else:
             print("\nInvalid choice! Going to main menu....\n")
 

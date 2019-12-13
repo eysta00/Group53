@@ -44,8 +44,8 @@ class EmployeeUI:
     def print_all_employees(self):
         rows_len, columns_len = os.get_terminal_size()
 
-        print("\n\tList all employess")
-        print("-" * (rows_len - 1))
+        print("\n\tList all employess\n")
+
         print(self.header)
         all_employees = self.LLAPI.ListAllEmployees()
         for employee in all_employees:

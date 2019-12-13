@@ -45,7 +45,7 @@ class VoyageUI:
         date_iso = datetime(year, month, day).isoformat()
         voyages = self.LLAPI.ListVoyagesForGivenWeek(date_iso)
         for voyage in voyages:
-            
+            print(voyage)
         print("\n")
 
     def print_Voyages(self):
@@ -53,7 +53,7 @@ class VoyageUI:
         print("\n\tList all Voyages")
         Voyages = self.LLAPI.ListAllVoyages()
         for Voyage in Voyages:
-            print("-" * (int((row_len - len(Voyage.destination)) / 2)), Voyage.destination,)
+            print(Voyage)
         print("\n")
     
     def print_voyage_by_dest(self):
