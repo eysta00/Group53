@@ -7,8 +7,8 @@ class DestinationUI:
         self.LLAPI = LLAPI()
 
     def register_destination(self):
-        destination_name = input('Destination name: ')
-        destination_id = input('Destination ID: ')
+        country = input('Destination Countr: ')
+        destination_id = input('Destination: ')
         flight_duration = input('Flight duration: ')
         contactNr = input('Contact number: ')
         LLAPI().RegisterDestination(destination_name, destination_id, flight_duration, contactNr)

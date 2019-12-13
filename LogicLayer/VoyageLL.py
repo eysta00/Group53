@@ -36,10 +36,17 @@ class VoyageLL:
     def AddStaffToVoyage(self, voyageID, employeeSSN): 
 
         voyage = self.data.getVoyageByVoyageID(voyageID)
+        if voyage.aircraftID == '' or voyage.aircraftID == None:
+            raise AircraftNotRegistered
         employee = self.data.getEmployeeBySSN(employeeSSN)
+        try:
+            aircraft = self.data.getAircraftByAircraftID(voyage.aircraftID)
+        except EntryNotInDatabase:
+            raise AircraftNotRegistered
+        
         print(employee) # did not run nor raise error
         
-        if str(employeeSSN) in voyage.pilot_lst or str(employeeSSN) in voyage.flightAttendants_lst:
+        if str(employeeSSN) in voyage.pilots_lst or str(employeeSSN) in voyage.flightAttendants_lst:
             raise EmployeeAlreadyAssigned('This employee is already assigned to this voyage')
 
         # print(employee.pilot_bool)
@@ -48,6 +55,8 @@ class VoyageLL:
             # print(voyage.pilots_lst)
             # print(type(voyage.pilots_lst))
             # print(voyage.pilots_lst)
+            if employee.planeType != aircraft.model:
+                print('hi')
             voyage.pilots_lst.append(employeeSSN)
         else:    
             voyage.flightAttendants_lst.append(employeeSSN)

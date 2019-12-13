@@ -126,7 +126,7 @@ class VoyageUI:
             else:
                 print("\nThere is no employee called " + employee_name + " in our system, returning to main.\n")
                 return
-
+            # print('------------')
             self.LLAPI.AddStaffToVoyage(voyage_id, employeeSSN)
 
         except EntryNotInDatabase:
@@ -134,6 +134,8 @@ class VoyageUI:
             return
         except EmployeeAlreadyAssigned:
             print('\n' + employee_name + ' is already assigned to this flight')
+        except AircraftNotRegistered:
+            print('\nYou Must Assign a Plane to the Voyage before Assigning Staff, returning to main\n')
                 
 
     def assign_captain_to_voyage(self):
