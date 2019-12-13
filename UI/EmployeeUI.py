@@ -255,16 +255,12 @@ class EmployeeUI:
 
             for voy in work_procedures:
                 print("-" * (rows_len - 1))
-                print("-" * (int((rows_len - len(employees_with_name[0])) / 2)), employees_with_name[0], "-" * (int((row_len - len(employees_with_name[0])) / 2)))
+                print("-" * (int((row_len - len(employees_with_name[0])) / 2)), employees_with_name[0], "-" * (int((row_len - len(employees_with_name[0])) / 2)))
                 print("Destination: ", voy.destination, "\tDeparture: ", voy.departureTime)
                 print("Aircraft ID: ", voy.aircraftID, "\tCaptain of Aircraft: ", voy.captain)
                 print("Incoming flight ID: ", voy.incomingFlightID, "\tOutgoing flight ID: ", voy.outgoingFlightID)
                 print("Flight Attendants: ",voy.flightAttendants_lst,"\nPilots: " ,voy.pilots_lst)
                 print("-" * (rows_len - 1))
-
-    #def print_specific_employee(self):
-        #employee_name = input('Input employee name: ')
-
 
 
 
@@ -273,3 +269,18 @@ class EmployeeUI:
 
         except ValueError:
             print('\nDates must be within defined ranges, months 1-12, days 1-31.\n')
+
+    def print_specific_employee(self):
+        try:
+            employee_name = input('Input employee name: ')
+            employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
+            print("{:30}\t{:10}\t{:20}\t{:10}\t{:25}\t{:20}\t{}".format("Name", "SSN", "Address", "Phone", "Email", "Pilot status", "Licenses"))
+            emp_id = str(employees_with_name)[-11:-1]
+            emp = self.LLAPI.GetEmployeeBySSN(emp_id)
+            if emp.pilot_bool:
+                pilot = "True"
+            else:
+                pilot = "False"
+            print("{:30}\t{:10}\t{:20}\t{:10}\t{:25}\t{:20}\t{}".format(emp.name, emp.ssn, emp.address, emp.phone, emp.email, pilot, emp.planeType))
+        except EntryNotInDatabase:
+            print("\nThere is No employee with the name " + employee_name)
