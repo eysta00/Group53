@@ -123,11 +123,12 @@ class VoyageUI:
                     print("\nInvalid ssn Selection, returning to main.\n")
                     return
 
-            self.LLAPI.AddStaffToVoyage(voyage_id, employeeSSN)
-
             else:
                 print("\nThere is no employee called " + employee_name + " in our system, returning to main.\n")
                 return
+
+            self.LLAPI.AddStaffToVoyage(voyage_id, employeeSSN)
+
         except EntryNotInDatabase:
             print("\nThere is no employee called " + employee_name + " in our system, returning to main.\n")
             return
