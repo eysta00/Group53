@@ -244,8 +244,11 @@ class EmployeeUI:
 
                 employee_ssn = input("Input the ssn of employee you requested: ")
 
-            else:
+            elif len(employees_with_name) == 1:
                 employee_ssn = employees_with_name[0].ssn
+            else:
+                print("No employ with that name was found")
+                return
             print("Please input the dates to get the work summary of", employee_name)
             year = int(input("Input year: "))
             month = int(input("Input month: "))
@@ -254,12 +257,14 @@ class EmployeeUI:
             work_procedures = self.LLAPI.GetWorkSummary(employees_with_name[0].ssn, date_iso)
             if len(work_procedures) > 0:
                 for voy in work_procedures:
-                    print("-" * (rows_len - 1))
-                    print("Destination: ", voy.destination, "\tDeparture: ", voy.departureTime)
-                    print("Aircraft ID: ", voy.aircraftID, "\tCaptain of Aircraft: ", voy.captain)
-                    print("Incoming flight ID: ", voy.incomingFlightID, "\tOutgoing flight ID: ", voy.outgoingFlightID)
-                    print("Flight Attendants: ",voy.flightAttendants_lst,"\nPilots: " ,voy.pilots_lst)
-                    print("-" * (rows_len - 1))
+                    requested_emp = self.LLAPI.GetEmployeeBySSN(employee_ssn)
+                    print("-" * rows_len -1)
+                    print("Employee", requested_emp.name, "Worked on", voy.departureTime)
+                    print("Destination: ", voy.destination, "Aircraft ID: ", voy.aircraftID)
+                    print("\tCaptain of Aircraft: ", voy.captain)
+                    print("|Incoming flight ID: ", voy.incomingFlightID, "|Outgoing flight ID: ", voy.outgoingFlightID)
+                    print("-" * rows_len - 1)
+                    
             else:
                 print("\nNo work procedures were found")
 
