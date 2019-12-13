@@ -251,7 +251,16 @@ class EmployeeUI:
             work_procedures = self.LLAPI.GetWorkSummary(employees_with_name[0].ssn, date_iso)
 
             for voy in work_procedures:
-                print(voy)
+                print("-" * (rows_len - 1))
+                print("-" * (int((row_len - len(employees_with_name[0])) / 2)), employees_with_name[0], "-" * (int((row_len - len(employees_with_name[0])) / 2)))
+                print("Destination: ", voy.destination, "\tDeparture: ", voy.departureTime)
+                print("Aircraft ID: ", voy.aircraftID, "\tCaptain of Aircraft: ", voy.captain)
+                print("Incoming flight ID: ", voy.incomingFlightID, "\tOutgoing flight ID: ", voy.outgoingFlightID)
+                print("Flight Attendants: ",voy.flightAttendants_lst,"\nPilots: " ,voy.pilots_lst)
+                print("-" * (rows_len - 1))
+
+
+
         except EntryNotInDatabase:
             print("\nThere is No employee with the name " + employee_name)
 

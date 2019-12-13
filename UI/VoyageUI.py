@@ -1,6 +1,6 @@
 from LogicLayer.LLAPI import LLAPI
 from datetime import datetime
-
+import os
 class VoyageUI:
     def __init__(self):
         self.LLAPI = LLAPI()
@@ -45,14 +45,15 @@ class VoyageUI:
         date_iso = datetime(year, month, day).isoformat()
         voyages = self.LLAPI.ListVoyagesForGivenWeek(date_iso)
         for voyage in voyages:
-            print(voyage)
+            
         print("\n")
 
     def print_Voyages(self):
-        print("List all Voyages")
+        row_len, coloumns_len = os.get_terminal_size()
+        print("\n\tList all Voyages")
         Voyages = self.LLAPI.ListAllVoyages()
         for Voyage in Voyages:
-            print(Voyage)
+            print("-" * (int((row_len - len(Voyage.destination)) / 2)), Voyage.destination,)
         print("\n")
     
     def print_voyage_by_dest(self):

@@ -8,9 +8,9 @@ class Voyage:
         self.destination = destination
         self.departureTime = departureTime
         self.aircraftID = aircraftID
-        self.pilots_lst = pilots_lst
-        self.flightAttendants_lst = flightAttendants_lst
-        self.pilots_lst = pilots_lst
+        self.pilots_lst = pilots_lst #
+        self.flightAttendants_lst = flightAttendants_lst #
+        self.pilots_lst = pilots_lst #
         self.captain = captain
         self.seatingSoldOutgoing = seatingSoldOutgoing
         self.seatingSoldIncoming = seatingSoldIncoming
@@ -31,6 +31,7 @@ class Voyage:
 
 
     def __str__(self):
+
         return self.destination + ' : ' + self.departureTime
 
     def __repr__(self):
