@@ -66,7 +66,7 @@ class EmployeeUI:
         
     # method to print all flight attendants
     def print_flight_attendants(self):
-        try;
+        try:
             rows_len, columns_len = os.get_terminal_size()
 
             print("\n\tList all flight attendants")
