@@ -1,7 +1,6 @@
 from LogicLayer.LLAPI import LLAPI
 from datetime import datetime
-from Exceptions.Exceptions import *
-
+import os
 class VoyageUI:
     def __init__(self):
         self.LLAPI = LLAPI()
@@ -30,6 +29,10 @@ class VoyageUI:
             
             departureTime = datetime(Voyage_year, Voyage_month, Voyage_day, Voyage_hour, Voyage_minute).isoformat()
             self.LLAPI.AddVoyage(Voyage_destination_id, departureTime)
+            
+            print('\nVoyage Successfully Added.\n')
+            return
+
         except ToFewAvailableEmployees:
             print('\nThere are to few available employees at that time to create a voyage, returning to main.\n')
             return
@@ -38,9 +41,9 @@ class VoyageUI:
             return 
         except ValueError:
             print('The Selected date is invalid, month must be 1-12 and day must be 1-31')
+            return
 
 
-        return
 
     def register_aircraft_to_voyage(self):
         Voyage_id = input('Voyage ID: ')
@@ -48,33 +51,11 @@ class VoyageUI:
 
     def register_employees_to_voyage(self):
         Voyage_id = input('Voyage ID: ')
-        employee_name = input('Input the Name of the Employee')
-        employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
+        Employee = input('Employee ID: ')
 
     def assign_captain_to_voyage(self):
         Voyage_id = input('Voyage ID: ')
-        voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
-        if len(voyage.pilots_lst) < 1:
-            print('\nYou must assign Pilots to Voyage before assigning Captain.')
-            return
-        elif len(voyage.pilots_lst) == 1:
-            cap = self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0])
-            self.LLAPI.UpdateVoyageCaptain(Voyage_id, voyage.pilots_lst[0])
-            print(str(cap.name) + ' Has Been set as voyage Captain')
-            return
-        else:
-            print('\nPlease Select what Pilot You Want To Make Captain:\n')
-            print(self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0]))
-            print(self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[1]))
-            capSSN = input('Pilot SSN: ')
-            if capSSN not in voyage.pilots_lst:
-                print('Invalid Selection, Returning to menu.')
-                return
-            self.LLAPI.UpdateVoyageCaptain(Voyage_id, capSSN)
-            return 
-
-            
-
+        Pilot = input('Pilot ID: ')
 
     def print_voyage_for_day(self):
         year = int(input("Input year: "))
@@ -98,7 +79,8 @@ class VoyageUI:
         print("\n")
 
     def print_Voyages(self):
-        print("List all Voyages")
+        row_len, coloumns_len = os.get_terminal_size()
+        print("\n\tList all Voyages")
         Voyages = self.LLAPI.ListAllVoyages()
         for Voyage in Voyages:
             print(Voyage)
@@ -127,31 +109,12 @@ class VoyageUI:
             return UpdateVoyageCaptain()
 
     def soldSeatsForVoyage(self):
+        Voyage_id = input("Enter voyage ID:")
+        sold_seats = input("Enter seats:")  #not sure about this
         try:
-            Voyage_id = input("Enter voyage ID:")
-            voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id) # so error code hits at the right moment
-            flightType = input("Is the flight:\n 1. Outgoing\n 2. Incoming\nFromIceland?: ")
-            sold_seats = input("Enter seats:")  #not sure about this
-            if flightType.lower() == "outgoing" or flightType == '1':
-                # print('going into outgoingl thing')
-                self.LLAPI.SellSeatsForVoyageOutgoing(Voyage_id ,int(sold_seats))
-                print('\nSold ' + str(sold_seats) + ' seats for the flight, the total is now ' + str(int(sold_seats) + int(voyage.seatingSoldOutgoing)))
-                return
-            elif flightType.lower() == "incoming" or flightType == '2':
-                self.LLAPI.SellSeatsForVoyageIncoming(Voyage_id, int(sold_seats))
-                print('\nSold ' + str(sold_seats) + ' seats for the flight, the total is now ' + str(int(sold_seats) + int(voyage.seatingSoldIncoming)))
-                return
-            else:
-                print('\nInvalid Flight Type Selection, Returning to main menu.')
-                return
+            voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
         except EntryNotInDatabase:
-            print("\nERROR! Voyage not found, please input correct id")
-            return
-        except NotEnoughSeats:
-            print("\nThere are not enough available seats to sell " + str(sold_seats) + ' seats.')
-            return
-        except AircraftNotRegistered:
-            print("\nYou must register an aircraft to the voyage before selling seats.")
-            
+            print("ERROR! Voyage not found, please input correct id")
+            return soldSeatsForVoyage()
 # test1 = VoyageUI()
 # test1.addVoyage()
