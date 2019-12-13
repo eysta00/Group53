@@ -18,11 +18,14 @@ class DestinationUI:
 
     def register_destination(self):
         print("\n\tRegister a new destination")
-        destination_name = input('Destination name: ')
-        destination_id = input('Destination ID: ')
+        destination_country = input('Country: ')
+        airport_str = input('Airport: ')
         flight_duration = input('Flight duration: ')
-        contactNr = input('Contact number: ')
-        LLAPI().RegisterDestination(destination_name, destination_id, flight_duration, contactNr)
+        distanceFromReykjavik = input('Distance from Reykjavík: ')
+        contactName_str = input('Contact name: ')
+        contactNr_str = input('Contact number: ')
+
+        LLAPI().RegisterDestination(destination_country, airport_str, flight_duration, distanceFromReykjavik, contactName_str, contactNr_str)
         
         return
 
