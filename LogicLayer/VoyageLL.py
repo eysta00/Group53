@@ -79,7 +79,7 @@ class VoyageLL:
             else:
                 freeFlightAttendants += 1
         
-        if freePilots > 2 or freeFlightAttendants > 1:
+        if freePilots < 2 or freeFlightAttendants < 1:
             raise ToFewAvailableEmployees("There are not enough available employees on this date to create a voyage")
 
         
