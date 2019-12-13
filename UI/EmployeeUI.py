@@ -206,6 +206,9 @@ class EmployeeUI:
             return
         except EntryNotInDatabase:
             print("ERROR! Employee not found, please input correct ssn")
+        except AttributeError:
+            print("ERROR! you put in the wrong ssn! please try again")
+            return
 
 
 
