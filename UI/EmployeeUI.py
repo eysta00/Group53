@@ -154,10 +154,10 @@ class EmployeeUI:
                     elif command_index == 3:
                         employee.email = input("New employee email address: ")
                     elif command_index == 4:
-                        employee.phone = input("New employee phone number: ")
                         pilot_str = input("Is employee a Pilot? yes/no: ").lower()
                         if pilot_str == "yes":
                             employee.pilot_bool = True
+                            employee.license = input("Employee plane license: ")
                         else:
                             employee.pilot_bool = False
                     elif command_index == 5:
@@ -185,10 +185,10 @@ class EmployeeUI:
                     elif command_index == 3:
                         employee.email = input("New employee email address: ")
                     elif command_index == 4:
-                        employee.phone = input("New employee phone number: ")
                         pilot_str = input("Is employee a Pilot? yes/no: ").lower()
                         if pilot_str == "yes":
                             employee.pilot_bool = True
+                            employee.license = input("Employee plane license: ")
                         else:
                             employee.pilot_bool = False
                     elif command_index == 5:
