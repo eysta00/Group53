@@ -7,13 +7,39 @@ class VoyageUI:
         self.LLAPI = LLAPI()
 
     def register_Voyage(self):
-        Voyage_destination = input('Voyage destination: ')
-        Voyage_time = input('Voyage ID: ')
-        
-        error = LLAPI().RegisterVoyage(Voyage_destination, Voyage_time, Voyage_id)
-        if error != 1:
-            print("Error, input not valid!")
-        
+        try:
+            print('\n##### Register New Voyage #####\n')
+            destinations = self.LLAPI.ListAllDestinations()
+            idList = [str(dest.dest_id) for dest in destinations]
+            # print(idList)
+            print('Available Destinations:')
+            print('ID \t Name')
+            for dest in destinations:
+                print(str(dest.dest_id) + ' \t' + str(dest.dest_name))
+            Voyage_destination_id = input('Enter Destination ID: ') # NEEDS RE CONFIGUREING
+            if Voyage_destination_id not in idList:
+                print('\nInvalid destinationID selection returning to main.')
+                return
+            print('\nSelect Time of Voyage\n')
+            
+            Voyage_year = int(input('Enter Year: '))
+            Voyage_month = int(input('Enter Month: '))
+            Voyage_day = int(input('Enter Day: '))
+            Voyage_hour = int(input('Enter hour: '))
+            Voyage_minute = int(input('Enter minute: '))
+            
+            departureTime = datetime(Voyage_year, Voyage_month, Voyage_day, Voyage_hour, Voyage_minute).isoformat()
+            self.LLAPI.AddVoyage(Voyage_destination_id, departureTime)
+        except ToFewAvailableEmployees:
+            print('\nThere are to few available employees at that time to create a voyage, returning to main.\n')
+            return
+        except DepartureTimeOccupied:
+            print('\nThe Selected Departure Time is already taken, to flights can not take off similtaniously, returning to main.\n')
+            return 
+        except ValueError:
+            print('The Selected date is invalid, month must be 1-12 and day must be 1-31')
+
+
         return
 
     def register_aircraft_to_voyage(self):

@@ -56,13 +56,11 @@ class VoyageLL:
 
 
     def assignAircraftToVoyage(self, voyageID, aircraftID):
-        try:
-            voyage = self.data.getVoyageByVoyageID(voyageID)
-            voyage.aircraftID = aircraftID
-            self.data.updateVoyage(voyage)
-            return 1
-        except EntryNotInDatabase:
-            return -1
+        
+        voyage = self.data.getVoyageByVoyageID(voyageID)
+        voyage.aircraftID = aircraftID
+        self.data.updateVoyage(voyage)
+        
 
 
     def addVoyage(self, apiself, destination_id, flightTime_str):
@@ -84,14 +82,11 @@ class VoyageLL:
         if freePilots > 2 or freeFlightAttendants > 1:
             raise ToFewAvailableEmployees("There are not enough available employees on this date to create a voyage")
 
-        try:
-            flightIDs_lst_str = self._GenerateFlightID(destination_id, flightTime_str)
-            voyage = Voyage(self._GenerateNewVoyageID(), destination_id, flightTime_str, outgoingFlightID=flightIDs_lst_str[0], incomingFlightID=flightIDs_lst_str[1])
-            self.data.addVoyage(voyage)
-            return 1
-        except EntryInDatabase:
-            return -1
-
+        
+        flightIDs_lst_str = self._GenerateFlightID(destination_id, flightTime_str)
+        voyage = Voyage(self._GenerateNewVoyageID(), destination_id, flightTime_str, outgoingFlightID=flightIDs_lst_str[0], incomingFlightID=flightIDs_lst_str[1])
+        self.data.addVoyage(voyage)
+        
         
 
 
