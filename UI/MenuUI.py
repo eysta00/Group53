@@ -84,7 +84,7 @@ class MenuUI:
         elif choice == "q":
             return "quit_run"
         else:
-            print("\nInvalid choice! Going to main menu....\n")
+            print("\nNo option selected, returning to main menu\n")
 
         return self.showMainMenu()
 
@@ -113,7 +113,7 @@ class MenuUI:
         elif choice == "q":
             return "quit_run"
         else:
-            print("\nInvalid choice! Going to main menu....\n")
+            print("\nNo option selected, returning to main menu\n")
 
         return self.showMainMenu()
     
@@ -149,7 +149,7 @@ class MenuUI:
         elif choice == "q":
             return "quit_run"
         else:
-            print("\nInvalid choice! Going to main menu....\n")
+            print("\nNo option selected, returning to main menu\n")
 
         return self.showMainMenu()
     
@@ -166,7 +166,7 @@ class MenuUI:
         elif choice == "q":
             return "quit_run"
         else:
-            print("\nInvalid choice! Going to main menu....\n")
+            print("\nNo option selected, returning to main menu\n")
 
         return self.showMainMenu()
     
@@ -183,6 +183,6 @@ class MenuUI:
         elif choice == "q":
             return "quit_run"
         else:
-            print("\nInvalid choice! Going to main menu....\n")
+            print("\nNo option selected, returning to main menu\n")
 
         return self.showMainMenu()
