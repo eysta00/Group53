@@ -9,6 +9,8 @@ def default_operation():
 
 class MenuUI:
     def showMainMenu(self):
+        print('  _                             \n | |\                           \n===| \______________|_______    \n  \|  O ooooo-=====-|ooo O n\__ \n    -|=|--------||--|---|=||---’\n_____|=|________oo______|=|o____')
+
         print("\n##### MAIN MENU #####")
         print("1. Employees"
               "\n2. Voyages"
@@ -59,6 +61,9 @@ class MenuUI:
         return self.getDInput()
 
     def showAircraftsMenu(self):
+
+        print('    __|__\n---@-(")-@---\n    ! ! !    ')
+
         print("\n##### Aircrafts ######")
         print("\n1. Add Aircarft",
               "\n2. List Aircrafts",
