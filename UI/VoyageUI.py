@@ -149,6 +149,7 @@ class VoyageUI:
             self.LLAPI.UpdateVoyageCaptain(Voyage_id, voyage.pilots_lst[0])
             self.LLAPI.UpdateHeadFlightAttendant(Voyage_id, voyage.flightAttendants_lst[0])
             print(str(cap.name) + ' Has Been set as voyage Captain')
+            print(str(head_flightattendant) + 'Has Been set as head Flightattendant')
             
             return
         else:
@@ -160,6 +161,11 @@ class VoyageUI:
                 print('Invalid Selection, Returning to menu.')
                 return
             self.LLAPI.UpdateVoyageCaptain(Voyage_id, capSSN)
+            print('\nPlease Select which flight attendant you want to make captain:\n')
+            for flight_attendant in voyage.flightAttendants_lst:
+                print(flight_attendant)
+            flight_attendantssn = input("Head flight attendant SSN: ")
+            self.LLAPI.head_flightattendant
             return 
 
     def print_voyage_for_day(self):
