@@ -6,13 +6,14 @@ import os
 class DestinationUI:
     def __init__(self):
         self.LLAPI = LLAPI()
-        self.header = "{:10}{:20}{:20}{:20}{:20}{:20}{:20}".format("country_str", "airport_str", "destination.dest_id",
-        "destination.flight_duration", "destination.distanceFromReykjavik", "contactName_str", "destination.contactNr_str")
+        self.header = "{:20}{:25}{:25}{:25}{:35}{:25}{:25}".format("Destination ID", "Country", "Airport",
+        "Flight Duration", "Distance From Reykjavik", "Contact Name", "Contact Number")
     
     def __printing_information(self, destination):
-        information_str = "{:10}{:20}{:20}{:20}{:20}{:20}{:20}".format(str(destination.country_str), str(destination.airport_str), str(destination.dest_id),
+        information_str = "{:20}{:25}{:25}{:25}{:35}{:25}{:25}".format(str(destination.dest_id), str(destination.country_str), str(destination.airport_str),
         str(destination.flight_duration), str(destination.distanceFromReykjavik), str(destination.contactName_str), str(destination.contactNr_str))
         len_rows, len_coloumns = os.get_terminal_size()
+        return information_str
 
 
     def register_destination(self):
@@ -26,11 +27,11 @@ class DestinationUI:
         return
 
     def print_destinations(self):
-        print("\n\tList all destinations")
+        print("\n\tList all destinations\n")
         destinations = self.LLAPI.ListAllDestinations()
         print(self.header)
         for destination in destinations:
-            self.__printing_information(destination)
+            print(self.__printing_information(destination))
         print("\n")
       
     def change_destination_contact_info(self):

@@ -275,3 +275,10 @@ class VoyageUI:
             print("\nYou must register an aircraft to the voyage before selling seats.")
 # test1 = VoyageUI()
 # test1.addVoyage()
+
+    def ListStatusOfVoyages(self):
+        voyages = self.LLAPI.ListAllVoyages()
+        print("\n{:10} {:15} {:20} {:30}".format("Voyage ID", "Airport", "Departure Time", 'Voyage Status'))
+        
+        for voy in voyages:
+            print("\n{:10} {:15} {:20} {:30}".format(voy.voyageID, self.LLAPI.GetDestinationByDestinationID(voy.destination).airport_str, voy.departureTime, self.LLAPI.GetVoyageStatus(voy)))

@@ -14,7 +14,9 @@ class DestinationLL():
             
             dest_id = self._GenerateNewDestinationID()
             self.data.addDestination(Destination(country_str, airport_str, dest_id, flight_duration, distanceFromReykjavik, contactName_str, contactNr_str))
-            
+
+    def GetDestinationByDestinationID(self, destinationID):
+        return self.data.getDestinationByDestinationID(destinationID)
 
     def ListAllDestinations(self):
         destinations = self.data.getAllDestinatons()

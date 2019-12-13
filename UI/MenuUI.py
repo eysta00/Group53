@@ -43,7 +43,8 @@ class MenuUI:
               "\n7. List voyages for given week",
               "\n8. List Flights By Location",
               "\n9. Update Voyage Captain",
-              "\n10. Sold seats for Voyage")
+              "\n10. Sold seats for Voyage"
+              "\n11. List Satus of Voyages")
         return self.getVInput()
     
     def showDestinationsMenu(self):
@@ -128,6 +129,9 @@ class MenuUI:
             return VoyageUI().UpdateVoyageCaptain()
         elif choice == "10":
             return VoyageUI().soldSeatsForVoyage()
+        elif choice == "11":
+            return VoyageUI().ListStatusOfVoyages()
+
         elif choice == "q":
             return "quit_run"
         else:

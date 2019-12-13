@@ -200,6 +200,44 @@ class VoyageLL:
     def IsFullyStaffed(self, voyage):
         return len(voyage.pilots_lst) > 1 and len(voyage.flightAttendants_lst) > 0
 
+    def GetVoyageStatus(self, voyage):
+        voyageTimes = self._getTimeOfVoyageActivities(voyage)
+        timeNow = datetime.now()
+        if timeNow < voyageTimes[0]:
+            return "Not Departed"
+        if timeNow < voyageTimes[1]:
+            return "In Transit To Dest"
+        if timeNow < voyageTimes[2]:
+            return "Idle At Destination"
+        if timeNow < voyageTimes[3]:
+            return "In Transit To Iceland"
+        else:
+            return "Voyage is Complete"
+
+
+    def _getTimeOfVoyageActivities(self, voyage): # returns list [<Departure from iceland>, <Arrival at destination>, <departure from destination>, <Arrival at Iceland>]
+        destination = self.data.getDestinationByDestinationID(voyage.destination)
+        
+        try:
+            StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S.%f')
+        except ValueError:
+            StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S')
+
+        flightTime = float(destination.flight_duration) # consider changing this to int so as to not miss the disimal places!
+        deltaHours = flightTime
+        deltaMinutes = (deltaHours%1)*60
+        deltaSeconds = (deltaMinutes%1)*60
+        deltaHours = int(deltaHours)
+        deltaMinutes = int(deltaMinutes)
+        deltaSeconds = int(deltaSeconds)
+
+        DepartureFromIceland = parse(StartTime_dateTime.isoformat())
+        ArrivalAtDestination = parse((StartTime_dateTime + relativedelta(hours=+(flightTime), minutes=+deltaMinutes, seconds=+deltaSeconds)).isoformat())
+        DepartureFromDestination = parse((StartTime_dateTime + relativedelta(hours=+(flightTime+1), minutes=+deltaMinutes, seconds=+deltaSeconds)).isoformat())
+        ArrivalAtIceland = parse((StartTime_dateTime + relativedelta(hours=+(flightTime*2+1), minutes=+deltaMinutes*2, seconds=+deltaSeconds*2)).isoformat())
+        return [DepartureFromIceland, ArrivalAtDestination, DepartureFromDestination, ArrivalAtIceland] # Assuming the rest at destination is 1 hour
+
+
     def _isDepartureTimeFree(self, flightTime_str_iso):
         voyages = self.data.getAllVoyages()
         parsedTime = parse(flightTime_str_iso)

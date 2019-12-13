@@ -98,7 +98,13 @@ class LLAPI:
     def IsFullyStaffed(self, voyage):
         return self.voyage_logic.IsFullyStaffed(voyage)
 
+    def GetVoyageStatus(self, voyage):
+        return self.voyage_logic.GetVoyageStatus(voyage)
+
     ##### DESTINATION API #####
+
+    def GetDestinationByDestinationID(self, destinationID):
+        return self.destination_logic.GetDestinationByDestinationID(destinationID)
 
     def ListAllDestinations(self):
         return self.destination_logic.ListAllDestinations()
