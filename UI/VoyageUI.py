@@ -9,7 +9,7 @@ class VoyageUI:
     def register_Voyage(self):
         Voyage_destination = input('Voyage destination: ')
         Voyage_time = input('Voyage ID: ')
-        Voyage_id = input('Voyage ID: ')
+        
         error = LLAPI().RegisterVoyage(Voyage_destination, Voyage_time, Voyage_id)
         if error != 1:
             print("Error, input not valid!")
@@ -27,7 +27,28 @@ class VoyageUI:
 
     def assign_captain_to_voyage(self):
         Voyage_id = input('Voyage ID: ')
-        Pilot = input('Pilot ID: ')
+        voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
+        if len(voyage.pilots_lst) < 1:
+            print('\nYou must assign Pilots to Voyage before assigning Captain.')
+            return
+        elif len(voyage.pilots_lst) == 1:
+            cap = self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0])
+            self.LLAPI.UpdateVoyageCaptain(Voyage_id, voyage.pilots_lst[0])
+            print(str(cap.name) + ' Has Been set as voyage Captain')
+            return
+        else:
+            print('\nPlease Select what Pilot You Want To Make Captain:\n')
+            print(self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0]))
+            print(self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[1]))
+            capSSN = input('Pilot SSN: ')
+            if capSSN not in voyage.pilots_lst:
+                print('Invalid Selection, Returning to menu.')
+                return
+            self.LLAPI.UpdateVoyageCaptain(Voyage_id, capSSN)
+            return 
+
+            
+
 
     def print_voyage_for_day(self):
         year = int(input("Input year: "))
