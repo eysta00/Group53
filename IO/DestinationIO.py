@@ -20,7 +20,7 @@ class DestinationIO():
         with open(self.filePath, 'a+') as csv_file:
             csvWriter = csv.DictWriter(csv_file, fieldnames = self.__fieldNames_lst)
             
-            csvWriter.writerow({'country_str' : destination.country_str, 'airport_str' : destination.airport_str, 'dest_id' : destination.dest_id, 'flight_duration' : destination.flight_duration, 'distanceFromReykjavik' : destination.distanceFromReykjavik, 'contactName_str' : destination:contactName_str, 'contactNr_str' : destination.contactNr_str})
+            csvWriter.writerow({'country_str' : destination.country_str, 'airport_str' : destination.airport_str, 'dest_id' : destination.dest_id, 'flight_duration' : destination.flight_duration, 'distanceFromReykjavik' : destination.distanceFromReykjavik, 'contactName_str' : destination.contactName_str, 'contactNr_str' : destination.contactNr_str})
 
     
     

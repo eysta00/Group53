@@ -31,7 +31,7 @@ class VoyageIO():
             rows = list(csvReader)
             for entry in rows:
                 if str(entry["voyageID"]) == str(voyage.voyageID):
-                    entry["voyageID"], entry["destination"], entry["departureTime"], entry['aircraftID'], entry['pilots_lst'], entry['flightAttendants_lst'], entry['captain'], entry['headFlightAttendant'] entry['seatingSoldOutgoing'], entry['seatingSoldIncoming'], entry['outgoingFlightID'], entry['incomingFlightID'] = \
+                    entry["voyageID"], entry["destination"], entry["departureTime"], entry['aircraftID'], entry['pilots_lst'], entry['flightAttendants_lst'], entry['captain'], entry['headFlightAttendant'], entry['seatingSoldOutgoing'], entry['seatingSoldIncoming'], entry['outgoingFlightID'], entry['incomingFlightID'] = \
                         voyage.voyageID, voyage.destination, voyage.departureTime, voyage.aircraftID, voyage.pilots_lst, voyage.flightAttendants_lst, voyage.captain, voyage.headFlightAttendant, voyage.seatingSoldOutgoing, voyage.seatingSoldIncoming, voyage.outgoingFlightID, voyage.incomingFlightID
                     self.__reWriteFileFromList(rows)
                     return

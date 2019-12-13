@@ -31,7 +31,7 @@ class DestinationLL():
         self.data.updateDestination(destination)
 
 
-    def UpdateDestinationContactName(self, destinationID, contactName)
+    def UpdateDestinationContactName(self, destinationID, contactName):
         destination = self.data.getDestinationByDestinationID(destinationID)
         destination.contactNr_str = contactNr_str
 

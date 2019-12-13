@@ -141,7 +141,7 @@ class VoyageLL:
         voyage.captain = pilotSSN
         self.data.updateVoyage(voyage)
 
-    def UpdateVoyageHeadFlightAttendant(self, voyageID, flightAttendantSSN)
+    def UpdateVoyageHeadFlightAttendant(self, voyageID, flightAttendantSSN):
         voyage = self.data.getVoyageByVoyageID(voyageID)
         voyage.headFlightAttendant = flightAttendantSSN 
         self.data.updateVoyage(voyage)
