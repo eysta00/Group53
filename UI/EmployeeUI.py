@@ -121,91 +121,91 @@ class EmployeeUI:
         print("\n")
 
     def print_update_employee_infomation(self):
-        finalize = True
-        rows_len, columns_len = os.get_terminal_size()
-        print("\n\tUpdate employee information")
-        employee_name = input("Input name of employee you want to update: ")
-        employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
-        # If there are more employees with same name you get a list and have to select manually the ssn of the employee.
-        if len(employees_with_name) > 1:
-            print("More than one employee was found with that name")
-            print("-" * (rows_len - 1))
-            print(self.header)
-            print("-" * (rows_len - 1))
-            for employee in employees_with_name:
-                print(employee)
+        try:
+            finalize = True
+            rows_len, columns_len = os.get_terminal_size()
+            print("\n\tUpdate employee information")
+            employee_name = input("Input name of employee you want to update: ")
+            employees_with_name = self.LLAPI.ListAllEmployeesWithName(employee_name)
+            # If there are more employees with same name you get a list and have to select manually the ssn of the employee.
+            if len(employees_with_name) > 1:
+                print("More than one employee was found with that name")
                 print("-" * (rows_len - 1))
-            employee_ssn = input("Please input the ssn of employee you want to update: ")
-            try:
+                print(self.header)
+                print("-" * (rows_len - 1))
+                for employee in employees_with_name:
+                    print(employee)
+                    print("-" * (rows_len - 1))
+                employee_ssn = input("Please input the ssn of employee you want to update: ")
+                
                 employee = self.LLAPI.GetEmployeeBySSN(employee_ssn)
-            except EntryNotInDatabase:
-                print("ERROR! Employee not found, please input correct ssn")
-                return print_update_employee_infomation()
-            print("What would you like to change?")
-            while finalize:
-                print("1. Address",
-                "2. Phone number ",
-                "3. Email",
-                "4. Pilot status",
-                "5. Plane license\n")
-                command_index = int(input("Please input a number: "))
-                if command_index == 1:
-                    employee.address = input("New employee Address: ")
-                elif command_index == 2:
-                    employee.phone = input("New employee phone number: ")
-                elif command_index == 3:
-                    employee.email = input("New employee email address: ")
-                elif command_index == 4:
-                    employee.phone = input("New employee phone number: ")
-                    pilot_str = input("Is employee a Pilot? yes/no: ").lower()
-                    if pilot_str == "yes":
-                        employee.pilot_bool = True
+                print("What would you like to change?")
+                while finalize:
+                    print("1. Address",
+                    "2. Phone number ",
+                    "3. Email",
+                    "4. Pilot status",
+                    "5. Plane license\n")
+                    command_index = int(input("Please input a number: "))
+                    if command_index == 1:
+                        employee.address = input("New employee Address: ")
+                    elif command_index == 2:
+                        employee.phone = input("New employee phone number: ")
+                    elif command_index == 3:
+                        employee.email = input("New employee email address: ")
+                    elif command_index == 4:
+                        employee.phone = input("New employee phone number: ")
+                        pilot_str = input("Is employee a Pilot? yes/no: ").lower()
+                        if pilot_str == "yes":
+                            employee.pilot_bool = True
+                        else:
+                            employee.pilot_bool = False
+                    elif command_index == 5:
+                        employee.planeType = input("New plane license: ")
+                    finalize_changes = input("Would you like to finalze your changes? yes/no: ").lower()
+                    if finalize_changes == "yes":
+                        finalize = False
                     else:
-                        employee.pilot_bool = False
-                elif command_index == 5:
-                    employee.planeType = input("New plane license: ")
-                finalize_changes = input("Would you like to finalze your changes? yes/no: ").lower()
-                if finalize_changes == "yes":
-                    finalize = False
-                else:
-                    finalize = True
-        # If there is only one employee with the name requested it goes straight to asking what would user want to change
-        elif len(employees_with_name) == 1:
-            employee = self.LLAPI.GetEmployeeBySSN(employees_with_name[0].ssn)
-            print("What would you like to change?")
-            while finalize:
-                print("1. Address",
-                "2. Phone number ",
-                "3. Email",
-                "4. Pilot status",
-                "5. Plane license\n")
-                command_index = int(input("Please input a number: "))
-                if command_index == 1:
-                    employee.address = input("New employee Address: ")
-                elif command_index == 2:
-                    employee.phone = input("New employee phone number: ")
-                elif command_index == 3:
-                    employee.email = input("New employee email address: ")
-                elif command_index == 4:
-                    employee.phone = input("New employee phone number: ")
-                    pilot_str = input("Is employee a Pilot? yes/no: ").lower()
-                    if pilot_str == "yes":
-                        employee.pilot_bool = True
+                        finalize = True
+            # If there is only one employee with the name requested it goes straight to asking what would user want to change
+            elif len(employees_with_name) == 1:
+                employee = self.LLAPI.GetEmployeeBySSN(employees_with_name[0].ssn)
+                print("What would you like to change?")
+                while finalize:
+                    print("1. Address",
+                    "2. Phone number ",
+                    "3. Email",
+                    "4. Pilot status",
+                    "5. Plane license\n")
+                    command_index = int(input("Please input a number: "))
+                    if command_index == 1:
+                        employee.address = input("New employee Address: ")
+                    elif command_index == 2:
+                        employee.phone = input("New employee phone number: ")
+                    elif command_index == 3:
+                        employee.email = input("New employee email address: ")
+                    elif command_index == 4:
+                        employee.phone = input("New employee phone number: ")
+                        pilot_str = input("Is employee a Pilot? yes/no: ").lower()
+                        if pilot_str == "yes":
+                            employee.pilot_bool = True
+                        else:
+                            employee.pilot_bool = False
+                    elif command_index == 5:
+                        employee.planeType = input("New plane license: ")
+                    finalize_changes = input("Would you like to finalze your changes? yes/no: ").lower()
+                    if finalize_changes == "yes":
+                        finalize = False
                     else:
-                        employee.pilot_bool = False
-                elif command_index == 5:
-                    employee.planeType = input("New plane license: ")
-                finalize_changes = input("Would you like to finalze your changes? yes/no: ").lower()
-                if finalize_changes == "yes":
-                    finalize = False
-                else:
-                    finalize = True
-        else:
-            print("No employee with that name was found")
+                        finalize = True
+            else:
+                print("No employee with that name was found")
 
-        self.LLAPI.UpdateEmployeeInfo(employee)
+            self.LLAPI.UpdateEmployeeInfo(employee)
 
-        return
+            return
+        except EntryNotInDatabase:
+            print("ERROR! Employee not found, please input correct ssn")
 
 
 
