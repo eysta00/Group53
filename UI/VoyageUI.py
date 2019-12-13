@@ -13,9 +13,8 @@ class VoyageUI:
         row_len, coloumn_len = os.get_terminal_size()
         row_len_half = 2 // row_len
         seperator_str =("-" * (row_len - 1) + "\n")
-        print(voyage)
-        info_str = "{:5} {:^20} {:30} {:>20} {:>10} {:>20} {:>20} {:>10} {:>10}".format(voyage.voyageID ,voyage.destination, voyage.departureTime,\
-            voyage.aircraftID, voyage.captain ,voyage.seatingSoldOutgoing, voyage.outgoingFlightID, voyage.seatingSoldIncoming, voyage.incomingFlightID)
+        info_str = "{:5} {:^20} {:30} {:>20} {:>10} {:>20} {:>20} {:>10} {:>10}".format(voyage.voyageID ,voyage.destination, voyage.departureTime, 
+        voyage.aircraftID, voyage.captain ,voyage.seatingSoldOutgoing, voyage.outgoingFlightID, voyage.seatingSoldIncoming, voyage.incomingFlightID)
         print(seperator_str, info_str)
 
     def register_Voyage(self):
@@ -27,7 +26,7 @@ class VoyageUI:
             print('Available Destinations:')
             print('ID \t Name')
             for dest in destinations:
-                print(str(dest.dest_id) + ' \t' + str(dest.dest_name))
+                print(str(dest.dest_id) + ' \t' + str(dest.airport_str))
             Voyage_destination_id = input('Enter Destination ID: ') # NEEDS RE CONFIGUREING
             if Voyage_destination_id not in idList:
                 print('\nInvalid destinationID selection returning to main.')
@@ -140,15 +139,19 @@ class VoyageUI:
                 
 
     def assign_captain_to_voyage(self):
+        print("Assign captain and head flight attendant to voyage\n")
         Voyage_id = input('Voyage ID: ')
         voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
-        if len(voyage.pilots_lst) < 1:
-            print('\nYou must assign Pilots to Voyage before assigning Captain.')
+        if len(voyage.pilots_lst) < 1 or len(voyage.flightAttendants_lst) < 1:
+            print('\nYou must assign more employees to Voyage before assigning Captain or Head flight attendant.')
             return
-        elif len(voyage.pilots_lst) == 1:
+        elif len(voyage.pilots_lst) == 1 and len(voyage.flightAttendants_lst) == 1:
             cap = self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0])
+            head_flightattendant = self.LLAPI.GetEmployeeBySSN(voyage.flightAttendants_lst[0])
             self.LLAPI.UpdateVoyageCaptain(Voyage_id, voyage.pilots_lst[0])
+            self.LLAPI.UpdateHeadFlightAttendant(Voyage_id, voyage.flightAttendants_lst[0])
             print(str(cap.name) + ' Has Been set as voyage Captain')
+            
             return
         else:
             print('\nPlease Select what Pilot You Want To Make Captain:\n')
