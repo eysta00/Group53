@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 Longyearbyean,LYR,,
 
@@ -12,3 +13,19 @@ Tingwall,LWK,,
 Keflavik,KEF,,
 
 Spain,12,4,122456874
+=======
+destination,id,,,
+
+Longyearbyean,LYR,,,
+
+Nuuk,GOH,,,
+
+Kulusuk,KUS,,,
+
+Thorshavn,FAE,,,
+
+Tingwall,LWK,,,
+
+Keflavik,KEF,,,
+
+>>>>>>> 1fe8c2e5cae6b8cae69988d1c836f8243bc1fcd7
