@@ -9,14 +9,18 @@ class VoyageUI:
         self.header = "{:^8}|{:^15}|{:^25}|{:^12}|{:^20}|{:^14}|{:^9}|{:^21}|{:^21}|{:^21}|{:^21}".format("VoyageID","DestinationID", "Departure Time", "Aircraft ID", "Head flight attendant", "Captain SSN","IsStaffed", "Outgoing seats sold", "Outgoing Flight ID", "Incoming seats sold", "Incoming flight ID")
 
     def __print_information(self, voyage):
-        '''Prints information regarding voyages'''
-        is_full_bool = self.LLAPI.IsFullyStaffed(voyage)
-        row_len, coloumn_len = os.get_terminal_size()
-        row_len_half = 2 // row_len
-        seperator_str =("-" * (row_len - 1) + "\n")
-        info_str = "{:^8} {:^15} {:^25} {:^12} {:^20} {:^14} {:^9} {:^21} {:^21} {:^21} {:^21}".format(str(voyage.voyageID) ,str(voyage.destination), str(voyage.departureTime), 
-        str(voyage.aircraftID),str(voyage.headFlightAttendant), str(voyage.captain) ,str(is_full_bool),str(voyage.seatingSoldOutgoing), str(voyage.outgoingFlightID), str(voyage.seatingSoldIncoming), str(voyage.incomingFlightID))
-        print(seperator_str, info_str)
+        try:
+            '''Prints information regarding voyages'''
+            is_full_bool = self.LLAPI.IsFullyStaffed(voyage)
+            row_len, coloumn_len = os.get_terminal_size()
+            row_len_half = 2 // row_len
+            seperator_str =("-" * (row_len - 1) + "\n")
+            info_str = "{:^8} {:^15} {:^25} {:^12} {:^20} {:^14} {:^9} {:^21} {:^21} {:^21} {:^21}".format(str(voyage.voyageID) ,str(voyage.destination), str(voyage.departureTime), 
+            str(voyage.aircraftID),str(voyage.headFlightAttendant), str(voyage.captain) ,str(is_full_bool),str(voyage.seatingSoldOutgoing), str(voyage.outgoingFlightID), str(voyage.seatingSoldIncoming), str(voyage.incomingFlightID))
+            print(seperator_str, info_str)
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
     def register_Voyage(self):
         try:
@@ -61,6 +65,9 @@ class VoyageUI:
         except ValueError:
             print('The Selected date is invalid, month must be 1-12 and day must be 1-31')
             return
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
     def register_recuring_voyage(self):
         try:
@@ -103,6 +110,9 @@ class VoyageUI:
         except DepartureTimeOccupied:
             print("\nThe selected date and time already has a voyage, consider delaying the voyage, returning to main.")
             return
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
 
     def register_aircraft_to_voyage(self):
@@ -135,6 +145,9 @@ class VoyageUI:
 
         except EntryNotInDatabase:
             print('\nInvalid Voyage ID, returning to main')
+            return
+        except:
+            print("Unexpected error has occured, returning to home screen")
             return
 
     def register_employees_to_voyage(self):
@@ -178,101 +191,128 @@ class VoyageUI:
             print('\n' + employee_name + ' is already assigned to this flight')
         except AircraftNotRegistered:
             print('\nYou Must Assign a Plane to the Voyage before Assigning Staff, returning to main\n')
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
                 
     def assign_head_flightattendant_to_voyage(self):
-        print("Assign head flightattendant to voyage\n")
-        Voyage_id = input('Voyage ID: ')
-        voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
-        if len(voyage.flightAttendants_lst) < 1:
-            print('\nYou must assign a flight attendant to Voyage before assigning Head flight attendant.')
-            return
-        elif len(voyage.flightAttendants_lst) == 1:
-            flight_att = self.LLAPI.GetEmployeeBySSN(voyage.flightAttendants_lst[0])
-            self.LLAPI.UpdateVoyageHeadFlightAttendant(Voyage_id, voyage.flightAttendants_lst[0])
-            print(str(flight_att.name) + ' Has Been set as head flight attendant')
-            
-            return
-        else:
-            print('\nPlease Select what Flight Attendant You Want To Make Head flight attendant:\n')
-            for flight_person in voyage.flightAttendants_lst:
-                print(self.LLAPI.GetEmployeeBySSN(flight_person))
-            SSN = input('Flight attendant SSN: ')
-            if SSN not in voyage.flightAttendants_lst:
-                print('Invalid Selection, Returning to menu.')
+        try:
+            print("Assign head flightattendant to voyage\n")
+            Voyage_id = input('Voyage ID: ')
+            voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
+            if len(voyage.flightAttendants_lst) < 1:
+                print('\nYou must assign a flight attendant to Voyage before assigning Head flight attendant.')
                 return
-            self.LLAPI.UpdateVoyageHeadFlightAttendant(Voyage_id, SSN)
-            return 
+            elif len(voyage.flightAttendants_lst) == 1:
+                flight_att = self.LLAPI.GetEmployeeBySSN(voyage.flightAttendants_lst[0])
+                self.LLAPI.UpdateVoyageHeadFlightAttendant(Voyage_id, voyage.flightAttendants_lst[0])
+                print(str(flight_att.name) + ' Has Been set as head flight attendant')
+                
+                return
+            else:
+                print('\nPlease Select what Flight Attendant You Want To Make Head flight attendant:\n')
+                for flight_person in voyage.flightAttendants_lst:
+                    print(self.LLAPI.GetEmployeeBySSN(flight_person))
+                SSN = input('Flight attendant SSN: ')
+                if SSN not in voyage.flightAttendants_lst:
+                    print('Invalid Selection, Returning to menu.')
+                    return
+                self.LLAPI.UpdateVoyageHeadFlightAttendant(Voyage_id, SSN)
+                return 
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
     def assign_captain_to_voyage(self):
-        print("Assign captain to voyage\n")
-        Voyage_id = input('Voyage ID: ')
-        voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
-        if len(voyage.pilots_lst) < 1:
-            print('\nYou must assign more pilots to Voyage before assigning Captain, returning to main')
-            return
-
-        elif len(voyage.pilots_lst) == 1:
-            cap = self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0])
-            self.LLAPI.UpdateVoyageCaptain(Voyage_id, voyage.pilots_lst[0])
-            print('\n' + str(cap.name) + ' Has Been set as voyage Captain')
-            
-            return
-        else:
-            print('\nPlease Select what Pilot You Want To Make Captain:\n')
-            print(self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0]))
-            print(self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[1]))
-            capSSN = input('Pilot SSN: ')
-            if capSSN not in voyage.pilots_lst:
-                print('Invalid Selection, Returning to menu.')
+        try:
+            print("Assign captain to voyage\n")
+            Voyage_id = input('Voyage ID: ')
+            voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
+            if len(voyage.pilots_lst) < 1:
+                print('\nYou must assign more pilots to Voyage before assigning Captain, returning to main')
                 return
-            self.LLAPI.UpdateVoyageCaptain(Voyage_id, capSSN)
-            return 
+
+            elif len(voyage.pilots_lst) == 1:
+                cap = self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0])
+                self.LLAPI.UpdateVoyageCaptain(Voyage_id, voyage.pilots_lst[0])
+                print('\n' + str(cap.name) + ' Has Been set as voyage Captain')
+                
+                return
+            else:
+                print('\nPlease Select what Pilot You Want To Make Captain:\n')
+                print(self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[0]))
+                print(self.LLAPI.GetEmployeeBySSN(voyage.pilots_lst[1]))
+                capSSN = input('Pilot SSN: ')
+                if capSSN not in voyage.pilots_lst:
+                    print('Invalid Selection, Returning to menu.')
+                    return
+                self.LLAPI.UpdateVoyageCaptain(Voyage_id, capSSN)
+                return 
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
     def print_voyage_for_day(self):
-        year = int(input("Input year: "))
-        month = int(input("Input month: "))
-        day = int(input("Input day: "))
-        date_iso = datetime(year, month, day).isoformat()
-        voyages = self.LLAPI.ListVoyagesForGivenDay(date_iso)
+        try:
+            year = int(input("Input year: "))
+            month = int(input("Input month: "))
+            day = int(input("Input day: "))
+            date_iso = datetime(year, month, day).isoformat()
+            voyages = self.LLAPI.ListVoyagesForGivenDay(date_iso)
 
-        if len(voyages) == 0:
-            print("\nNo Assigned Voyages for date: ", date_iso)
+            if len(voyages) == 0:
+                print("\nNo Assigned Voyages for date: ", date_iso)
+                return
+
+            print(self.header)
+            for voyage in voyages:
+                self.__print_information(voyage)
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
             return
 
-        print(self.header)
-        for voyage in voyages:
-            self.__print_information(voyage)
-        print("\n")
-
     def print_voyage_for_week(self):
-        print("Input first day of the week you want to look at")
-        year = int(input("Input year: "))
-        month = int(input("Input month: "))
-        day = int(input("Input day: "))
-        date_iso = datetime(year, month, day).isoformat()
-        voyages = self.LLAPI.ListVoyagesForGivenWeek(date_iso)
-        print(self.header)
-        for voyage in voyages:
-            self.__print_information(voyage)
-        print("\n")
+        try:
+            print("Input first day of the week you want to look at")
+            year = int(input("Input year: "))
+            month = int(input("Input month: "))
+            day = int(input("Input day: "))
+            date_iso = datetime(year, month, day).isoformat()
+            voyages = self.LLAPI.ListVoyagesForGivenWeek(date_iso)
+            print(self.header)
+            for voyage in voyages:
+                self.__print_information(voyage)
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
     def print_Voyages(self):
-        row_len, coloumns_len = os.get_terminal_size()
-        print("\n\tList all Voyages")
-        Voyages = self.LLAPI.ListAllVoyages()
-        print(self.header)
-        for Voyage in Voyages:
-            self.__print_information(Voyage)
-        print("\n")
+        try:
+            row_len, coloumns_len = os.get_terminal_size()
+            print("\n\tList all Voyages")
+            Voyages = self.LLAPI.ListAllVoyages()
+            print(self.header)
+            for Voyage in Voyages:
+                self.__print_information(Voyage)
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
     
     def print_voyage_by_dest(self):
         # destinations = self.LLAPI.
-        dest_id = input("Destination ID: ")
-        Voyages = self.LLAPI.ListVoyagesForDestination(dest_id)
-        print(self.header)
-        for voyage in Voyages:
-            self.__print_information(voyage)
-        print("\n")
+        try:
+            dest_id = input("Destination ID: ")
+            Voyages = self.LLAPI.ListVoyagesForDestination(dest_id)
+            print(self.header)
+            for voyage in Voyages:
+                self.__print_information(voyage)
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
     def UpdateVoyageCaptain(self):
         Voyage_id = input("Enter voyage ID:")
@@ -288,6 +328,9 @@ class VoyageUI:
         except EntryNotInDatabase:
             print("ERROR! Pilot not found, please correct ssn")
             return UpdateVoyageCaptain()
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
     def soldSeatsForVoyage(self):
         try:
@@ -315,12 +358,19 @@ class VoyageUI:
             return
         except AircraftNotRegistered:
             print("\nYou must register an aircraft to the voyage before selling seats.")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 # test1 = VoyageUI()
 # test1.addVoyage()
 
     def ListStatusOfVoyages(self):
-        voyages = self.LLAPI.ListAllVoyages()
-        print("\n{:10} {:15} {:20} {:30}".format("Voyage ID", "Airport", "Departure Time", 'Voyage Status'))
-        
-        for voy in voyages:
-            print("\n{:10} {:15} {:20} {:30}".format(voy.voyageID, self.LLAPI.GetDestinationByDestinationID(voy.destination).airport_str, voy.departureTime, self.LLAPI.GetVoyageStatus(voy)))
+        try:
+            voyages = self.LLAPI.ListAllVoyages()
+            print("\n{:10} {:15} {:20} {:30}".format("Voyage ID", "Airport", "Departure Time", 'Voyage Status'))
+            
+            for voy in voyages:
+                print("\n{:10} {:15} {:20} {:30}".format(voy.voyageID, self.LLAPI.GetDestinationByDestinationID(voy.destination).airport_str, voy.departureTime, self.LLAPI.GetVoyageStatus(voy)))
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return

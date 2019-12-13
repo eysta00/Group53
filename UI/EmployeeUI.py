@@ -8,117 +8,141 @@ class EmployeeUI:
         self.header = "{:40}\t{:10}\t{:20}\t{:10}\t{:35}\t{:20}\t{}".format("Name", "SSN", "Address", "Phone", "Email", "Pilot status", "Licenses")
 
     def print_register_employee(self):
-        rows_len, columns_len = os.get_terminal_size() # checks on length of terminal, this repeats.
+        try:
+            rows_len, columns_len = os.get_terminal_size() # checks on length of terminal, this repeats.
 
-        print("\n\tRegister a new employee")
-        print("-" * (rows_len - 1))
-        e_name = input("Full employee name: ")
-        e_ssn = input("Employee social securtiy number: ")
-        e_address = input("Employee Address: ")
-        e_phone = input("Employe phone number: ")
-        e_email = input("Employee email: ")
-        
-        e_pilot = input("Is employee a pilot? yes/no: ").lower()
-        if e_pilot == "yes":
-            e_pilot = True
-            e_planelicense = input("Employee plane license: ")
-        else:
-            e_planelicense = None
-            e_pilot = False
-        
-        error = self.LLAPI.RegisterEmployee(e_name, e_ssn, e_address, e_phone, e_email, e_pilot, e_planelicense)
-        if error != 1:
-            print("Error, input not valid!")
-            repeat_inquiry = input("Would you like to try again? yes/no: ").lower()
-            if repeat_inquiry == "yes":
-                return print_register_employee()
-        print(("-" * (int((rows_len - 24) / 2))) + "New Employee Registered" + ("-" * ((int((rows_len -24) / 2)))))
-        print(self.header)
-        print("-" * (rows_len - 1))
-        new_employee = self.LLAPI.GetEmployeeBySSN(e_ssn)
-        print(new_employee)
-        print("-" * (rows_len - 1))
-        print("\n")
-        return
-    
-    def print_all_employees(self):
-        rows_len, columns_len = os.get_terminal_size()
-
-        print("\n\tList all employess\n")
-
-        print(self.header)
-        all_employees = self.LLAPI.ListAllEmployees()
-        for employee in all_employees:
+            print("\n\tRegister a new employee")
             print("-" * (rows_len - 1))
-            print(employee)
+            e_name = input("Full employee name: ")
+            e_ssn = input("Employee social securtiy number: ")
+            e_address = input("Employee Address: ")
+            e_phone = input("Employe phone number: ")
+            e_email = input("Employee email: ")
             
-        print("\n")
-        
-    def print_flight_attendants(self):
-        rows_len, columns_len = os.get_terminal_size()
-
-        print("\n\tList all flight attendants")
-        print("-" * (rows_len-1))
-        print(self.header)
-        flight_attendants = self.LLAPI.ListFlightAttendants()
-        for attendant in flight_attendants:
-            print("-" * (rows_len-1))
-            print(attendant)
-        print("\n")
-    
-    def print_pilots(self):
-        rows_len, columns_len = os.get_terminal_size()
-
-
-        print("\n\tList all pilots")
-        print("-" * (rows_len - 1))
-        print(self.header)
-
-        all_pilots = self.LLAPI.ListPilots()
-        for pilot in all_pilots:
-            print("-" * (rows_len - 1))
-            print(pilot)
-        print("\n")
-    
-    def print_assigned_employees(self):
-        rows_len, columns_len = os.get_terminal_size()
-
-        print("\n\tList all already assigned employees on a given day")
-        year = int(input("Input year: "))
-        month = int(input("Input month: "))
-        day = int(input("Input day: "))
-        date_iso = datetime(year, month, day).isoformat()
-        assinged_employees = self.LLAPI.ListAssignedEmployees(date_iso)
-        if len(assinged_employees) < 1:
-            print("\nThere are no employees assigned on the imputed day ")
-        else:
+            e_pilot = input("Is employee a pilot? yes/no: ").lower()
+            if e_pilot == "yes":
+                e_pilot = True
+                e_planelicense = input("Employee plane license: ")
+            else:
+                e_planelicense = None
+                e_pilot = False
+            
+            error = self.LLAPI.RegisterEmployee(e_name, e_ssn, e_address, e_phone, e_email, e_pilot, e_planelicense)
+            if error != 1:
+                print("Error, input not valid!")
+                repeat_inquiry = input("Would you like to try again? yes/no: ").lower()
+                if repeat_inquiry == "yes":
+                    return print_register_employee()
+            print(("-" * (int((rows_len - 24) / 2))) + "New Employee Registered" + ("-" * ((int((rows_len -24) / 2)))))
             print(self.header)
             print("-" * (rows_len - 1))
-            for employee in assinged_employees:
+            new_employee = self.LLAPI.GetEmployeeBySSN(e_ssn)
+            print(new_employee)
+            print("-" * (rows_len - 1))
+            print("\n")
+            return
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
+    
+    def print_all_employees(self):
+        try:
+            rows_len, columns_len = os.get_terminal_size()
+
+            print("\n\tList all employess\n")
+
+            print(self.header)
+            all_employees = self.LLAPI.ListAllEmployees()
+            for employee in all_employees:
                 print("-" * (rows_len - 1))
                 print(employee)
-        print("\n")
+                
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
+        
+    def print_flight_attendants(self):
+        try;
+            rows_len, columns_len = os.get_terminal_size()
+
+            print("\n\tList all flight attendants")
+            print("-" * (rows_len-1))
+            print(self.header)
+            flight_attendants = self.LLAPI.ListFlightAttendants()
+            for attendant in flight_attendants:
+                print("-" * (rows_len-1))
+                print(attendant)
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
+    
+    def print_pilots(self):
+        try:
+            rows_len, columns_len = os.get_terminal_size()
+
+
+            print("\n\tList all pilots")
+            print("-" * (rows_len - 1))
+            print(self.header)
+
+            all_pilots = self.LLAPI.ListPilots()
+            for pilot in all_pilots:
+                print("-" * (rows_len - 1))
+                print(pilot)
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
+    
+    def print_assigned_employees(self):
+        try:
+            rows_len, columns_len = os.get_terminal_size()
+
+            print("\n\tList all already assigned employees on a given day")
+            year = int(input("Input year: "))
+            month = int(input("Input month: "))
+            day = int(input("Input day: "))
+            date_iso = datetime(year, month, day).isoformat()
+            assinged_employees = self.LLAPI.ListAssignedEmployees(date_iso)
+            if len(assinged_employees) < 1:
+                print("\nThere are no employees assigned on the imputed day ")
+            else:
+                print(self.header)
+                print("-" * (rows_len - 1))
+                for employee in assinged_employees:
+                    print("-" * (rows_len - 1))
+                    print(employee)
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
     
     def print_unassigned_employees(self):
-        rows_len, columns_len = os.get_terminal_size()
-        
-        print("\n\tList all unassigned employees on a given day")
-        year = int(input("Input year: "))
-        month = int(input("Input month: "))
-        day = int(input("Input day: "))
-        date_iso = datetime(year, month, day).isoformat()
-        unassinged_employees = self.LLAPI.ListUnassignedEmployees(date_iso)
-        if len(unassinged_employees) < 1:
-            print("There are no employees that are unassigned")
-        else:
-            print(self.header)
-            print("-" * (rows_len - 1))
-            for employee in unassinged_employees:
+        try:
+            rows_len, columns_len = os.get_terminal_size()
+            
+            print("\n\tList all unassigned employees on a given day")
+            year = int(input("Input year: "))
+            month = int(input("Input month: "))
+            day = int(input("Input day: "))
+            date_iso = datetime(year, month, day).isoformat()
+            unassinged_employees = self.LLAPI.ListUnassignedEmployees(date_iso)
+            if len(unassinged_employees) < 1:
+                print("There are no employees that are unassigned")
+            else:
+                print(self.header)
                 print("-" * (rows_len - 1))
-                print(employee)
-        
-        print("\n")
+                for employee in unassinged_employees:
+                    print("-" * (rows_len - 1))
+                    print(employee)
+            
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
     def print_update_employee_infomation(self):
         try:
@@ -209,21 +233,28 @@ class EmployeeUI:
         except AttributeError:
             print("ERROR! you put in the wrong ssn! please try again")
             return
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
 
 
     def print_pilots_with_aircraft_privilage(self):
-        rows_len, columns_len = os.get_terminal_size()
+        try:
+            rows_len, columns_len = os.get_terminal_size()
 
-        print("\n\tList all pilots with a certain aircraft privilage")
-        aircraft_model = input("Input aircraft model (case sensitive): ")
-        pilot_licenses = self.LLAPI.ListPilotsWithAircraftPrivilege(aircraft_model)
-        print(self.header)
-        print("-" * (rows_len - 1))
-        for pilot_license in pilot_licenses:
-            print(pilot_license)
+            print("\n\tList all pilots with a certain aircraft privilage")
+            aircraft_model = input("Input aircraft model (case sensitive): ")
+            pilot_licenses = self.LLAPI.ListPilotsWithAircraftPrivilege(aircraft_model)
+            print(self.header)
             print("-" * (rows_len - 1))
-        print("\n")
+            for pilot_license in pilot_licenses:
+                print(pilot_license)
+                print("-" * (rows_len - 1))
+            print("\n")
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
     def print_work_summary(self):
         rows_len, columns_len = os.get_terminal_size()
@@ -270,6 +301,9 @@ class EmployeeUI:
 
         except ValueError:
             print('\nDates must be within defined ranges, months 1-12, days 1-31.\n')
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
 
     def print_specific_employee(self):
         try:
@@ -285,3 +319,6 @@ class EmployeeUI:
             print("{:30}\t{:10}\t{:20}\t{:10}\t{:25}\t{:20}\t{}".format(emp.name, emp.ssn, emp.address, emp.phone, emp.email, pilot, emp.planeType))
         except EntryNotInDatabase:
             print("\nThere is No employee with the name " + employee_name)
+        except:
+            print("Unexpected error has occured, returning to home screen")
+            return
