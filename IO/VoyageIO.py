@@ -125,7 +125,35 @@ class VoyageIO():
         with open(self.filePath, 'r') as csv_file:
             csvReader = csv.DictReader(csv_file, fieldnames = self.__fieldNames_lst)
             for row in csvReader:
-                    return_list.append(Voyage(row['voyageID'], row['destination'], row['departureTime'], row['aircraftID'], row['pilots_lst'], row['flightAttendants_lst'], row['captain'], row['headFlightAttendant'], row['seatingSoldOutgoing'], row['seatingSoldIncoming'], row['outgoingFlightID'], row['incomingFlightID']))
+                voyageID = row['voyageID']
+                destination = row['destination']
+                departureTime = row['departureTime']
+                aircraftID = row['aircraftID']
+                # print(row['pilots_lst'])
+                # print(type(row['pilots_lst']))
+                pilots_lst = row['pilots_lst'].strip('][').split(', ') # this code is to convert pilots list to 
+                pilots_lst = [s.replace("'", "") for s in pilots_lst]
+                flightAttendants_lst = row['flightAttendants_lst'].strip('][').split(', ')
+                flightAttendants_lst = [s.replace("'", "") for s in flightAttendants_lst]
+                if pilots_lst[0] == '' and len(pilots_lst) == 1: # avoiding the list returning with one empty string
+                    pilots_lst = []
+                if flightAttendants_lst[0] == '' and len(flightAttendants_lst) == 1:
+                    flightAttendants_lst = []
+                captain = row['captain']
+                headFlightAttendant = row['headFlightAttendant']
+                seatingSoldOutgoing = row['seatingSoldOutgoing']
+                seatingSoldIncoming = row['seatingSoldIncoming']
+                outgoingFlightID = row['outgoingFlightID']
+                incomingFlightID = row['incomingFlightID']
+                if seatingSoldOutgoing == '':
+                    seatingSoldOutgoing = 0
+                if seatingSoldIncoming == '':
+                    seatingSoldIncoming = 0
+                if pilots_lst == '':
+                    pilots_lst = []
+                if flightAttendants_lst == '':
+                    flightAttendants_lst = []
+                return_list.append(Voyage(voyageID, destination, departureTime, aircraftID, pilots_lst, flightAttendants_lst, captain, headFlightAttendant, seatingSoldOutgoing, seatingSoldIncoming, outgoingFlightID, incomingFlightID))
         return return_list
 
 
