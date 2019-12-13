@@ -8,6 +8,8 @@ class VoyageUI:
         self.LLAPI = LLAPI()
         self.header = "{:^8}|{:^15}|{:^25}|{:^12}|{:^20}|{:^14}|{:^9}|{:^21}|{:^21}|{:^21}|{:^21}".format("VoyageID","DestinationID", "Departure Time", "Aircraft ID", "Head flight attendant", "Captain SSN","IsStaffed", "Outgoing seats sold", "Outgoing Flight ID", "Incoming seats sold", "Incoming flight ID")
 
+
+# private method to format prints
     def __print_information(self, voyage):
         '''Prints information regarding voyages'''
         is_full_bool = self.LLAPI.IsFullyStaffed(voyage)
@@ -18,6 +20,8 @@ class VoyageUI:
         str(voyage.aircraftID),str(voyage.headFlightAttendant), str(voyage.captain) ,str(is_full_bool),str(voyage.seatingSoldOutgoing), str(voyage.outgoingFlightID), str(voyage.seatingSoldIncoming), str(voyage.incomingFlightID))
         print(seperator_str, info_str)
 
+
+# method to register a new voyage
     def register_Voyage(self):
         try:
             print('\n##### Register New Voyage #####\n')
@@ -62,13 +66,14 @@ class VoyageUI:
             print('The Selected date is invalid, month must be 1-12 and day must be 1-31')
             return
 
+
+# Method to register recurring voyages
     def register_recuring_voyage(self):
         try:
             print('\nRegister A recurring voyage\n')
 
             destinations = self.LLAPI.ListAllDestinations()
             idList = [str(dest.dest_id) for dest in destinations]
-            # print(idList)
             print('Available Destinations:')
             print('ID \t Name')
             for dest in destinations:
@@ -104,7 +109,7 @@ class VoyageUI:
             print("\nThe selected date and time already has a voyage, consider delaying the voyage, returning to main.")
             return
 
-
+# Method to register an aircraft to a voyage
     def register_aircraft_to_voyage(self):
         try:
             Voyage_id = input('Enter Desired Voyage ID: ')
@@ -137,6 +142,7 @@ class VoyageUI:
             print('\nInvalid Voyage ID, returning to main')
             return
 
+# Method to register an employee to a voyage
     def register_employees_to_voyage(self):
         employee_name = "default"
         try:
@@ -179,6 +185,8 @@ class VoyageUI:
         except AircraftNotRegistered:
             print('\nYou Must Assign a Plane to the Voyage before Assigning Staff, returning to main\n')
                 
+
+# Method to assign a head flightattendant to a voyage
     def assign_head_flightattendant_to_voyage(self):
         print("Assign head flightattendant to voyage\n")
         Voyage_id = input('Voyage ID: ')
@@ -203,6 +211,8 @@ class VoyageUI:
             self.LLAPI.UpdateVoyageHeadFlightAttendant(Voyage_id, SSN)
             return 
 
+
+# method to assign a captain to a voyage
     def assign_captain_to_voyage(self):
         print("Assign captain to voyage\n")
         Voyage_id = input('Voyage ID: ')
@@ -228,6 +238,7 @@ class VoyageUI:
             self.LLAPI.UpdateVoyageCaptain(Voyage_id, capSSN)
             return 
 
+# method to print all voyages for a given day
     def print_voyage_for_day(self):
         year = int(input("Input year: "))
         month = int(input("Input month: "))
@@ -244,6 +255,8 @@ class VoyageUI:
             self.__print_information(voyage)
         print("\n")
 
+
+# method to print all voyages for a certain week
     def print_voyage_for_week(self):
         print("Input first day of the week you want to look at")
         year = int(input("Input year: "))
@@ -256,6 +269,7 @@ class VoyageUI:
             self.__print_information(voyage)
         print("\n")
 
+# method to print all voyages
     def print_Voyages(self):
         row_len, coloumns_len = os.get_terminal_size()
         print("\n\tList all Voyages")
@@ -265,6 +279,8 @@ class VoyageUI:
             self.__print_information(Voyage)
         print("\n")
     
+
+# Methed to print all voyages by destination
     def print_voyage_by_dest(self):
         # destinations = self.LLAPI.
         dest_id = input("Destination ID: ")
@@ -274,6 +290,7 @@ class VoyageUI:
             self.__print_information(voyage)
         print("\n")
 
+# Method to update a voyages captain
     def UpdateVoyageCaptain(self):
         Voyage_id = input("Enter voyage ID:")
         pilot_ssn = input("Enter pilot ID:")
@@ -289,14 +306,15 @@ class VoyageUI:
             print("ERROR! Pilot not found, please correct ssn")
             return UpdateVoyageCaptain()
 
+
+# Method to sell seats to a voyage
     def soldSeatsForVoyage(self):
         try:
             Voyage_id = input("Enter voyage ID:")
             voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id) # so error code hits at the right moment
             flightType = input("Is the flight:\n 1. Outgoing\n 2. Incoming\nFromIceland?: ")
-            sold_seats = input("Enter seats:")  #not sure about this
+            sold_seats = input("Enter seats:") 
             if flightType.lower() == "outgoing" or flightType == '1':
-                # print('going into outgoingl thing')
                 self.LLAPI.SellSeatsForVoyageOutgoing(Voyage_id ,int(sold_seats))
                 print('\nSold ' + str(sold_seats) + ' seats for the flight, the total is now ' + str(int(sold_seats) + int(voyage.seatingSoldOutgoing)))
                 return
@@ -315,8 +333,6 @@ class VoyageUI:
             return
         except AircraftNotRegistered:
             print("\nYou must register an aircraft to the voyage before selling seats.")
-# test1 = VoyageUI()
-# test1.addVoyage()
 
     def ListStatusOfVoyages(self):
         voyages = self.LLAPI.ListAllVoyages()

@@ -8,14 +8,15 @@ class DestinationUI:
         self.LLAPI = LLAPI()
         self.header = "{:20}{:25}{:25}{:25}{:35}{:25}{:25}".format("Destination ID", "Country", "Airport",
         "Flight Duration", "Distance From Reykjavik", "Contact Name", "Contact Number")
-    
+
+    # private method for formatting prints    
     def __printing_information(self, destination):
         information_str = "{:20}{:25}{:25}{:25}{:35}{:25}{:25}".format(str(destination.dest_id), str(destination.country_str), str(destination.airport_str),
         str(destination.flight_duration), str(destination.distanceFromReykjavik), str(destination.contactName_str), str(destination.contactNr_str))
         len_rows, len_coloumns = os.get_terminal_size()
         return information_str
 
-
+# method to register a new destination
     def register_destination(self):
         print("\n\tRegister a new destination")
         destination_country = input('Country: ')
@@ -29,6 +30,7 @@ class DestinationUI:
         
         return
 
+# method to print all destinations in the system
     def print_destinations(self):
         print("\n\tList all destinations\n")
         destinations = self.LLAPI.ListAllDestinations()
@@ -37,17 +39,17 @@ class DestinationUI:
             print(self.__printing_information(destination))
         print("\n")
       
+
+# Method to change destination contact info
     def change_destination_contact_info(self):
         print("\n\tUpdate destination information")
         dest_id = input("Destination ID: ")
         contactNr = input("New contact number: ")
         contact = self.LLAPI.UpdateDestinationContactNumber(dest_id, contactNr)
 
+
+# Method to show the most popular destination
     def most_popular_destinations(self):
         most_dest = self.LLAPI.MostPopularDestination()
         print(self.header)
         print(self.__printing_information(most_dest))
-
-#test1 = DestinationUI()
-#test1.print_destinations()
-#test1.register_destination()

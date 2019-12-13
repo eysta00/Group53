@@ -7,6 +7,7 @@ class EmployeeUI:
         self.LLAPI = LLAPI()
         self.header = "{:40}\t{:10}\t{:20}\t{:10}\t{:35}\t{:20}\t{}".format("Name", "SSN", "Address", "Phone", "Email", "Pilot status", "Licenses")
 
+# method to register a new employee
     def print_register_employee(self):
         rows_len, columns_len = os.get_terminal_size() # checks on length of terminal, this repeats.
 
@@ -41,6 +42,7 @@ class EmployeeUI:
         print("\n")
         return
     
+    # Metheod to print all employees
     def print_all_employees(self):
         rows_len, columns_len = os.get_terminal_size()
 
@@ -54,6 +56,7 @@ class EmployeeUI:
             
         print("\n")
         
+    # method to print all flight attendants
     def print_flight_attendants(self):
         rows_len, columns_len = os.get_terminal_size()
 
@@ -66,6 +69,7 @@ class EmployeeUI:
             print(attendant)
         print("\n")
     
+    # method to print  all pilots
     def print_pilots(self):
         rows_len, columns_len = os.get_terminal_size()
 
@@ -80,6 +84,7 @@ class EmployeeUI:
             print(pilot)
         print("\n")
     
+    # method to print assigned employees
     def print_assigned_employees(self):
         rows_len, columns_len = os.get_terminal_size()
 
@@ -99,7 +104,7 @@ class EmployeeUI:
                 print(employee)
         print("\n")
 
-    
+    # method to print unassigned employees
     def print_unassigned_employees(self):
         rows_len, columns_len = os.get_terminal_size()
         
@@ -120,6 +125,8 @@ class EmployeeUI:
         
         print("\n")
 
+
+    # method to update infomation of an employee
     def print_update_employee_infomation(self):
         try:
             finalize = True
@@ -211,7 +218,7 @@ class EmployeeUI:
             return
 
 
-
+# prints all pilots with a certain aircrat priveldge
     def print_pilots_with_aircraft_privilage(self):
         rows_len, columns_len = os.get_terminal_size()
 
@@ -225,6 +232,8 @@ class EmployeeUI:
             print("-" * (rows_len - 1))
         print("\n")
 
+
+# prints a worksummary for an employee
     def print_work_summary(self):
         rows_len, columns_len = os.get_terminal_size()
 
@@ -276,6 +285,8 @@ class EmployeeUI:
         except ValueError:
             print('\nDates must be within defined ranges, months 1-12, days 1-31.\n')
 
+
+# method to print infomation on a specific employee
     def print_specific_employee(self):
         try:
             employee_name = input('Input employee name: ')

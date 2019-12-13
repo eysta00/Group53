@@ -7,6 +7,7 @@ class AircraftUI:
     def __init__(self):
         self.LLAPI = LLAPI()
 
+# method to register a new aircraft
     def register_aircraft(self):
         manufacturer = input('Enter Aircraft Manufacturer: ')
         model = input('Enter Aircraft Model: ')
@@ -16,6 +17,7 @@ class AircraftUI:
         
         return
 
+# method to print all aircrafts
     def print_aircrafts(self):
         print("\n##### List All Aircrafts #####\n")
         aircrafts = self.LLAPI.ListAllAircrafts()
@@ -23,22 +25,19 @@ class AircraftUI:
             print(aircraft)
         print("\n")
     
+# method to show status of all aircrafts
     def showAircraftStatus(self):
         print("\nAircraft Status")
-        # aircrafts = self.LLAPI.AircraftStatus()
         id = input("\nEnter Aircraft ID: ")
         try:
             aircraftStatus = self.LLAPI.AircraftStatus(id, datetime.now().isoformat())
             print("\nThe Aircraft is " + aircraftStatus)
         except EntryNotInDatabase:
             print("The entered Aircraft ID does not correspond to an entry in the database.")
-        # if id in aircrafts:
-        #     return LLAPI().ShowStatusOfAircrafts()
-        # else:
-        #     print("Aircraft ID not found!")
 
         print("\n")
     
+# method to print available aircrafts
     def printAvailableAircrafts(self):
         aircrafts = self.LLAPI.ShowStatusOfAircrafts()
         for aircraft in aircrafts:

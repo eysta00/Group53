@@ -12,11 +12,12 @@ class VoyageLL:
         self.data = IOAPI()
 
 
-# Method to list all voyages in teh
+# Method to list all voyages in the system
     def ListAllVoyages(self):
         voyages = self.data.getAllVoyages()
         return voyages
 
+# Method to list all upcoming voyages
     def ListUpcomingVoyages(self):
         voyages = self.data.getAllVoyages()
         nowParsed = datetime.now()
@@ -28,11 +29,13 @@ class VoyageLL:
         upcomingVoyages.sort(key=lambda x: parse(x.departureTime))
         return upcomingVoyages
 
+
+# Method to get a specifiv voyage by voyage id
     def getVoyageByVoyageID(self, voyageID):
         return self.data.getVoyageByVoyageID(voyageID)
 
 
-    # We should possibly edit the code so that it doesn't access the stored instances in the classes directly but through methods
+# Method to add staff to a voyage
     def AddStaffToVoyage(self, voyageID, employeeSSN): 
 
         voyage = self.data.getVoyageByVoyageID(voyageID)
@@ -44,17 +47,11 @@ class VoyageLL:
         except EntryNotInDatabase:
             raise AircraftNotRegistered
         
-        print(employee) # did not run nor raise error
         
         if str(employeeSSN) in voyage.pilots_lst or str(employeeSSN) in voyage.flightAttendants_lst:
             raise EmployeeAlreadyAssigned('This employee is already assigned to this voyage')
 
-        # print(employee.pilot_bool)
-        # print(type(employee.pilot_bool))
         if employee.pilot_bool:
-            # print(voyage.pilots_lst)
-            # print(type(voyage.pilots_lst))
-            # print(voyage.pilots_lst)
             if employee.planeType != aircraft.model:
                 print('hi')
             voyage.pilots_lst.append(employeeSSN)
@@ -64,6 +61,7 @@ class VoyageLL:
         self.data.updateVoyage(voyage)
 
 
+# Method to assign an aircraft to a voyage
     def assignAircraftToVoyage(self, voyageID, aircraftID):
         
         voyage = self.data.getVoyageByVoyageID(voyageID)
@@ -71,10 +69,9 @@ class VoyageLL:
         self.data.updateVoyage(voyage)
         
 
-
+# Method to add voyage to the system
     def addVoyage(self, apiself, destination_id, flightTime_str):
         
-        # implement logic checking if there's enough staff available at the given time here
 
         if not self._isDepartureTimeFree(flightTime_str):
             raise DepartureTimeOccupied('There is already a flight at that time')
@@ -96,7 +93,7 @@ class VoyageLL:
         voyage = Voyage(self._GenerateNewVoyageID(), destination_id, flightTime_str, outgoingFlightID=flightIDs_lst_str[0], incomingFlightID=flightIDs_lst_str[1])
         self.data.addVoyage(voyage)
         
-        
+    # Method to add recuring voyages
     def AddRecurringVoyages(self, apiself, destination_id, flightTime_str, dayInterval_int, quantity_int):
         parsedTime = parse(flightTime_str)
         deltaTime = relativedelta(days = +dayInterval_int)
@@ -108,7 +105,7 @@ class VoyageLL:
 
         
 
-
+# List all voyages for a given day
     def ListVoyagesForGivenDay(self, date_iso):
         voyages = self.data.getAllVoyages()
         voyagesOnDay_lst = []
@@ -122,14 +119,12 @@ class VoyageLL:
                 voyagesOnDay_lst.append(voy)
         return voyagesOnDay_lst
             
-
+# list all voyages in the upcoming week
     def ListVoyagesForGivenWeek(self, date_iso): # the input date is the first day in the week
         voyages = self.data.getAllVoyages()
         voyagesInWeek_lst = []
         dateParced = parse(date_iso)
         weekLaterParced = dateParced + relativedelta(days=+7)
-        # print(dateParced)
-        # print(weekLaterParced)
         for voy in voyages:
             parsedStartTime = parse(voy.departureTime)
             parsedEndTime = parse(self._getEndTimeOfVoyage(voy))
@@ -137,7 +132,7 @@ class VoyageLL:
                 voyagesInWeek_lst.append(voy)
         return voyagesInWeek_lst
 
-
+# List all pilots for a voyage
     def ListVoyagePilots(self, voyageID):
         voyage = self.data.getVoyageByVoyageID(voyageID)
         pilotsSSN_lst = voyage.pilots_lst
@@ -146,6 +141,7 @@ class VoyageLL:
             pilots_emp.append(self.data.getEmployeeBySSN(pilotSSN))
         return pilots_emp
 
+# list all flightattendants for a voyage
     def ListVoyageFlightAttendants(self, voyageID):
         voyage = self.data.getVoyageByVoyageID(voyageID)
         flightAttendantsSSN_lst = voyage.flightAttendants_lst
@@ -154,28 +150,26 @@ class VoyageLL:
             flightAttendats_emp.append(self.data.getEmployeeBySSN(flightAttendatSSN))
         return flightAttendats_emp
 
-
+# update the voyage captain
     def UpdateVoyageCaptain(self,voyageID, pilotSSN):
         voyage = self.data.getVoyageByVoyageID(voyageID)
         voyage.captain = pilotSSN
         self.data.updateVoyage(voyage)
 
+# update the head flight attendant for the voyage
     def UpdateVoyageHeadFlightAttendant(self, voyageID, flightAttendantSSN):
         voyage = self.data.getVoyageByVoyageID(voyageID)
         voyage.headFlightAttendant = flightAttendantSSN 
         self.data.updateVoyage(voyage)
 
+# sell seats for the voyage
     def SellSeatsForVoyageOutgoing(self, voyageID, soldSeats):
         voyage = self.data.getVoyageByVoyageID(voyageID)
         
-        # Raise exception if no aircraft has been registered
         try:
             aircraft = self.data.getAircraftByAircraftID(voyage.aircraftID)
         except EntryNotInDatabase:
             raise AircraftNotRegistered('The voyage does not have a Aircraft registered')
-        # print("1. " + str(voyage.seatingSoldOutgoing))
-        # print("2. " + str(soldSeats))
-        # print("3. " + str(aircraft.total_seats_int))
         if (int(voyage.seatingSoldOutgoing) + int(soldSeats)) > int(aircraft.total_seats_int):
 
             raise NotEnoughSeats("There are not enough available seats")
@@ -183,14 +177,11 @@ class VoyageLL:
             voyage.seatingSoldOutgoing = int(voyage.seatingSoldOutgoing) + int(soldSeats)
             self.data.updateVoyage(voyage)
             return
-    
+
+# sell seats for the incoming flight of a voyage    
     def SellSeatsForVoyageIncoming(self, voyageID, soldSeats):
         voyage = self.data.getVoyageByVoyageID(voyageID)
-        # Raise exception if no aircraft has been registered
         aircraft = self.data.getAircraftByAircraftID(voyage.aircraftID)
-        # print("1. " + str(voyage.seatingSoldIncoming))
-        # print("2. " + str(soldSeats))
-        # print("3. " + str(aircraft.total_seats_int))
         if (int(voyage.seatingSoldIncoming) + int(soldSeats)) > int(aircraft.total_seats_int):
             return -1
         else:
@@ -198,6 +189,8 @@ class VoyageLL:
             self.data.updateVoyage(voyage)
             return 1
 
+
+# List all voyages for a given destination
     def ListVoyagesForDestination(self, dest_id):
         voyages = self.data.getAllVoyages()
         voyForDest = []
@@ -207,9 +200,11 @@ class VoyageLL:
                 voyForDest.append(voy)
         return voyForDest
 
+# returns weather the voyage has been fully staffed
     def IsFullyStaffed(self, voyage):
         return len(voyage.pilots_lst) > 1 and len(voyage.flightAttendants_lst) > 0
 
+# Get the status of the voyage
     def GetVoyageStatus(self, voyage):
         voyageTimes = self._getTimeOfVoyageActivities(voyage)
         timeNow = datetime.now()
@@ -225,7 +220,7 @@ class VoyageLL:
             return "Voyage is Complete"
 
 
-
+# Private Method to get all inner times of a voyage
     def _getTimeOfVoyageActivities(self, voyage): # returns list [<Departure from iceland>, <Arrival at destination>, <departure from destination>, <Arrival at Iceland>]
         destination = self.data.getDestinationByDestinationID(voyage.destination)
         
@@ -249,6 +244,7 @@ class VoyageLL:
         return [DepartureFromIceland, ArrivalAtDestination, DepartureFromDestination, ArrivalAtIceland] # Assuming the rest at destination is 1 hour
 
 
+# private method to say weather a time is free for an new flight
     def _isDepartureTimeFree(self, flightTime_str_iso):
         voyages = self.data.getAllVoyages()
         parsedTime = parse(flightTime_str_iso)
@@ -257,6 +253,7 @@ class VoyageLL:
                 return False
         return True
 
+# private method to generate a new flight id
     def _GenerateFlightID(self, destinationID, departureTime):
         outgoingFlightID_str = 'NA'
         incomingFlightID_str = 'NA'
@@ -271,6 +268,7 @@ class VoyageLL:
         return [outgoingFlightID_str, incomingFlightID_str]
 
 
+# private methdo to find the hightest flight id
     def _HighestFlightID(self, destinationID, date_iso): # simply finds the flight on the desired day with the highest flight id so you can generate one that's higher
         voyages = self.data.getAllVoyages()
         parsedDate = parse(date_iso)
@@ -283,6 +281,7 @@ class VoyageLL:
                         highestID = int(voy.incomingFlightID[-1]) + 1
         return highestID
 
+# private method to get teh end of the given voyage
     def _getEndTimeOfVoyage(self, voyage):
         destination = self.data.getDestinationByDestinationID(voyage.destination)
         # try:
@@ -302,6 +301,7 @@ class VoyageLL:
         endTime = StartTime_dateTime + relativedelta(hours= +(flightTimeHours*2+1), minutes = +2*flightTimeMinutes, seconds = +2*flightTimeSeconds)
         return endTime.isoformat()
 
+# private method to generate a new voyage id
     def _GenerateNewVoyageID(self):
         voyages = self.data.getAllVoyages()
         iteration = 1
