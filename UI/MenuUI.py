@@ -9,6 +9,8 @@ def default_operation():
 
 class MenuUI:
     def showMainMenu(self):
+        print('  _                             \n | |\                           \n===| \______________|_______    \n  \|  O ooooo-=====-|ooo O n\__ \n    -|=|--------||--|---|=||---’\n_____|=|________oo______|=|o____')
+
         print("\n##### MAIN MENU #####")
         print("1. Employees"
               "\n2. Voyages"
@@ -44,10 +46,9 @@ class MenuUI:
               "\n7. List voyage for given day",
               "\n8. List voyages for given week",
               "\n9. List Flights By Location",
-              "\n10. Update Voyage Captain",
-              "\n11. Sold seats for Voyage",
-              "\n12. List Satus of Voyages",
-              "\n13. Add Recurring Voyages")
+              "\n10. Sold seats for Voyage",
+              "\n11. List Satus of Voyages",
+              "\n12. Add Recurring Voyages")
         return self.getVInput()
     
     def showDestinationsMenu(self):
@@ -59,6 +60,9 @@ class MenuUI:
         return self.getDInput()
 
     def showAircraftsMenu(self):
+
+        print('    __|__\n---@-(")-@---\n    ! ! !    ')
+
         print("\n##### Aircrafts ######")
         print("\n1. Add Aircarft",
               "\n2. List Aircrafts",
@@ -133,12 +137,10 @@ class MenuUI:
         elif choice == "9":
             return VoyageUI().print_voyage_by_dest()
         elif choice == "10":
-            return VoyageUI().UpdateVoyageCaptain()
-        elif choice == "11":
             return VoyageUI().soldSeatsForVoyage()
-        elif choice == "12":
+        elif choice == "11":
             return VoyageUI().ListStatusOfVoyages()
-        elif choice == "13":
+        elif choice == "12":
             return VoyageUI().register_recuring_voyage()
 
         elif choice == "q":

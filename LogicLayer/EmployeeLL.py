@@ -11,6 +11,8 @@ class EmployeeLL:
     def __init__(self):
         self.data = IOAPI()
 
+
+# Method to register a new employee
     def RegisterEmployee(self, name_str, ssn_str, address_str, phone_str, email_str, isPilot_bool, planeLicense_str):
         try:
             self.data.addEmployee(Employee(name_str, ssn_str, address_str, phone_str, email_str, isPilot_bool, planeLicense_str))
@@ -18,9 +20,12 @@ class EmployeeLL:
         except EntryInDatabase:
             return -1
 
+# Method to get an employee be its ssn
     def GetEmployeeBySSN(self, ssn):
         return self.data.getEmployeeBySSN(ssn)
 
+
+# Method to get a list of all the pilots
     def ListPilots(self):
         employees = self.data.getAllEmployees()
         pilots = []
@@ -30,6 +35,7 @@ class EmployeeLL:
         pilots.sort(key=lambda x: x.name) # sort the lists based on name
         return pilots
 
+# Method to get a list of all flight attendants
     def ListFlightAttendats(self):
         employees = self.data.getAllEmployees()
         flightAttendats = []
@@ -39,11 +45,14 @@ class EmployeeLL:
         flightAttendats.sort(key=lambda x: x.name) # sort the lists based on name
         return flightAttendats
 
+# Method to list all the employees sorted by name and divided by position
     def ListAllEmployees(self): # Lists all employees, first Pilots then flightAttendants
         pilots = self.ListPilots()
         flightAttendats = self.ListFlightAttendats()
         return pilots + flightAttendats
 
+
+# Method to list all employees that have a name containing the input
     def ListAllEmployeesWithName(self, name):
         employees = self.data.getAllEmployees()
         ret_lst = []  
@@ -54,15 +63,7 @@ class EmployeeLL:
             raise EntryNotInDatabase('There is no employee with that name') 
         return ret_lst
 
-
-    def AddEmployee(self, name_str, ssn_str, address_str, phone_str, email_str, pilot_bool = False, planeType = None):
-        employee = Employee(name_str, ssn_str, address_str, phone_str, email_str, pilot_bool, planeType)
-        try:
-            self.data.addEmployee(employee)
-            return 1
-        except EntryInDatabase:
-            return -1
-
+# Method to update an employee
     def UpdateEmployeeInfo(self, employee):
         try:
             self.data.updateEmployee(employee)
@@ -70,6 +71,8 @@ class EmployeeLL:
         except EntryNotInDatabase:
             return -1
 
+
+# Method to list all unassigned employees in the system for a certain date
     def ListUnassignedEmployees(self, date_iso): # not implemeted, to be implemented once datetime slides appear
         dateParced = parse(date_iso)
         voyages = self.data.getAllVoyages()
@@ -94,6 +97,8 @@ class EmployeeLL:
         unassigned_employees.sort(key=lambda x: x.pilot_bool, reverse = True)
         return unassigned_employees
 
+
+# Method to list all assigned Employees
     def ListAssignedEmployees(self, date_iso): 
         dateParced = parse(date_iso)
         voyages = self.data.getAllVoyages()
@@ -116,7 +121,7 @@ class EmployeeLL:
                 assigned_employees.append(emp)
         return assigned_employees
 
-
+# Method to list all pilots with a priveledge to a certain aircraft model
     def ListPilotsWithAircraftPrivilege(self, aircraft_model):
         pilots = self.ListPilots()
         model_pilots = []
@@ -126,12 +131,9 @@ class EmployeeLL:
         model_pilots.sort(key=lambda x: x.name)
         return model_pilots
 
+# Method to get the End time of a voyage
     def _getEndTimeOfVoyage(self, voyage):
         destination = self.data.getDestinationByDestinationID(voyage.destination)
-        # try:
-        #     StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S.%f')
-        # except ValueError:
-        #     StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S')
 
         StartTime_dateTime = parse(voyage.departureTime)
 
@@ -141,22 +143,10 @@ class EmployeeLL:
         flightTimeHours = int(flightTimeHours)
         flightTimeMinutes = int(flightTimeMinutes)
         flightTimeSeconds = int(flightTimeSeconds)
-        # print(flightTime)
         endTime = StartTime_dateTime + relativedelta(hours= +(flightTimeHours*2+1), minutes = +2*flightTimeMinutes, seconds = +2*flightTimeSeconds)
         return endTime.isoformat()
         
-    # def _getEndTimeOfVoyage(self, voyage):
-    #     destination = self.data.getDestinationByDestinationID(voyage.destination)
-    #     try:
-    #         StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S.%f')
-    #     except ValueError:
-    #         StartTime_dateTime = datetime.strptime(voyage.departureTime, '%Y-%m-%dT%H:%M:%S')
-
-    #     flightTime = int(destination.flight_duration) # consider changing this to int so as to not miss the disimal places!
-    #     # print(flightTime)
-    #     return parse((StartTime_dateTime + relativedelta(hour=+(flightTime*2+1))).isoformat()) # Assuming the rest at destination is 1 hour
-
-
+# Method to get a work summary of an employee by ssn
     def GetWorkSummaryBySsn(self, apiSelf, employeeSSN, current_date):
         voyages_in_week = apiSelf.ListVoyagesForGivenWeek(current_date)
         emp_voyages = []
@@ -167,7 +157,6 @@ class EmployeeLL:
 
         return emp_voyages
 
-        #not finished implementing
 
 if __name__ == "__main__":
     logic = EmployeeLL()

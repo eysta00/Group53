@@ -1,4 +1,5 @@
 class Destination:
+    # Instance Class for Destinations
     def __init__(self, country_str, airport_str, dest_id, flight_duration, distanceFromReykjavik, contactName_str = None, contactNr_str = None):
         self.country_str = country_str
         self.airport_str = airport_str 
@@ -8,9 +9,6 @@ class Destination:
         self.contactName_str = contactName_str
         self.contactNr_str = contactNr_str
 
-    # def update_data(self, new_dname, new_did):
-    #     self.d_data['dest_name'] = self.dest_name
-    #     self.d_data['dest_id'] = self.dest_id
 
     def __str__(self):
         return self.airport_str + ' : ' + self.flight_duration

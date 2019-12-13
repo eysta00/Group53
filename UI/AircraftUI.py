@@ -1,5 +1,7 @@
 from LogicLayer.LLAPI import LLAPI
 from Exceptions.Exceptions import *
+from InstanceClasses.Aircraft import *
+from datetime import datetime
 
 class AircraftUI:
     def __init__(self):
@@ -34,7 +36,7 @@ class AircraftUI:
         # aircrafts = self.LLAPI.AircraftStatus()
         id = input("\nEnter Aircraft ID: ")
         try:
-            aircraftStatus = self.LLAPI.AircraftStatus(id)
+            aircraftStatus = self.LLAPI.AircraftStatus(id, datetime.now().isoformat())
             print("\nThe Aircraft is " + aircraftStatus)
         except EntryNotInDatabase:
             print("The entered Aircraft ID does not correspond to an entry in the database.")
