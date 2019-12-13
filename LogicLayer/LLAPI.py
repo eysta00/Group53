@@ -122,6 +122,9 @@ class LLAPI:
 
     def ShowStatusOfAircrafts(self):
         return self.aircraft_logic.ShowStatusOfAircrafts()
+
+    def ListAvailableAircrafts(self, time):
+        return self.aircraft_logic.ListAvailableAircrafts(time)
         
 
 if __name__ == "__main__":

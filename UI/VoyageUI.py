@@ -53,9 +53,36 @@ class VoyageUI:
 
 
     def register_aircraft_to_voyage(self):
-        Voyage_id = input('Enter Desired Voyage ID: ')
-        voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
-        aircraft = input('Aircraft: ')
+        try:
+            Voyage_id = input('Enter Desired Voyage ID: ')
+            voyage = self.LLAPI.getVoyageByVoyageID(Voyage_id)
+            print("\nAvailable aircrafts for Voyage:\n")
+            availableAircrafts = self.LLAPI.ListAvailableAircrafts(voyage.departureTime)
+            print('{:15}{:20}{:20}'.format('AircraftID', 'Manufacturer', 'Model'))
+                
+
+            airID_lst = [str(air.aircraftID) for air in availableAircrafts]
+
+            if len(airID_lst) < 1:
+                print('\nThere are no available Aircrafts at the time of the selected Voyage, returning to main.\n')
+                return
+
+            for air in availableAircrafts:
+                print('{:15}{:20}{:20}'.format(air.aircraftID, air.manufacturer, air.model))
+            
+            aircraft_id = input('\nEnter Aircraft ID: ')
+            
+            if aircraft_id not in airID_lst:
+                print('\nInvalid ID Choice, returning to main.\n')
+                return
+
+            self.LLAPI.AssignAircraftToVoyge(Voyage_id, aircraft_id)
+
+            print('\nSuccessfully assigned aircraft to voyage\n')
+
+        except EntryNotInDatabase:
+            print('\nInvalid Voyage ID, returning to main')
+            return
 
     def register_employees_to_voyage(self):
         Voyage_id = input('Voyage ID: ')
