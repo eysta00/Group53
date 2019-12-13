@@ -13,8 +13,9 @@ class VoyageUI:
         row_len, coloumn_len = os.get_terminal_size()
         row_len_half = 2 // row_len
         seperator_str =("-" * (row_len - 1) + "\n")
-        info_str = "{:5} {:^20} {:30} {:>20} {:>10} {:>20} {:>20} {:>10} {:>10}".format(voyage.voyageID ,voyage.destination, voyage.departureTime,
-        voyage.aircraftID, voyage.captain ,voyage.seatingSoldOutgoing, voyage.outgoingFlightID, voyage.seatingSoldIncoming, voyage.incomingFlightID)
+        print(voyage)
+        info_str = "{:5} {:^20} {:30} {:>20} {:>10} {:>20} {:>20} {:>10} {:>10}".format(voyage.voyageID ,voyage.destination, voyage.departureTime,\
+            voyage.aircraftID, voyage.captain ,voyage.seatingSoldOutgoing, voyage.outgoingFlightID, voyage.seatingSoldIncoming, voyage.incomingFlightID)
         print(seperator_str, info_str)
 
     def register_Voyage(self):
@@ -126,7 +127,7 @@ class VoyageUI:
             else:
                 print("\nThere is no employee called " + employee_name + " in our system, returning to main.\n")
                 return
-
+            # print('------------')
             self.LLAPI.AddStaffToVoyage(voyage_id, employeeSSN)
 
         except EntryNotInDatabase:
@@ -134,6 +135,8 @@ class VoyageUI:
             return
         except EmployeeAlreadyAssigned:
             print('\n' + employee_name + ' is already assigned to this flight')
+        except AircraftNotRegistered:
+            print('\nYou Must Assign a Plane to the Voyage before Assigning Staff, returning to main\n')
                 
 
     def assign_captain_to_voyage(self):
