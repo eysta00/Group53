@@ -258,12 +258,12 @@ class EmployeeUI:
             if len(work_procedures) > 0:
                 for voy in work_procedures:
                     requested_emp = self.LLAPI.GetEmployeeBySSN(employee_ssn)
-                    print("-" * rows_len -1)
+                    print("-" * (rows_len -1))
                     print("Employee", requested_emp.name, "Worked on", voy.departureTime)
                     print("Destination: ", voy.destination, "Aircraft ID: ", voy.aircraftID)
                     print("\tCaptain of Aircraft: ", voy.captain)
                     print("|Incoming flight ID: ", voy.incomingFlightID, "|Outgoing flight ID: ", voy.outgoingFlightID)
-                    print("-" * rows_len - 1)
+                    print("-" * (rows_len - 1))
                     
             else:
                 print("\nNo work procedures were found")
