@@ -92,6 +92,9 @@ class LLAPI:
     def ListVoyagesForDestination(self, dest_id):
         return self.voyage_logic.ListVoyagesForDestination(dest_id)
 
+    def IsFullyStaffed(self, voyage):
+        return self.voyage_logic.IsFullyStaffed(voyage)
+
     ##### DESTINATION API #####
 
     def ListAllDestinations(self):

@@ -79,7 +79,7 @@ class VoyageLL:
             else:
                 freeFlightAttendants += 1
         
-        if freePilots > 2 or freeFlightAttendants > 1:
+        if freePilots < 2 or freeFlightAttendants < 1:
             raise ToFewAvailableEmployees("There are not enough available employees on this date to create a voyage")
 
         
@@ -182,6 +182,9 @@ class VoyageLL:
             if str(voy.destination) == str(dest_id):
                 voyForDest.append(voy)
         return voyForDest
+
+    def IsFullyStaffed(self, voyage):
+        return len(voyage.pilots_lst) > 1 and len(voyage.flightAttendants_lst) > 0
 
     def _isDepartureTimeFree(self, flightTime_str_iso):
         voyages = self.data.getAllVoyages()
