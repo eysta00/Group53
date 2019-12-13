@@ -48,7 +48,7 @@ class EmployeeLL:
         employees = self.data.getAllEmployees()
         ret_lst = []  
         for emp in employees:
-            if emp.name == name:
+            if name in emp.name:
                 ret_lst.append(emp)
         if len(ret_lst) == 0:
             raise EntryNotInDatabase('There is no employee with that name') 
