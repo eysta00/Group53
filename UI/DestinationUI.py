@@ -7,7 +7,7 @@ class DestinationUI:
     def __init__(self):
         self.LLAPI = LLAPI()
         self.header = "{:10}{:20}{:20}{:20}{:20}{:20}{:20}".format("country_str", "airport_str", "destination.dest_id",
-        "destination.flight_duration", "destination.distanceFromReykjavik", "contactName_str", "destination.contactNr_str"))
+        "destination.flight_duration", "destination.distanceFromReykjavik", "contactName_str", "destination.contactNr_str")
     
     def __printing_information(self, destination):
         information_str = "{:10}{:20}{:20}{:20}{:20}{:20}{:20}".format(str(destination.country_str), str(destination.airport_str), str(destination.dest_id),

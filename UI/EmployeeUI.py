@@ -255,7 +255,7 @@ class EmployeeUI:
 
             for voy in work_procedures:
                 print("-" * (rows_len - 1))
-                print("-" * (int((row_len - len(employees_with_name[0])) / 2)), employees_with_name[0], "-" * (int((row_len - len(employees_with_name[0])) / 2)))
+                print("-" * (int((rows_len - len(employees_with_name[0])) / 2)), employees_with_name[0], "-" * (int((row_len - len(employees_with_name[0])) / 2)))
                 print("Destination: ", voy.destination, "\tDeparture: ", voy.departureTime)
                 print("Aircraft ID: ", voy.aircraftID, "\tCaptain of Aircraft: ", voy.captain)
                 print("Incoming flight ID: ", voy.incomingFlightID, "\tOutgoing flight ID: ", voy.outgoingFlightID)

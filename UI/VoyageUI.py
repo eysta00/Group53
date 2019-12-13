@@ -152,7 +152,7 @@ class VoyageUI:
             return
         else:
             print('\nPlease Select what Flight Attendant You Want To Make Head flight attendant:\n')
-            for flight_person in voyage.flightAttendants_lst
+            for flight_person in voyage.flightAttendants_lst:
                 print(self.LLAPI.GetEmployeeBySSN(flight_person))
             SSN = input('Flight attendant SSN: ')
             if SSN not in voyage.flightAttendants_lst:
