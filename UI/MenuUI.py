@@ -28,7 +28,8 @@ class MenuUI:
               "\n6. List Unassigned Employees",
               "\n7. List pilots with aircraft privilage",
               "\n8. Change Employee Info",
-              "\n9. Work Summary")
+              "\n9. Work Summary",
+              "\n10. List information for employee")
     
         return self.getEInput()
     
@@ -99,6 +100,8 @@ class MenuUI:
             return EmployeeUI().print_update_employee_infomation()
         elif choice == "9":
             return EmployeeUI().print_work_summary()
+        elif choice == "10":
+            return EmployeeUI().print_specific_employee()
         elif choice == "q":
             return "quit_run"
         else:
